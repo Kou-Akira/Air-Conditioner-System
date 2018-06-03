@@ -21,10 +21,10 @@ namespace Common {
 			state = 0;
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			LOGGER.Info("Network init!");
-			threads = new Thread[threadNum];
-			semaphore.
-			for(int i=0;i<threadNum;i++)
-				threads[i]
+			//threads = new Thread[threadNum];
+			//semaphore.
+			//for(int i=0;i<threadNum;i++)
+			//	threads[i]
 		}
 
 		private void start() {

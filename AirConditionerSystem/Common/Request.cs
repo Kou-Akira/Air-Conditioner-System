@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common {
-	class Request : IRequest<Request> {
-		public Request FromString(string s) {
-			throw new NotImplementedException();
-		}
+	class Request {
+		int roomNumber;
 
-		public string ToString() {
-			throw new NotImplementedException();
+		public Request(int roomNumber) {
+			this.roomNumber = roomNumber;
+		}
+		
+		public int RoomNumber() {
+			return roomNumber;
 		}
 	}
 }

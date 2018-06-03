@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using log4net;
 
 namespace Common {
-	internal delegate void RequestDelegate();
+	internal delegate void RequestDelegate(Request request);
 
 	/// <summary>
 	/// 0关闭 1开启 2休眠
@@ -97,7 +97,7 @@ namespace Common {
 			hostState.nowServiceAmount = 0;
 			hostState.refreshFrequency = 1;
 			hostState.serviceStage = ServiceStage.FIFO;
-			LOGGER.Info("Stata init! " + hostState.ToString());
+			LOGGER.Info("State init! " + hostState.ToString());
 		}
 
 		internal event RequestDelegate RequestEvent;
