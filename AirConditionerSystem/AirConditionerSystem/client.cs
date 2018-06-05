@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace AirConditionerSystem
 {
-    public partial class client : DMSkin.Main
+    public partial class Client : DMSkin.Main
     {
-        public client()
+        public Client()
         {
             InitializeComponent();
         }
 
-        private void client_Load(object sender, EventArgs e)
+        private void Client_Load(object sender, EventArgs e)
         {
            
         }

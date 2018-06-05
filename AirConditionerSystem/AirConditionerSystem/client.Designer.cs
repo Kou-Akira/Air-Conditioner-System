@@ -1,6 +1,6 @@
 ﻿namespace AirConditionerSystem
 {
-    partial class client
+    partial class Client
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,21 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(client));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.mainIcon = new System.Windows.Forms.PictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.swithBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.speedBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.tpBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.coldBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.heatBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.tpText = new System.Windows.Forms.Label();
             this.ShutDownButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.heatBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.coldBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.tpBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.speedBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.swithBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.label5 = new System.Windows.Forms.Label();
+            this.metroTrackBar1 = new DMSkin.Metro.Controls.MetroTrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
+            this.mainPanel.Controls.Add(this.metroTrackBar1);
             this.mainPanel.Controls.Add(this.label5);
             this.mainPanel.Controls.Add(this.swithBtn);
             this.mainPanel.Controls.Add(this.speedBtn);
@@ -70,6 +72,92 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(550, 300);
             this.mainPanel.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.label5.Location = new System.Drawing.Point(221, 233);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 30);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Turn On";
+            // 
+            // swithBtn
+            // 
+            this.swithBtn.BackColor = System.Drawing.Color.Transparent;
+            this.swithBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("swithBtn.BackgroundImage")));
+            this.swithBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.swithBtn.DM_DownImage = null;
+            this.swithBtn.DM_HoverImage = null;
+            this.swithBtn.DM_Mode = false;
+            this.swithBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("swithBtn.DM_NolImage")));
+            this.swithBtn.Location = new System.Drawing.Point(114, 216);
+            this.swithBtn.Name = "swithBtn";
+            this.swithBtn.Size = new System.Drawing.Size(316, 65);
+            this.swithBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.swithBtn.TabIndex = 4;
+            // 
+            // speedBtn
+            // 
+            this.speedBtn.BackColor = System.Drawing.Color.Transparent;
+            this.speedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("speedBtn.BackgroundImage")));
+            this.speedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.speedBtn.DM_DownImage = null;
+            this.speedBtn.DM_HoverImage = null;
+            this.speedBtn.DM_Mode = false;
+            this.speedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("speedBtn.DM_NolImage")));
+            this.speedBtn.Location = new System.Drawing.Point(424, 33);
+            this.speedBtn.Name = "speedBtn";
+            this.speedBtn.Size = new System.Drawing.Size(80, 80);
+            this.speedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.speedBtn.TabIndex = 3;
+            // 
+            // tpBtn
+            // 
+            this.tpBtn.BackColor = System.Drawing.Color.Transparent;
+            this.tpBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpBtn.BackgroundImage")));
+            this.tpBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tpBtn.DM_DownImage = null;
+            this.tpBtn.DM_HoverImage = ((System.Drawing.Image)(resources.GetObject("tpBtn.DM_HoverImage")));
+            this.tpBtn.DM_Mode = false;
+            this.tpBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("tpBtn.DM_NolImage")));
+            this.tpBtn.Location = new System.Drawing.Point(298, 33);
+            this.tpBtn.Name = "tpBtn";
+            this.tpBtn.Size = new System.Drawing.Size(80, 80);
+            this.tpBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.tpBtn.TabIndex = 2;
+            // 
+            // coldBtn
+            // 
+            this.coldBtn.BackColor = System.Drawing.Color.Transparent;
+            this.coldBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("coldBtn.BackgroundImage")));
+            this.coldBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.coldBtn.DM_DownImage = null;
+            this.coldBtn.DM_HoverImage = null;
+            this.coldBtn.DM_Mode = false;
+            this.coldBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("coldBtn.DM_NolImage")));
+            this.coldBtn.Location = new System.Drawing.Point(46, 33);
+            this.coldBtn.Name = "coldBtn";
+            this.coldBtn.Size = new System.Drawing.Size(80, 80);
+            this.coldBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.coldBtn.TabIndex = 1;
+            // 
+            // heatBtn
+            // 
+            this.heatBtn.BackColor = System.Drawing.Color.Transparent;
+            this.heatBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("heatBtn.BackgroundImage")));
+            this.heatBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.heatBtn.DM_DownImage = null;
+            this.heatBtn.DM_HoverImage = null;
+            this.heatBtn.DM_Mode = false;
+            this.heatBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("heatBtn.DM_NolImage")));
+            this.heatBtn.Location = new System.Drawing.Point(172, 33);
+            this.heatBtn.Name = "heatBtn";
+            this.heatBtn.Size = new System.Drawing.Size(80, 80);
+            this.heatBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.heatBtn.TabIndex = 0;
             // 
             // tpText
             // 
@@ -144,93 +232,19 @@
             this.label4.Text = "23:33";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // heatBtn
+            // metroTrackBar1
             // 
-            this.heatBtn.BackColor = System.Drawing.Color.Transparent;
-            this.heatBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("heatBtn.BackgroundImage")));
-            this.heatBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.heatBtn.DM_DownImage = null;
-            this.heatBtn.DM_HoverImage = null;
-            this.heatBtn.DM_Mode = false;
-            this.heatBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("heatBtn.DM_NolImage")));
-            this.heatBtn.Location = new System.Drawing.Point(172, 33);
-            this.heatBtn.Name = "heatBtn";
-            this.heatBtn.Size = new System.Drawing.Size(80, 80);
-            this.heatBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.heatBtn.TabIndex = 0;
+            this.metroTrackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
+            this.metroTrackBar1.DM_UseCustomBackColor = true;
+            this.metroTrackBar1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.metroTrackBar1.Location = new System.Drawing.Point(139, 147);
+            this.metroTrackBar1.Name = "metroTrackBar1";
+            this.metroTrackBar1.Size = new System.Drawing.Size(268, 38);
+            this.metroTrackBar1.Style = DMSkin.Metro.MetroColorStyle.Red;
+            this.metroTrackBar1.TabIndex = 13;
+            this.metroTrackBar1.Text = "metroTrackBar1";
             // 
-            // coldBtn
-            // 
-            this.coldBtn.BackColor = System.Drawing.Color.Transparent;
-            this.coldBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("coldBtn.BackgroundImage")));
-            this.coldBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.coldBtn.DM_DownImage = null;
-            this.coldBtn.DM_HoverImage = null;
-            this.coldBtn.DM_Mode = false;
-            this.coldBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("coldBtn.DM_NolImage")));
-            this.coldBtn.Location = new System.Drawing.Point(46, 33);
-            this.coldBtn.Name = "coldBtn";
-            this.coldBtn.Size = new System.Drawing.Size(80, 80);
-            this.coldBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.coldBtn.TabIndex = 1;
-            // 
-            // tpBtn
-            // 
-            this.tpBtn.BackColor = System.Drawing.Color.Transparent;
-            this.tpBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpBtn.BackgroundImage")));
-            this.tpBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.tpBtn.DM_DownImage = null;
-            this.tpBtn.DM_HoverImage = null;
-            this.tpBtn.DM_Mode = false;
-            this.tpBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("tpBtn.DM_NolImage")));
-            this.tpBtn.Location = new System.Drawing.Point(298, 33);
-            this.tpBtn.Name = "tpBtn";
-            this.tpBtn.Size = new System.Drawing.Size(80, 80);
-            this.tpBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.tpBtn.TabIndex = 2;
-            // 
-            // speedBtn
-            // 
-            this.speedBtn.BackColor = System.Drawing.Color.Transparent;
-            this.speedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("speedBtn.BackgroundImage")));
-            this.speedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.speedBtn.DM_DownImage = null;
-            this.speedBtn.DM_HoverImage = null;
-            this.speedBtn.DM_Mode = false;
-            this.speedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("speedBtn.DM_NolImage")));
-            this.speedBtn.Location = new System.Drawing.Point(424, 33);
-            this.speedBtn.Name = "speedBtn";
-            this.speedBtn.Size = new System.Drawing.Size(80, 80);
-            this.speedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.speedBtn.TabIndex = 3;
-            // 
-            // swithBtn
-            // 
-            this.swithBtn.BackColor = System.Drawing.Color.Transparent;
-            this.swithBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("swithBtn.BackgroundImage")));
-            this.swithBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.swithBtn.DM_DownImage = null;
-            this.swithBtn.DM_HoverImage = null;
-            this.swithBtn.DM_Mode = false;
-            this.swithBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("swithBtn.DM_NolImage")));
-            this.swithBtn.Location = new System.Drawing.Point(114, 201);
-            this.swithBtn.Name = "swithBtn";
-            this.swithBtn.Size = new System.Drawing.Size(316, 65);
-            this.swithBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.swithBtn.TabIndex = 4;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label5.Location = new System.Drawing.Point(221, 218);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 30);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Turn On";
-            // 
-            // client
+            // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -246,9 +260,9 @@
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.mainIcon);
             this.DM_howBorder = false;
-            this.Name = "client";
+            this.Name = "Client";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.client_Load);
+            this.Load += new System.EventHandler(this.Client_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).EndInit();
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
@@ -273,6 +287,7 @@
         private DMSkin.Controls.DM.DMButtonImage coldBtn;
         private DMSkin.Controls.DM.DMButtonImage heatBtn;
         private System.Windows.Forms.Label label5;
+        private DMSkin.Metro.Controls.MetroTrackBar metroTrackBar1;
     }
 }
 
