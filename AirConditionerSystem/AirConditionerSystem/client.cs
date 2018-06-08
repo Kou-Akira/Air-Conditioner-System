@@ -47,7 +47,7 @@ namespace AirConditionerSystem
 
         private void doWork(Object o)
         {
-            byte[] respose = ApiClient.sendTurnOnRequest();
+            ApiClient.sendTurnOnRequest();
             Thread.Sleep(2000);
             ((CallBack)o)();
         }

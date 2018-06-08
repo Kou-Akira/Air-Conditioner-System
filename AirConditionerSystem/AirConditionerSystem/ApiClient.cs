@@ -8,10 +8,17 @@ namespace AirConditionerSystem
 {
     static class ApiClient
     {
-        public static byte[] sendTurnOnRequest()
+        public static bool sendTurnOnRequest()
         {
-            
-            return null;
+            //Network send request
+
+            return true;
         }
+
+        public static bool sendTurnOffRequest()
+        {
+            return true;
+        }
+
     }
 }
