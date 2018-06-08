@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Common;
 
 namespace AirConditionerSystem
 {
@@ -30,6 +32,24 @@ namespace AirConditionerSystem
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tpBtn_Click(object sender, EventArgs e)
+        {
+            AsynTask asynTask = new AsynTask(new Thread(doWork), callBack);
+            asynTask.startTask();
+        }
+
+        private void callBack()
+        {
+            MessageBox.Show("hahahahah");
+        }
+
+        private void doWork(Object o)
+        {
+            byte[] respose = ApiClient.sendTurnOnRequest();
+            Thread.Sleep(2000);
+            ((CallBack)o)();
         }
     }
 }

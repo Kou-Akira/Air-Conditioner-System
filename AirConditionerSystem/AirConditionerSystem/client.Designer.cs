@@ -43,7 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.metroTrackBar1 = new DMSkin.Metro.Controls.MetroTrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +60,6 @@
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
-            this.mainPanel.Controls.Add(this.metroTrackBar1);
             this.mainPanel.Controls.Add(this.label5);
             this.mainPanel.Controls.Add(this.swithBtn);
             this.mainPanel.Controls.Add(this.speedBtn);
@@ -78,7 +76,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label5.Location = new System.Drawing.Point(221, 233);
+            this.label5.Location = new System.Drawing.Point(221, 207);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 30);
             this.label5.TabIndex = 12;
@@ -93,7 +91,7 @@
             this.swithBtn.DM_HoverImage = null;
             this.swithBtn.DM_Mode = false;
             this.swithBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("swithBtn.DM_NolImage")));
-            this.swithBtn.Location = new System.Drawing.Point(114, 216);
+            this.swithBtn.Location = new System.Drawing.Point(114, 190);
             this.swithBtn.Name = "swithBtn";
             this.swithBtn.Size = new System.Drawing.Size(316, 65);
             this.swithBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
@@ -232,18 +230,6 @@
             this.label4.Text = "23:33";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // metroTrackBar1
-            // 
-            this.metroTrackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
-            this.metroTrackBar1.DM_UseCustomBackColor = true;
-            this.metroTrackBar1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.metroTrackBar1.Location = new System.Drawing.Point(139, 147);
-            this.metroTrackBar1.Name = "metroTrackBar1";
-            this.metroTrackBar1.Size = new System.Drawing.Size(268, 38);
-            this.metroTrackBar1.Style = DMSkin.Metro.MetroColorStyle.Red;
-            this.metroTrackBar1.TabIndex = 13;
-            this.metroTrackBar1.Text = "metroTrackBar1";
-            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -287,7 +273,6 @@
         private DMSkin.Controls.DM.DMButtonImage coldBtn;
         private DMSkin.Controls.DM.DMButtonImage heatBtn;
         private System.Windows.Forms.Label label5;
-        private DMSkin.Metro.Controls.MetroTrackBar metroTrackBar1;
     }
 }
 

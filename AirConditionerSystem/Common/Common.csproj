@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsynTask.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IHost.cs" />
     <Compile Include="INetWork.cs" />

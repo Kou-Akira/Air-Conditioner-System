@@ -77,7 +77,7 @@ namespace Common {
 					}
 					if (requests[i].Count != 0) {
 						request = requests[i].Dequeue();
-						LOGGER.DebugFormat("Request {} deque!", request.ToString());
+						LOGGER.DebugFormat("Request {} deque!", request.RoomNumber());
 					} else {
 						continue;
 					}
