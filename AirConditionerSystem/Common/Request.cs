@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Common {
 	class Request {
+		int cat;
 		int roomNumber;
-
-		public Request(int roomNumber) {
+		protected Request(int cat, int roomNumber) {
+			this.cat = cat;
 			this.roomNumber = roomNumber;
 		}
-		
-		public int RoomNumber() {
-			return roomNumber;
+
+		public int Cat { get => cat; }
+	}
+	class LoginRequest : Request {
+		public LoginRequest(int cat, int roomNumber) : base(cat, roomNumber) {
 		}
 	}
 }

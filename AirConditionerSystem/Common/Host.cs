@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 
@@ -80,9 +82,9 @@ namespace Common {
 
 		Host(String logdir) {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+			netWork = new Network(dealRequest);
 		}
 		
-
 		public int SettModle(int modle) {
 			throw new NotImplementedException();
 		}
@@ -102,10 +104,6 @@ namespace Common {
 
 		internal event RequestDelegate RequestEvent;
 
-		private void DealRequest(IRequest<Request> request) {
-			
-		}
-
 		public void TurnOn() {
 			LOGGER.Info("AirConditioner Turn On!");
 			if (hostState.state != State.OFF)
@@ -119,6 +117,10 @@ namespace Common {
 		public void run() {
 
 			throw new NotImplementedException();
+		}
+		
+		private void dealRequest(TcpClient tcpClient) {
+			Thread thread = new Thread(()=>new RemoteClient(tcpClient).run());
 		}
 	}
 }
