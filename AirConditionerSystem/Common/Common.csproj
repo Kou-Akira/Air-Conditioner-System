@@ -56,7 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="RequestFormatter.cs" />
-    <Compile Include="ResponseHandler.cs" />
     <Compile Include="ThreadPool.cs" />
   </ItemGroup>
   <ItemGroup>
