@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common {
-	interface INetworkCallback {
-		void OnSuccess();
-		void OnError();
+	interface IHostCallback {
+		Response DealRequest(Request request);
 	}
 }

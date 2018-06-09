@@ -10,50 +10,37 @@ using System.Threading.Tasks;
 using log4net;
 
 namespace Common {
-	class Network : INetWork, INetworkCallback {
-		private const int threadNum = 10;
+	class Network : INetWork {
 		private TcpListener listener;
 		private int state;
 		private ILog LOGGER;
-		private ThreadPool threadPool;
-		private RequestDelegate requestDelegate;
+		private IHostCallback callback;
 		private Thread listenerThread;
 
-		Network(RequestDelegate requestDelegate) {
-			this.requestDelegate = requestDelegate;
+		public Network(IHostCallback callback) {
+			this.callback = callback;
 			state = 0;
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			LOGGER.Info("Network init!");
-			threadPool = new ThreadPool(threadNum, this.requestDelegate);
-			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), 2333);
+			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), Common.Consts.PORT);
+		}
+		
+		public void StartListen() {
+			Interlocked.Increment(ref state);
 			listenerThread = new Thread(listen);
 		}
 
-		public void StartListen() {
-			Interlocked.Increment(ref state);
-			threadPool.Start();
-		}
-
 		public void StopListen() {
+			listenerThread.Abort();
 			Interlocked.Decrement(ref state);
-			threadPool.Stop();
 		}
 
 		private void listen() {
+			listener.Start();
 			while(state == 1) {
 				TcpClient tcpClient = listener.AcceptTcpClient();
-				RequestFormatter formatter = new RequestFormatter(tcpClient,this);
+				RemoteClient remoteClient = new RemoteClient(tcpClient);
 			}
-		}
-
-		public delegate void GetRequestDelegate(Request request);
-
-		public void OnSuccess() {
-			throw new NotImplementedException();
-		}
-
-		public void OnError() {
-			throw new NotImplementedException();
 		}
 	}
 }

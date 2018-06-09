@@ -25,17 +25,16 @@ namespace Common {
 			buffer = new byte[BufferSize];
 		}
 
-		public void run() {
+		public void run(INetworkCallback callback) {
 			try {
 				while (true) {
-					streamToClient.Read(buffer, 0,);
-					Request request = RequestFormatter.GetRequest(buffer);
-					Request response = new RequestDealer(request).Deal();
+					Request request = RequestFormatter.GetRequest(streamToClient);
+					Response response = RequestDealer.Deal(request, callback);
 					byte[] responseBytes = RequestFormatter.GetByte(response);
 					streamToClient.Write(responseBytes, 0, responseBytes.Length);
 				}
 			} catch (IOException e) {
-				LOGGER.Warn("CLient close!")
+				LOGGER.Warn("CLient close!", e);
 			}
 
 		}

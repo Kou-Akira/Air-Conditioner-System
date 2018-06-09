@@ -45,11 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientStatus.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="IHost.cs" />
+    <Compile Include="IHostCallback.cs" />
     <Compile Include="INetWork.cs" />
-    <Compile Include="INetworkCallback.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="Program.cs" />

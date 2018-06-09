@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Net.Sockets;
 using System.Reflection;
@@ -61,7 +62,7 @@ namespace Common {
 		}
 	}
 
-	class Host : IHost {
+	class Host : IHost, IHostCallback {
 		private static int HotMaxTemperature = 30;
 		private static int HotMinTemperature = 25;
 		private static int HotTemperatureDefault = 28;
@@ -78,11 +79,13 @@ namespace Common {
 		private HostState hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
+		private IDictionary<String, ClientStatus> clients;
 		
 
 		Host(String logdir) {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-			netWork = new Network(dealRequest);
+			netWork = new Network(this);
+			clients = new ConcurrentDictionary<String, ClientStatus>();
 		}
 		
 		public int SettModle(int modle) {
@@ -94,6 +97,7 @@ namespace Common {
 		}
 
 		private void Init() {
+			clients.Clear();
 			hostState.state = State.OFF;
 			hostState.mode = Mode.COLD;
 			hostState.nowServiceAmount = 0;
@@ -102,25 +106,34 @@ namespace Common {
 			LOGGER.Info("State init! " + hostState.ToString());
 		}
 
-		internal event RequestDelegate RequestEvent;
-
+		private int GetTemperatureDefault() {
+			return hostState.mode == Mode.COLD ?
+				ColdTemperatureDefault :
+				HotTemperatureDefault;
+		}
+		
 		public void TurnOn() {
-			LOGGER.Info("AirConditioner Turn On!");
 			if (hostState.state != State.OFF)
 				throw new Exception("AirConditioner is already on!");
-
 			Init();
 			hostState.state = State.Sleep;
 			netWork.StartListen();
+			LOGGER.Info("AirConditioner Turn On!");
 		}
+				
+		public Response DealRequest(Request request) {
+			switch (request.Cat) {
+				case 2: {
+					LoginRequest loginRequest = request as LoginRequest;
+					clients.Add(loginRequest.IdNum, new ClientStatus(ESpeed.NoWind, GetTemperatureDefault(), 0.0));
 
-		public void run() {
 
-			throw new NotImplementedException();
-		}
-		
-		private void dealRequest(TcpClient tcpClient) {
-			Thread thread = new Thread(()=>new RemoteClient(tcpClient).run());
+
+					break;
+				}
+				default:
+					throw new Exception("Host::DealRequest switch out of range with " + request.Cat);
+			}
 		}
 	}
 }

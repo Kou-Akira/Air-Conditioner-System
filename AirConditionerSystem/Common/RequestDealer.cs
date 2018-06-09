@@ -6,27 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common {
-	class RequestDealer {
-		private Request request;
-		public RequestDealer(Request request) {
-			this.request = request;
-			this.Deal();
-		}
-		public Request Deal() {
+	static class RequestDealer {
+		public static Response Deal(Request request, IHostCallback callback) {
 			switch (request.Cat) {
-				case 1: {
-					break;
-				}
 				case 2: {
 					LoginRequest loginRequest = request as LoginRequest;
-
-					break;
+					return callback.DealRequest(loginRequest);
 				}
 				case 9: {
 					throw new IOException();
 				}
 				default:
-					break;
+					throw new Exception("RequestDealer::Deal switch out of range with " + request.Cat);
 			}
 		}
 	}
