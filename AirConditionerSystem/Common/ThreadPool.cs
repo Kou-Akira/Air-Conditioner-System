@@ -72,11 +72,15 @@ namespace Common {
 				Request request = null;
 				lock (mutexes[i]) {
 					if (requests[i].Count == 0) {
+						LOGGER.DebugFormat("Thread {} wait!", i);
 						Monitor.Wait(mutexes[i]);
 					}
 					if (requests[i].Count != 0) {
 						request = requests[i].Dequeue();
-					} else continue;
+						LOGGER.DebugFormat("Request {} deque!", request.ToString());
+					} else {
+						continue;
+					}
 				}
 				requestHandler(request);
 			}
