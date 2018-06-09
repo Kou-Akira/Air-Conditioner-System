@@ -31,6 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.mainIcon = new System.Windows.Forms.PictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.SpeedPanel = new System.Windows.Forms.Panel();
+            this.highSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.midSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.lowSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.tpUpBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.tpDownBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.speedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.switchBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.tpText = new System.Windows.Forms.Label();
@@ -38,18 +45,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tpDownBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.tpUpBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.SpeedPanel = new System.Windows.Forms.Panel();
-            this.lowSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.midSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.highSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.timeText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.mainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SpeedPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainIcon
@@ -75,6 +75,107 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(500, 200);
             this.mainPanel.TabIndex = 2;
+            // 
+            // SpeedPanel
+            // 
+            this.SpeedPanel.Controls.Add(this.highSpeedBtn);
+            this.SpeedPanel.Controls.Add(this.midSpeedBtn);
+            this.SpeedPanel.Controls.Add(this.lowSpeedBtn);
+            this.SpeedPanel.Location = new System.Drawing.Point(362, 3);
+            this.SpeedPanel.Name = "SpeedPanel";
+            this.SpeedPanel.Size = new System.Drawing.Size(135, 194);
+            this.SpeedPanel.TabIndex = 7;
+            this.SpeedPanel.Visible = false;
+            // 
+            // highSpeedBtn
+            // 
+            this.highSpeedBtn.BackColor = System.Drawing.Color.Transparent;
+            this.highSpeedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("highSpeedBtn.BackgroundImage")));
+            this.highSpeedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.highSpeedBtn.DM_DownImage = null;
+            this.highSpeedBtn.DM_HoverImage = null;
+            this.highSpeedBtn.DM_Mode = false;
+            this.highSpeedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("highSpeedBtn.DM_NolImage")));
+            this.highSpeedBtn.Location = new System.Drawing.Point(43, 131);
+            this.highSpeedBtn.Name = "highSpeedBtn";
+            this.highSpeedBtn.Size = new System.Drawing.Size(50, 50);
+            this.highSpeedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.highSpeedBtn.TabIndex = 10;
+            // 
+            // midSpeedBtn
+            // 
+            this.midSpeedBtn.BackColor = System.Drawing.Color.Transparent;
+            this.midSpeedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("midSpeedBtn.BackgroundImage")));
+            this.midSpeedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.midSpeedBtn.DM_DownImage = null;
+            this.midSpeedBtn.DM_HoverImage = null;
+            this.midSpeedBtn.DM_Mode = false;
+            this.midSpeedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("midSpeedBtn.DM_NolImage")));
+            this.midSpeedBtn.Location = new System.Drawing.Point(42, 72);
+            this.midSpeedBtn.Name = "midSpeedBtn";
+            this.midSpeedBtn.Size = new System.Drawing.Size(50, 50);
+            this.midSpeedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.midSpeedBtn.TabIndex = 9;
+            this.midSpeedBtn.Click += new System.EventHandler(this.midSpeedBtn_Click);
+            // 
+            // lowSpeedBtn
+            // 
+            this.lowSpeedBtn.BackColor = System.Drawing.Color.Transparent;
+            this.lowSpeedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("lowSpeedBtn.BackgroundImage")));
+            this.lowSpeedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.lowSpeedBtn.DM_DownImage = null;
+            this.lowSpeedBtn.DM_HoverImage = null;
+            this.lowSpeedBtn.DM_Mode = false;
+            this.lowSpeedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("lowSpeedBtn.DM_NolImage")));
+            this.lowSpeedBtn.Location = new System.Drawing.Point(43, 11);
+            this.lowSpeedBtn.Name = "lowSpeedBtn";
+            this.lowSpeedBtn.Size = new System.Drawing.Size(50, 50);
+            this.lowSpeedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.lowSpeedBtn.TabIndex = 8;
+            this.lowSpeedBtn.Click += new System.EventHandler(this.lowSpeedBtn_Click);
+            // 
+            // tpUpBtn
+            // 
+            this.tpUpBtn.BackColor = System.Drawing.Color.Transparent;
+            this.tpUpBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpUpBtn.BackgroundImage")));
+            this.tpUpBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tpUpBtn.DM_DownImage = null;
+            this.tpUpBtn.DM_HoverImage = null;
+            this.tpUpBtn.DM_Mode = false;
+            this.tpUpBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("tpUpBtn.DM_NolImage")));
+            this.tpUpBtn.Location = new System.Drawing.Point(291, 70);
+            this.tpUpBtn.Name = "tpUpBtn";
+            this.tpUpBtn.Size = new System.Drawing.Size(50, 50);
+            this.tpUpBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.tpUpBtn.TabIndex = 6;
+            this.tpUpBtn.Click += new System.EventHandler(this.tpUpBtn_Click);
+            // 
+            // tpDownBtn
+            // 
+            this.tpDownBtn.BackColor = System.Drawing.Color.Transparent;
+            this.tpDownBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpDownBtn.BackgroundImage")));
+            this.tpDownBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tpDownBtn.DM_DownImage = null;
+            this.tpDownBtn.DM_HoverImage = null;
+            this.tpDownBtn.DM_Mode = false;
+            this.tpDownBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("tpDownBtn.DM_NolImage")));
+            this.tpDownBtn.Location = new System.Drawing.Point(177, 70);
+            this.tpDownBtn.Name = "tpDownBtn";
+            this.tpDownBtn.Size = new System.Drawing.Size(50, 50);
+            this.tpDownBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
+            this.tpDownBtn.TabIndex = 5;
+            this.tpDownBtn.Click += new System.EventHandler(this.tpDownBtn_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(229, 65);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // speedBtn
             // 
@@ -169,115 +270,16 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Room 632";
             // 
-            // label4
+            // timeText
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(228, 4);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 25);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "23:33";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(229, 65);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // tpDownBtn
-            // 
-            this.tpDownBtn.BackColor = System.Drawing.Color.Transparent;
-            this.tpDownBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpDownBtn.BackgroundImage")));
-            this.tpDownBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.tpDownBtn.DM_DownImage = null;
-            this.tpDownBtn.DM_HoverImage = null;
-            this.tpDownBtn.DM_Mode = false;
-            this.tpDownBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("tpDownBtn.DM_NolImage")));
-            this.tpDownBtn.Location = new System.Drawing.Point(177, 70);
-            this.tpDownBtn.Name = "tpDownBtn";
-            this.tpDownBtn.Size = new System.Drawing.Size(50, 50);
-            this.tpDownBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.tpDownBtn.TabIndex = 5;
-            // 
-            // tpUpBtn
-            // 
-            this.tpUpBtn.BackColor = System.Drawing.Color.Transparent;
-            this.tpUpBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpUpBtn.BackgroundImage")));
-            this.tpUpBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.tpUpBtn.DM_DownImage = null;
-            this.tpUpBtn.DM_HoverImage = null;
-            this.tpUpBtn.DM_Mode = false;
-            this.tpUpBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("tpUpBtn.DM_NolImage")));
-            this.tpUpBtn.Location = new System.Drawing.Point(291, 70);
-            this.tpUpBtn.Name = "tpUpBtn";
-            this.tpUpBtn.Size = new System.Drawing.Size(50, 50);
-            this.tpUpBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.tpUpBtn.TabIndex = 6;
-            // 
-            // SpeedPanel
-            // 
-            this.SpeedPanel.Controls.Add(this.highSpeedBtn);
-            this.SpeedPanel.Controls.Add(this.midSpeedBtn);
-            this.SpeedPanel.Controls.Add(this.lowSpeedBtn);
-            this.SpeedPanel.Location = new System.Drawing.Point(362, 3);
-            this.SpeedPanel.Name = "SpeedPanel";
-            this.SpeedPanel.Size = new System.Drawing.Size(135, 194);
-            this.SpeedPanel.TabIndex = 7;
-            this.SpeedPanel.Visible = false;
-            // 
-            // lowSpeedBtn
-            // 
-            this.lowSpeedBtn.BackColor = System.Drawing.Color.Transparent;
-            this.lowSpeedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("lowSpeedBtn.BackgroundImage")));
-            this.lowSpeedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.lowSpeedBtn.DM_DownImage = null;
-            this.lowSpeedBtn.DM_HoverImage = null;
-            this.lowSpeedBtn.DM_Mode = false;
-            this.lowSpeedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("lowSpeedBtn.DM_NolImage")));
-            this.lowSpeedBtn.Location = new System.Drawing.Point(43, 11);
-            this.lowSpeedBtn.Name = "lowSpeedBtn";
-            this.lowSpeedBtn.Size = new System.Drawing.Size(50, 50);
-            this.lowSpeedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.lowSpeedBtn.TabIndex = 8;
-            this.lowSpeedBtn.Click += new System.EventHandler(this.lowSpeedBtn_Click);
-            // 
-            // midSpeedBtn
-            // 
-            this.midSpeedBtn.BackColor = System.Drawing.Color.Transparent;
-            this.midSpeedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("midSpeedBtn.BackgroundImage")));
-            this.midSpeedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.midSpeedBtn.DM_DownImage = null;
-            this.midSpeedBtn.DM_HoverImage = null;
-            this.midSpeedBtn.DM_Mode = false;
-            this.midSpeedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("midSpeedBtn.DM_NolImage")));
-            this.midSpeedBtn.Location = new System.Drawing.Point(42, 72);
-            this.midSpeedBtn.Name = "midSpeedBtn";
-            this.midSpeedBtn.Size = new System.Drawing.Size(50, 50);
-            this.midSpeedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.midSpeedBtn.TabIndex = 9;
-            this.midSpeedBtn.Click += new System.EventHandler(this.midSpeedBtn_Click);
-            // 
-            // highSpeedBtn
-            // 
-            this.highSpeedBtn.BackColor = System.Drawing.Color.Transparent;
-            this.highSpeedBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("highSpeedBtn.BackgroundImage")));
-            this.highSpeedBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.highSpeedBtn.DM_DownImage = null;
-            this.highSpeedBtn.DM_HoverImage = null;
-            this.highSpeedBtn.DM_Mode = false;
-            this.highSpeedBtn.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("highSpeedBtn.DM_NolImage")));
-            this.highSpeedBtn.Location = new System.Drawing.Point(43, 131);
-            this.highSpeedBtn.Name = "highSpeedBtn";
-            this.highSpeedBtn.Size = new System.Drawing.Size(50, 50);
-            this.highSpeedBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.highSpeedBtn.TabIndex = 10;
+            this.timeText.AutoSize = true;
+            this.timeText.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.timeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.timeText.Location = new System.Drawing.Point(213, 4);
+            this.timeText.Name = "timeText";
+            this.timeText.Size = new System.Drawing.Size(61, 25);
+            this.timeText.TabIndex = 11;
+            this.timeText.Text = "23:33";
             // 
             // Client
             // 
@@ -286,7 +288,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
             this.ClientSize = new System.Drawing.Size(500, 550);
             this.ControlBox = false;
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.timeText);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -305,8 +307,8 @@
             this.Load += new System.EventHandler(this.Client_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).EndInit();
             this.mainPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.SpeedPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,7 +323,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label timeText;
         private DMSkin.Controls.DM.DMButtonImage speedBtn;
         private DMSkin.Controls.DM.DMButtonImage switchBtn;
         private System.Windows.Forms.PictureBox pictureBox1;

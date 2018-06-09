@@ -18,10 +18,11 @@ namespace AirConditionerSystem
     {
         private LoadingBox mLoadingBox;
         private BackgroundWorker timeWordker;
-        private System.Timers.Timer timer;
+        private BackgroundWorker refreshTimeWorker;
         private bool isOff;
         private int speedMode;
         private bool isClose;
+        private int nowTp;
 
         public Client()
         {
@@ -32,11 +33,33 @@ namespace AirConditionerSystem
         {
             mLoadingBox = new LoadingBox();
             timeWordker = new BackgroundWorker();
+            refreshTimeWorker = new BackgroundWorker();
             timeWordker.WorkerSupportsCancellation = true;
             timeWordker.DoWork += panelWait;
             timeWordker.RunWorkerCompleted += panelCallBack;
+            refreshTimeWorker.DoWork += getSysTime;
+            refreshTimeWorker.ProgressChanged += refreshTimeText;
+            refreshTimeWorker.WorkerReportsProgress = true;
+            refreshTimeWorker.RunWorkerAsync();
             isOff = true;
             isClose = false;
+            nowTp = Constants.DEFAULT_TEMPERATURE;
+            tpText.Text = nowTp.ToString() + "℃";
+        }
+
+        private void getSysTime(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker myworker = (BackgroundWorker)sender;
+            while (true)
+            {
+                myworker.ReportProgress(1, DateTime.Now.ToLongTimeString());
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+
+        private void refreshTimeText(object sender, ProgressChangedEventArgs e)
+        {
+            timeText.Text = e.UserState.ToString();
         }
 
         private void ShutDownButton_Click(object sender, EventArgs e)
@@ -180,6 +203,24 @@ namespace AirConditionerSystem
             AsynTask asynTask = new AsynTask(speedDoWork, speedCallBack);
             asynTask.startTask(Constants.HIGH_SPEED);
             mLoadingBox.ShowDialog();
+        }
+
+        private void tpUpBtn_Click(object sender, EventArgs e)
+        {
+            if (nowTp < Constants.TEMPERATURE_MAX)
+            {
+                nowTp++;
+                tpText.Text = nowTp.ToString() + "℃";
+            }
+        }
+
+        private void tpDownBtn_Click(object sender, EventArgs e)
+        {
+            if (nowTp > Constants.TEMPERATURE_MIN)
+            {
+                nowTp--;
+                tpText.Text = nowTp.ToString() + "℃";
+            }
         }
     }
 }
