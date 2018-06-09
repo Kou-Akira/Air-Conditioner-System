@@ -4,25 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.ComponentModel;
 
 namespace Common
 {
-    public delegate void CallBack();
     public class AsynTask
     {
-        private CallBack mCallBack;
-        private Thread mThread;
-
-        public AsynTask(Thread t, CallBack callBack)
+        private BackgroundWorker worker;
+        public AsynTask(DoWorkEventHandler doWork, RunWorkerCompletedEventHandler callBack)
         {
-            mThread = t;
-            mCallBack = callBack;
+            worker = new BackgroundWorker();
+            worker.DoWork += doWork;
+            worker.RunWorkerCompleted += callBack;
         }
         
         public void startTask()
         {
-            
-            mThread.Start(mCallBack);
+            worker.RunWorkerAsync();
+        }
+
+        public void startTask(object o)
+        {
+            worker.RunWorkerAsync(o);
         }
     }
 }

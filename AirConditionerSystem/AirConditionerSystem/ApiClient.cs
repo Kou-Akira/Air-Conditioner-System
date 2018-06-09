@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AirConditionerSystem
@@ -11,11 +12,18 @@ namespace AirConditionerSystem
         public static bool sendTurnOnRequest()
         {
             //Network send request
-
-            return true;
+            Thread.Sleep(2000);
+            return false;
         }
 
         public static bool sendTurnOffRequest()
+        {
+            return true;
+        }
+
+        public static void sendRoomTemperature() { }
+
+        public static bool sendSpeedMode(int mode)
         {
             return true;
         }
