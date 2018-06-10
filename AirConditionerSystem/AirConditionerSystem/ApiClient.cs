@@ -12,6 +12,7 @@ namespace AirConditionerSystem
         public static bool sendTurnOnRequest()
         {
             //Network send request
+
             Thread.Sleep(2000);
             return false;
         }
