@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common {
-	class Request {
+	public class Request {
 		int cat;
 		protected Request(int cat) {
 			this.cat = cat;
@@ -13,7 +13,7 @@ namespace Common {
 
 		public int Cat { get => cat; }
 	}
-	class Response {
+    public class Response {
 		int cat;
 		protected Response(int cat) {
 			this.cat = cat;
@@ -21,13 +21,13 @@ namespace Common {
 
 		public int Cat { get => cat; }
 	}
-	class HostNakResponse : Response {
+    public class HostNakResponse : Response {
 		public HostNakResponse() : base(0) { }
 	}
-	class HostAckResponse : Response {
+    public class HostAckResponse : Response {
 		public HostAckResponse() : base(1) { }
 	}
-	class ClientLoginRequest : Request {
+    public class ClientLoginRequest : Request {
 		String idNum;
 		int roomNumber;
 		public ClientLoginRequest(int roomNumber,String  IdNum) : base(2) {
@@ -38,7 +38,7 @@ namespace Common {
 		public string IdNum { get => idNum; }
 		public int RoomNumber { get => roomNumber; }
 	}
-	class HostModeResponse : Response {
+    public class HostModeResponse : Response {
 		int mode;
 		float temperature;
 		public HostModeResponse(int mode, float temperature) :base(3) {
@@ -49,7 +49,7 @@ namespace Common {
 		public int Mode { get => mode; }
 		public float Temperature { get => temperature; }
 	}
-	class ClientTemperatureRequest : Request {
+    public class ClientTemperatureRequest : Request {
 		float temperature;
 		public ClientTemperatureRequest(float temperature) : base(4) {
 			this.temperature = temperature;
@@ -57,7 +57,7 @@ namespace Common {
 
 		public float Temperature { get => temperature; }
 	}
-	class ClientSpeedRequest : Request {
+    public class ClientSpeedRequest : Request {
 		int speed;
 		public ClientSpeedRequest(int speed) : base(5) {
 			this.speed = speed;
@@ -65,11 +65,11 @@ namespace Common {
 
 		public int Speed { get => speed;}
 	}
-	class ClientStopRequest : Request {
+    public class ClientStopRequest : Request {
 		public ClientStopRequest() : base(6) {
 		}
 	}
-	class HostCostResponse : Response {
+    public class HostCostResponse : Response {
 		float cost;
 		public HostCostResponse(float cost) : base(7) {
 			this.cost = cost;
@@ -77,7 +77,7 @@ namespace Common {
 
 		public float Cost { get => cost; }
 	}
-	class HostSpeedResponse : Response {
+    public class HostSpeedResponse : Response {
 		int speed;
 		public HostSpeedResponse(int speed) : base(8) {
 			this.speed = speed;
@@ -85,7 +85,7 @@ namespace Common {
 
 		public int Speed { get => speed; }
 	}
-	class ClientCloseRequest : Request {
+    public class ClientCloseRequest : Request {
 		public ClientCloseRequest() : base(9) {
 		}
 	}

@@ -4,11 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Common;
 
 namespace AirConditionerSystem
 {
     static class ApiClient
     {
+        public static void sendLoginRequest(int roomNumber, String id)
+        {
+            byte[] buffer = RequestHelper.GetByte(new ClientLoginRequest(632, "650204199612181235"));
+            TcpConnector.sendPackage(buffer);
+        }
+
+
         public static bool sendTurnOnRequest()
         {
             //Network send request

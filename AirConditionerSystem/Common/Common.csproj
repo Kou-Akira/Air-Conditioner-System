@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsynTask.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="ClientStatus.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Host.cs" />

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common {
-	static class RequestHelper { 
+	public static class RequestHelper { 
 		public static Request GetRequest(NetworkStream networkStream) {
 			byte[] buffer = new byte[Constants.MAXBYTES];
 			networkStream.Read(buffer, 0, 1);
@@ -25,7 +25,7 @@ namespace Common {
 					throw new Exception("RequestFormatter::GetRequest switch out of range with " + cat);
 			}
 		}
-		public static byte[] GetByte(Response response) {
+		public static byte[] GetByte(Request response) {
 			switch (response.Cat) {
 				case 0: {
 					byte[] res = new byte[1];
@@ -37,11 +37,50 @@ namespace Common {
 					res[1] = 1;
 					return res;
 				}
-				default:
+                case 2:
+                    {
+                        ClientLoginRequest clientLoginRequest = response as ClientLoginRequest;
+                        byte[] buffer = new byte[21];
+                        buffer[0] = 2;
+                        buffer[1] = (byte)clientLoginRequest.RoomNumber;
+                        return buffer;
+                    }
+                default:
 					throw new Exception("RequestFormatter::GetByte switch out of range with " + response.Cat);
 			}
-		} 
-		private static String GetId(byte[] bt) {
+		}
+
+        public static byte[] GetByte(Response response)
+        {
+            switch (response.Cat)
+            {
+                case 0:
+                    {
+                        byte[] res = new byte[1];
+                        res[0] = 0;
+                        return res;
+                    }
+                case 1:
+                    {
+                        byte[] res = new byte[1];
+                        res[1] = 1;
+                        return res;
+                    }
+                case 2:
+                    {
+                        //ClientLoginRequest clientLoginRequest = response as ClientLoginRequest;
+                        //byte[] buffer = new byte[21];
+                        //buffer[0] = 2;
+                        //buffer[1] = (byte)clientLoginRequest.RoomNumber;
+                        //return buffer;
+                        return new byte[2];
+                    }
+                default:
+                    throw new Exception("RequestFormatter::GetByte switch out of range with " + response.Cat);
+            }
+        }
+
+        private static String GetId(byte[] bt) {
 			if (bt.Length != Constants.IDLENTH)
 				log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType).ErrorFormat("Id lenth != {0}", Constants.IDLENTH);
 			String id = "";

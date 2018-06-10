@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Common;
-using System.Timers;
 
 namespace AirConditionerSystem
 {
@@ -23,7 +15,8 @@ namespace AirConditionerSystem
         private int speedMode;
         private bool isClose;
         private int nowTp;
-
+        private int sendType;
+      
         public Client()
         {
             InitializeComponent();
@@ -45,6 +38,13 @@ namespace AirConditionerSystem
             isClose = false;
             nowTp = Constants.DEFAULT_TEMPERATURE;
             tpText.Text = nowTp.ToString() + "℃";
+            TcpConnector.beginConnect(tcpCallBack);
+        }
+
+        private void tcpCallBack(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Request res = (Request)e.Result;
+            MessageBox.Show(res.ToString());
         }
 
         private void getSysTime(object sender, DoWorkEventArgs e)
@@ -106,35 +106,37 @@ namespace AirConditionerSystem
 
         private void switchCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
-            if ((bool)e.Result)
-            {
-                mLoadingBox.Hide();
-                refreshSwitchUI();
-                isOff = !isOff;
-                if (isClose)//关闭程序前的关机请求
-                {
-                    Environment.Exit(0);
-                }
-            }
-            else
-            {
-                mLoadingBox.setText("Error");
-                mLoadingBox.delayHide();
-            }
+            //if ((bool)e.Result)
+            //{
+            //    mLoadingBox.Hide();
+            //    refreshSwitchUI();
+            //    isOff = !isOff;
+            //    if (isClose)//关闭程序前的关机请求
+            //    {
+            //        Environment.Exit(0);
+            //    }
+            //}
+            //else
+            //{
+            //    mLoadingBox.setText("Error");
+            //    mLoadingBox.delayHide();
+            //}
+            mLoadingBox.Hide();
         }
 
         private void switchDoWork(object sender, DoWorkEventArgs e)
         {
-            bool result;
-            if (!(bool)e.Argument)
-            {
-                result = ApiClient.sendTurnOffRequest();
-            }
-            else
-            {
-                result = ApiClient.sendTurnOnRequest();
-            }
-            e.Result = result;
+            //bool result;
+            //if (!(bool)e.Argument)
+            //{
+            //    result = ApiClient.sendTurnOffRequest();
+            //}
+            //else
+            //{
+            //    result = ApiClient.sendTurnOnRequest();
+            //}
+            //e.Result = result;
+            ApiClient.sendLoginRequest(66,"650204199612181235");
         }
 
         private void switchBtn_Click(object sender, EventArgs e)
