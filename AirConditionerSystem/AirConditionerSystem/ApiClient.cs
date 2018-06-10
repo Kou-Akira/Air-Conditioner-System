@@ -12,7 +12,7 @@ namespace AirConditionerSystem
     {
         public static void sendLoginRequest(int roomNumber, String id)
         {
-            byte[] buffer = RequestHelper.GetByte(new ClientLoginRequest(632, "650204199612181235"));
+            byte[] buffer = PackageHelper.GetByte(new ClientLoginPackage(632, "650204199612181235"));
             TcpConnector.sendPackage(buffer);
         }
 

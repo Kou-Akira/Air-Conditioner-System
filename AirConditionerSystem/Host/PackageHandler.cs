@@ -5,20 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common {
-	static class RequestHandler {
-		public static Response[] Deal(Request request, IHostCallback callback) {
+namespace Host {
+	static class PackageHandler {
+		public static Common.Package[] Deal(Common.Package request, IHostServiceCallback callback) {
 			switch (request.Cat) {
 				case 2: {
-					ClientLoginRequest loginRequest = request as ClientLoginRequest;
+					Common.ClientLoginPackage loginRequest = request as Common.ClientLoginPackage;
 					bool loginOk = callback.Login(loginRequest.RoomNumber, loginRequest.IdNum);
 					if (loginOk) {
 						var tmp = callback.GetDefaultWorkingState();
-						return new Response[2] {
-							new HostAckResponse(),
-							new HostModeResponse(tmp.Item1,tmp.Item2) };
+						return new Common.Package[2] {
+							new Common.HostAckPackage(),
+							new Common.HostModePackage(tmp.Item1,tmp.Item2) };
 					} else {
-						return new Response[1] { new HostNakResponse() };
+						return new Common.Package[1] { new Common.HostNakPackage() };
 					}
 				}
 				case 9: {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common {
+namespace Host {
 	public enum ESpeed {
 		Unauthorized = -1,
 		NoWind = 0,

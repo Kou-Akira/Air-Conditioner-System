@@ -37,7 +37,7 @@ namespace Common
             while (true)
             {
                 //get package
-                Request req = RequestHelper.GetRequest(networkStream);
+                Package req = PackageHelper.GetRequest(networkStream);
                 new AsynTask(handleResponse, callBack).startTask(req);
             }
         }
@@ -49,7 +49,7 @@ namespace Common
 
         private static void handleResponse(object sender, DoWorkEventArgs e)
         {
-            Request req = (Request)e.Argument;
+            Package req = (Package)e.Argument;
             e.Result = req;
         }
     }

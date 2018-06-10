@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common {
-	interface INetWork {
-		void StartListen();
-		void StopListen();
+namespace Host {
+	class SchedulingInformation {
 	}
 }
