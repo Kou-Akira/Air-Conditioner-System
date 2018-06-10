@@ -11,7 +11,15 @@ namespace Common {
 			switch (request.Cat) {
 				case 2: {
 					ClientLoginRequest loginRequest = request as ClientLoginRequest;
-					return callback.DealRequest(loginRequest);
+					bool loginOk = callback.Login(loginRequest.RoomNumber, loginRequest.IdNum);
+					if (loginOk) {
+						var tmp = callback.GetDefaultWorkingState();
+						return new Response[2] {
+							new HostAckResponse(),
+							new HostModeResponse(tmp.Item1,tmp.Item2) };
+					} else {
+						return new Response[1] { new HostNakResponse() };
+					}
 				}
 				case 9: {
 					throw new IOException();

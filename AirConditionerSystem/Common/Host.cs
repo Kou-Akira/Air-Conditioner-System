@@ -30,13 +30,13 @@ namespace Common {
 		private HostStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
-		private IDictionary<String, ClientStatus> clients;
+		private IDictionary<RemoteClient, SchedulingInformation> clients;
 
 
-		Host(String logdir) {
+		public Host() {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			netWork = new Network(this);
-			clients = new ConcurrentDictionary<String, ClientStatus>();
+			clients = new ConcurrentDictionary<RemoteClient, SchedulingInformation>();
 		}
 
 		public int SettModle(int modle) {
@@ -57,10 +57,12 @@ namespace Common {
 			LOGGER.Info("State init! " + hostState.ToString());
 		}
 
-		private float GetTemperatureDefault() {
-			return hostState.mode == Mode.COLD ?
+		public Tuple<int, float> GetDefaultWorkingState() {
+			return new Tuple<int, float>
+				((int)hostState.mode, 
+				hostState.mode == Mode.COLD ?
 				ColdTemperatureDefault :
-				HotTemperatureDefault;
+				HotTemperatureDefault);
 		}
 
 		public void TurnOn() {
@@ -72,33 +74,23 @@ namespace Common {
 			LOGGER.Info("AirConditioner Turn On!");
 		}
 
-		public Response[] DealRequest(Request request) {
-			switch (request.Cat) {
-				case 2: {
-					ClientLoginRequest loginRequest = request as ClientLoginRequest;
-					bool loginOk = checkLogin(loginRequest.RoomNumber, loginRequest.IdNum);
-					if (loginOk) {
-						clients.Add(loginRequest.IdNum,
-							new ClientStatus(ESpeed.NoWind, GetTemperatureDefault(), 0));
-						return new Response[2] {
-							new HostAckResponse(),
-							new HostModeResponse((int)this.hostState.mode, GetTemperatureDefault()) };
-					} else {
-						return new Response[1] { new HostNakResponse() };
-					}
-				}
-				default:
-					throw new Exception("Host::DealRequest switch out of range with " + request.Cat);
-			}
-		}
-
-		private bool checkLogin(int roomNumber, string idNum) {
+		public bool Login(int roomNumber, string idNum) {
 			// Todo checkLogin
 			return true;
 		}
 
 		public Response ChangeMode() {
-			return new HostModeResponse((int)this.hostState.mode, GetTemperatureDefault());
+			//return new HostModeResponse((int)this.hostState.mode, GetTemperatureDefault());
+			throw new NotImplementedException();
+		}
+
+		public void AddClient(RemoteClient remoteClient) {
+			clients.Add(remoteClient, new SchedulingInformation());
+		}
+
+		public void CloseClient(RemoteClient client) {
+			clients.Remove(client);
+			client.Abort();
 		}
 	}
 }

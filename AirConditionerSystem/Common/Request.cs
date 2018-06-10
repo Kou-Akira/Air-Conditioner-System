@@ -36,6 +36,7 @@ namespace Common {
 		}
 
 		public string IdNum { get => idNum; }
+		public int RoomNumber { get => roomNumber; }
 	}
 	class HostModeResponse : Response {
 		int mode;
@@ -68,9 +69,9 @@ namespace Common {
 		public ClientStopRequest() : base(6) {
 		}
 	}
-	class HostCoseResponse : Response {
+	class HostCostResponse : Response {
 		float cost;
-		public HostCoseResponse(float cost) : base(7) {
+		public HostCostResponse(float cost) : base(7) {
 			this.cost = cost;
 		}
 

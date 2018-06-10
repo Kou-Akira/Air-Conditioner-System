@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common {
 	public enum ESpeed {
+		Unauthorized = -1,
 		NoWind = 0,
 		Small,
 		Mid,

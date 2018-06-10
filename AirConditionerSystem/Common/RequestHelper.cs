@@ -19,7 +19,7 @@ namespace Common {
 					int roomNum = Convert.ToInt32(buffer[0]);
 					networkStream.Read(buffer, 0, 18);
 					String id = GetId(buffer);
-					return new ClientLoginRequest(cat, roomNum, id);
+					return new ClientLoginRequest(roomNum, id);
 				}
 				default:
 					throw new Exception("RequestFormatter::GetRequest switch out of range with " + cat);

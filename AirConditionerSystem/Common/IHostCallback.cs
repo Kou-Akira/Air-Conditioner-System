@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Common {
 	interface IHostCallback {
-		Response[] DealRequest(Request request);
+		Tuple<int, float> GetDefaultWorkingState();
+		void AddClient(RemoteClient remoteClient);
+		bool Login(int roomNumber, string idNum);
 		Response ChangeMode();
-		// Response Close();
+		void CloseClient(RemoteClient client);
 	}
 }

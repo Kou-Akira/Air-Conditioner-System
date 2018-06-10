@@ -16,36 +16,65 @@ namespace Common {
 		private const int BufferSize = 8192;
 		private byte[] buffer;
 		private ILog LOGGER;
-		private Thread workThread;
+		private Thread requestThread;
+		private Thread heartbreatThread;
+		String clientNum;
+		private ClientStatus clientStatus;
 
-		public RemoteClient(TcpClient client) {
+		public RemoteClient(TcpClient client, IHostCallback callback) {
 			this.client = client;
 			LOGGER = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			LOGGER.InfoFormat("Client Connected ! {0} < -- {1}",
 				client.Client.LocalEndPoint, client.Client.RemoteEndPoint);
 			streamToClient = client.GetStream();
 			buffer = new byte[BufferSize];
-			//workThread = new Thread(run);
+			requestThread = new Thread(run);
+			heartbreatThread = new Thread(heartBeat);
+			requestThread.Start(callback);
+			heartbreatThread.Start();
 		}
 
-		private void run(IHostCallback callback) {
+		private void run(object cb) {
+			IHostCallback callback = cb as IHostCallback;
 			try {
 				while (true) {
-					Request request = RequestHelper.GetRequest(streamToClient);
+					Request request = null;
+					lock (streamToClient) {
+						request = RequestHelper.GetRequest(streamToClient);
+					}
 					Response[] responses = RequestHandler.Deal(request, callback);
 					foreach (Response response in responses) {
 						byte[] responseBytes = RequestHelper.GetByte(response);
-						streamToClient.Write(responseBytes, 0, responseBytes.Length);
+						lock (streamToClient) {
+							streamToClient.Write(responseBytes, 0, responseBytes.Length);
+						}
 					}
 				}
 			} catch (IOException e) {
 				LOGGER.Warn("CLient close!", e);
+			} finally {
+				streamToClient.Dispose();
+				client.Close();
+				callback.CloseClient(this);
 			}
-
 		}
 
-		public void HeartBeat() {
+		private void heartBeat() {
+			if (clientStatus.Speed == ESpeed.Unauthorized) return;
+			Response response1 = new HostCostResponse(clientStatus.Cost);
+			byte[] responseBytes1 = RequestHelper.GetByte(response1);
+			Response response2 = new HostSpeedResponse((int)clientStatus.Speed);
+			byte[] responseBytes2 = RequestHelper.GetByte(response2);
+			lock (streamToClient) {
+				streamToClient.Write(responseBytes1, 0, responseBytes1.Length);
+				streamToClient.Write(responseBytes2, 0, responseBytes2.Length);
+			}
+		}
 
+		public void Abort() {
+			heartbreatThread.Abort();
+
+			requestThread.Abort();
 		}
 	}
 }
