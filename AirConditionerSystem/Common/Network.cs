@@ -16,7 +16,6 @@ namespace Common {
 		private ILog LOGGER;
 		private IHostCallback callback;
 		private Thread listenerThread;
-		private ISet<RemoteClient> clients;
 
 		public Network(IHostCallback callback) {
 			this.callback = callback;
@@ -24,13 +23,12 @@ namespace Common {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			LOGGER.Info("Network init!");
 			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.PORT);
-			clients = new HashSet<RemoteClient>();
 		}
 		
 		public void StartListen() {
 			Interlocked.Increment(ref state);
-			clients.Clear();
 			listenerThread = new Thread(listen);
+			listenerThread.Start();
 		}
 
 		public void StopListen() {
@@ -42,15 +40,8 @@ namespace Common {
 			listener.Start();
 			while(state == 1) {
 				TcpClient tcpClient = listener.AcceptTcpClient();
-				RemoteClient remoteClient = new RemoteClient(tcpClient);
-				clients.Add(remoteClient);
+				callback.AddClient(new RemoteClient(tcpClient, callback));
 			}
-		}
-		private void heartBeat() {
-			foreach (RemoteClient client in clients) {
-				client.HeartBeat();
-			}
-			Thread.Sleep(4000);
 		}
 	}
 }
