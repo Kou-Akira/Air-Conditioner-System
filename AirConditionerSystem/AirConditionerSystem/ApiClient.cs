@@ -25,6 +25,7 @@ namespace AirConditionerSystem
 
         public static bool sendSpeedMode(int mode)
         {
+            Thread.Sleep(2000);
             return true;
         }
 

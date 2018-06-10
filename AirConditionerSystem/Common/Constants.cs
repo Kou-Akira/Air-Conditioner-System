@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirConditionerSystem
 {
-    class Constants
+    public class Constants
     {
         public const int LOW_SPEED = 0;
         public const int MID_SPEED = 1;
@@ -17,5 +17,11 @@ namespace AirConditionerSystem
         public const int DEFAULT_TEMPERATURE = 26;
         public const int TEMPERATURE_MAX = 30;
         public const int TEMPERATURE_MIN = 18;
+
+        public const String CONNECT_COUNT_STR = "连接数量：";
+        public const String WORKING_MODE_STR = "工作模式：";
+        public const String NOW_PAYMENT = "当前费用：";
+        public const String ROOM_TP = "房间温度：";
+
     }
 }
