@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common {
-	static class RequestDealer {
-		public static Response Deal(Request request, IHostCallback callback) {
+	static class RequestHandler {
+		public static Response[] Deal(Request request, IHostCallback callback) {
 			switch (request.Cat) {
 				case 2: {
-					LoginRequest loginRequest = request as LoginRequest;
+					ClientLoginRequest loginRequest = request as ClientLoginRequest;
 					return callback.DealRequest(loginRequest);
 				}
 				case 9: {

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common {
 	interface IHostCallback {
-		Response DealRequest(Request request);
+		Response[] DealRequest(Request request);
+		Response ChangeMode();
+		// Response Close();
 	}
 }

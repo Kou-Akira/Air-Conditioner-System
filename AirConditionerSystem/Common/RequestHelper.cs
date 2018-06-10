@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common {
-	static class RequestFormatter { 
+	static class RequestHelper { 
 		public static Request GetRequest(NetworkStream networkStream) {
-			byte[] buffer = new byte[Common.Consts.MAXBYTES];
+			byte[] buffer = new byte[Consts.MAXBYTES];
 			networkStream.Read(buffer, 0, 1);
 			int cat = Convert.ToInt32(buffer[0]);
 			switch (cat) {
@@ -19,7 +19,7 @@ namespace Common {
 					int roomNum = Convert.ToInt32(buffer[0]);
 					networkStream.Read(buffer, 0, 18);
 					String id = GetId(buffer);
-					return new LoginRequest(cat, roomNum, id);
+					return new ClientLoginRequest(cat, roomNum, id);
 				}
 				default:
 					throw new Exception("RequestFormatter::GetRequest switch out of range with " + cat);

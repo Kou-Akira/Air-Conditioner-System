@@ -13,17 +13,17 @@ namespace Common {
 	}
 	struct ClientStatus {
 		ESpeed speed;
-		int temperature;
-		double cost;
+		float temperature;
+		float cost;
 
-		public ClientStatus(ESpeed speed, int temperature, double cost) {
+		public ClientStatus(ESpeed speed, float temperature, float cost) {
 			this.speed = speed;
 			this.temperature = temperature;
 			this.cost = cost;
 		}
 
 		public ESpeed Speed { get => speed; set => speed = value; }
-		public int Temperature { get => temperature; set => temperature = value; }
-		public double Cost { get => cost; set => cost = value; }
+		public float Temperature { get => temperature; set => temperature = value; }
+		public float Cost { get => cost; set => cost = value; }
 	}
 }

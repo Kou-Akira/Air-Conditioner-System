@@ -24,7 +24,7 @@ namespace Common {
 		/// <returns></returns>
 		int SettModle(int modle);
 
-		Response DealRequest(Request request);
+		// Response[] DealRequest(Request request);
 
 	}
 }
