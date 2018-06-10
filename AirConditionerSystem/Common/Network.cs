@@ -23,7 +23,7 @@ namespace Common {
 			state = 0;
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			LOGGER.Info("Network init!");
-			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), Common.Consts.PORT);
+			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.PORT);
 			clients = new HashSet<RemoteClient>();
 		}
 		

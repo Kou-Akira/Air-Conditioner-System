@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirConditionerSystem
+namespace Common
 {
     public class Constants
     {
@@ -23,5 +23,9 @@ namespace AirConditionerSystem
         public const String NOW_PAYMENT = "当前费用：";
         public const String ROOM_TP = "房间温度：";
 
+
+        public const int PORT = 6000;
+        public const int MAXBYTES = 20;
+        public const int IDLENTH = 18;
     }
 }

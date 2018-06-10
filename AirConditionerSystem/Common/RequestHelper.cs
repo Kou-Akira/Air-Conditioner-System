@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Common {
 	static class RequestHelper { 
 		public static Request GetRequest(NetworkStream networkStream) {
-			byte[] buffer = new byte[Consts.MAXBYTES];
+			byte[] buffer = new byte[Constants.MAXBYTES];
 			networkStream.Read(buffer, 0, 1);
 			int cat = Convert.ToInt32(buffer[0]);
 			switch (cat) {
@@ -42,8 +42,8 @@ namespace Common {
 			}
 		} 
 		private static String GetId(byte[] bt) {
-			if (bt.Length != Common.Consts.IDLENTH)
-				log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType).ErrorFormat("Id lenth != {0}", Consts.IDLENTH);
+			if (bt.Length != Constants.IDLENTH)
+				log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType).ErrorFormat("Id lenth != {0}", Constants.IDLENTH);
 			String id = "";
 			for(int i = 0; i < bt.Length; i++) {
 				id = id + bt[i].ToString();
