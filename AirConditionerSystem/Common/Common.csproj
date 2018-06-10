@@ -47,16 +47,21 @@
   <ItemGroup>
     <Compile Include="AsynTask.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="ClientStatus.cs" />
+    <Compile Include="Consts.cs" />
     <Compile Include="Host.cs" />
+    <Compile Include="HostStatus.cs" />
     <Compile Include="IHost.cs" />
+    <Compile Include="IHostCallback.cs" />
     <Compile Include="INetWork.cs" />
-    <Compile Include="INetworkCallback.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteClient.cs" />
     <Compile Include="Request.cs" />
-    <Compile Include="RequestFormatter.cs" />
+    <Compile Include="RequestHandler.cs" />
+    <Compile Include="RequestHelper.cs" />
     <Compile Include="ThreadPool.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,87 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 
 namespace Common {
 	internal delegate void RequestDelegate(Request request);
 
-	/// <summary>
-	/// 0关闭 1开启 2休眠
-	/// </summary>
-	enum State {
-		OFF = 0,
-		On ,
-		Sleep
-	};
 
-	/// <summary>
-	/// 0hot 1cold
-	/// </summary>
-	internal enum Mode {
-		HOT = 0,
-		COLD 
-	}
+	class Host : IHost, IHostCallback {
+		private static readonly int HotMaxTemperature = 30;
+		private static readonly int HotMinTemperature = 25;
+		private static readonly int HotTemperatureDefault = 28;
 
-	/// <summary>
-	/// 服务策略
-	/// </summary>
-	internal enum ServiceStage {
-		FIFO = 0,
-		RoundRobin ,
-		HighSpeedFirst
-	}
+		private static readonly int ColdMaxTemperature = 25;
+		private static readonly int ColdMinTemperature = 18;
+		private static readonly int ColdTemperatureDefault = 22;
 
-	struct HostState {
+		private static readonly double MidSpeedPower = 1.0;
+		private static readonly double LowSpeedPower = 0.8;
+		private static readonly double HighSpeedPower = 1.3;
+		private static readonly int CostPrePower = 5;
 
-		internal State state;
-
-		internal Mode mode;
-
-		/// <summary>
-		/// 刷新频率
-		/// </summary>
-		internal int refreshFrequency;
-
-		internal ServiceStage serviceStage;
-
-		/// <summary>
-		/// 当前服务主机数
-		/// </summary>
-		internal int nowServiceAmount;
-
-		public override string ToString() {
-			return String.Format("State:{0},Mode:{1},RefreshFrequency:{2},ServiceStage:{3},NowServiceAmount:{4}",
-				state, mode, refreshFrequency, serviceStage, nowServiceAmount);
-		}
-	}
-
-	class Host : IHost {
-		private static int HotMaxTemperature = 30;
-		private static int HotMinTemperature = 25;
-		private static int HotTemperatureDefault = 28;
-
-		private static int ColdMaxTemperature = 25;
-		private static int ColdMinTemperature = 18;
-		private static int ColdTemperatureDefault = 22;
-
-		private static double MidSpeedPower = 1.0;
-		private static double LowSpeedPower = 0.8;
-		private static double HighSpeedPower = 1.3;
-		private static int CostPrePower = 5;
-
-		private HostState hostState;
+		private HostStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
-		
+		private IDictionary<String, ClientStatus> clients;
+
 
 		Host(String logdir) {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+			netWork = new Network(this);
+			clients = new ConcurrentDictionary<String, ClientStatus>();
 		}
-		
 
 		public int SettModle(int modle) {
 			throw new NotImplementedException();
@@ -92,6 +48,7 @@ namespace Common {
 		}
 
 		private void Init() {
+			clients.Clear();
 			hostState.state = State.OFF;
 			hostState.mode = Mode.COLD;
 			hostState.nowServiceAmount = 0;
@@ -100,25 +57,48 @@ namespace Common {
 			LOGGER.Info("State init! " + hostState.ToString());
 		}
 
-		internal event RequestDelegate RequestEvent;
-
-		private void DealRequest(IRequest<Request> request) {
-			
+		private float GetTemperatureDefault() {
+			return hostState.mode == Mode.COLD ?
+				ColdTemperatureDefault :
+				HotTemperatureDefault;
 		}
 
 		public void TurnOn() {
-			LOGGER.Info("AirConditioner Turn On!");
 			if (hostState.state != State.OFF)
 				throw new Exception("AirConditioner is already on!");
-
 			Init();
 			hostState.state = State.Sleep;
 			netWork.StartListen();
+			LOGGER.Info("AirConditioner Turn On!");
 		}
 
-		public void run() {
+		public Response[] DealRequest(Request request) {
+			switch (request.Cat) {
+				case 2: {
+					ClientLoginRequest loginRequest = request as ClientLoginRequest;
+					bool loginOk = checkLogin(loginRequest.RoomNumber, loginRequest.IdNum);
+					if (loginOk) {
+						clients.Add(loginRequest.IdNum,
+							new ClientStatus(ESpeed.NoWind, GetTemperatureDefault(), 0));
+						return new Response[2] {
+							new HostAckResponse(),
+							new HostModeResponse((int)this.hostState.mode, GetTemperatureDefault()) };
+					} else {
+						return new Response[1] { new HostNakResponse() };
+					}
+				}
+				default:
+					throw new Exception("Host::DealRequest switch out of range with " + request.Cat);
+			}
+		}
 
-			throw new NotImplementedException();
+		private bool checkLogin(int roomNumber, string idNum) {
+			// Todo checkLogin
+			return true;
+		}
+
+		public Response ChangeMode() {
+			return new HostModeResponse((int)this.hostState.mode, GetTemperatureDefault());
 		}
 	}
 }

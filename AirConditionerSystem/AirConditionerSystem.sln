@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirConditioner", "AirConditionerSystem\AirConditioner.csproj", "{8957A79E-4CC2-40CF-8313-6B6B6FEC4753}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3B788FA6-1D09-4018-9B2A-93B6CA07654D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{BD0EA24F-834E-49CC-8C75-A966D6C7D879}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8957A79E-4CC2-40CF-8313-6B6B6FEC4753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8957A79E-4CC2-40CF-8313-6B6B6FEC4753}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8957A79E-4CC2-40CF-8313-6B6B6FEC4753}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8957A79E-4CC2-40CF-8313-6B6B6FEC4753}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B788FA6-1D09-4018-9B2A-93B6CA07654D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B788FA6-1D09-4018-9B2A-93B6CA07654D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B788FA6-1D09-4018-9B2A-93B6CA07654D}.Release|Any CPU.ActiveCfg = Release|Any CPU
