@@ -31,7 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.mainIcon = new System.Windows.Forms.PictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SpeedPanel = new System.Windows.Forms.Panel();
+            this.highText = new System.Windows.Forms.Label();
+            this.midText = new System.Windows.Forms.Label();
+            this.lowText = new System.Windows.Forms.Label();
             this.highSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.midSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.lowSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
@@ -40,18 +45,13 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.speedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.switchBtn = new DMSkin.Controls.DM.DMButtonImage();
+            this.label6 = new System.Windows.Forms.Label();
             this.tpText = new System.Windows.Forms.Label();
             this.ShutDownButton = new System.Windows.Forms.Button();
             this.roomTpText = new System.Windows.Forms.Label();
             this.nowPayText = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.timeText = new System.Windows.Forms.Label();
-            this.lowText = new System.Windows.Forms.Label();
-            this.midText = new System.Windows.Forms.Label();
-            this.highText = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.mainPanel.SuspendLayout();
             this.SpeedPanel.SuspendLayout();
@@ -85,6 +85,28 @@
             this.mainPanel.Size = new System.Drawing.Size(450, 200);
             this.mainPanel.TabIndex = 2;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("黑体", 10F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.label5.Location = new System.Drawing.Point(216, 134);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 14);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "温度";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("黑体", 10F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.label4.Location = new System.Drawing.Point(55, 134);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 14);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "开关";
+            // 
             // SpeedPanel
             // 
             this.SpeedPanel.Controls.Add(this.highText);
@@ -98,6 +120,39 @@
             this.SpeedPanel.Size = new System.Drawing.Size(135, 194);
             this.SpeedPanel.TabIndex = 7;
             this.SpeedPanel.Visible = false;
+            // 
+            // highText
+            // 
+            this.highText.AutoSize = true;
+            this.highText.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.highText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.highText.Location = new System.Drawing.Point(87, 147);
+            this.highText.Name = "highText";
+            this.highText.Size = new System.Drawing.Size(29, 19);
+            this.highText.TabIndex = 13;
+            this.highText.Text = "强";
+            // 
+            // midText
+            // 
+            this.midText.AutoSize = true;
+            this.midText.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.midText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.midText.Location = new System.Drawing.Point(87, 89);
+            this.midText.Name = "midText";
+            this.midText.Size = new System.Drawing.Size(29, 19);
+            this.midText.TabIndex = 12;
+            this.midText.Text = "中";
+            // 
+            // lowText
+            // 
+            this.lowText.AutoSize = true;
+            this.lowText.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lowText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.lowText.Location = new System.Drawing.Point(87, 28);
+            this.lowText.Name = "lowText";
+            this.lowText.Size = new System.Drawing.Size(29, 19);
+            this.lowText.TabIndex = 11;
+            this.lowText.Text = "弱";
             // 
             // highSpeedBtn
             // 
@@ -222,6 +277,17 @@
             this.switchBtn.TabIndex = 1;
             this.switchBtn.Click += new System.EventHandler(this.switchBtn_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("黑体", 10F);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.label6.Location = new System.Drawing.Point(376, 134);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 14);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "风力";
+            // 
             // tpText
             // 
             this.tpText.AutoSize = true;
@@ -288,77 +354,11 @@
             this.timeText.AutoSize = true;
             this.timeText.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.timeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.timeText.Location = new System.Drawing.Point(187, 4);
+            this.timeText.Location = new System.Drawing.Point(199, 4);
             this.timeText.Name = "timeText";
             this.timeText.Size = new System.Drawing.Size(61, 25);
             this.timeText.TabIndex = 11;
             this.timeText.Text = "23:33";
-            // 
-            // lowText
-            // 
-            this.lowText.AutoSize = true;
-            this.lowText.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lowText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.lowText.Location = new System.Drawing.Point(87, 28);
-            this.lowText.Name = "lowText";
-            this.lowText.Size = new System.Drawing.Size(29, 19);
-            this.lowText.TabIndex = 11;
-            this.lowText.Text = "弱";
-            // 
-            // midText
-            // 
-            this.midText.AutoSize = true;
-            this.midText.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.midText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.midText.Location = new System.Drawing.Point(87, 89);
-            this.midText.Name = "midText";
-            this.midText.Size = new System.Drawing.Size(29, 19);
-            this.midText.TabIndex = 12;
-            this.midText.Text = "中";
-            // 
-            // highText
-            // 
-            this.highText.AutoSize = true;
-            this.highText.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.highText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.highText.Location = new System.Drawing.Point(87, 147);
-            this.highText.Name = "highText";
-            this.highText.Size = new System.Drawing.Size(29, 19);
-            this.highText.TabIndex = 13;
-            this.highText.Text = "强";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("黑体", 10F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label4.Location = new System.Drawing.Point(55, 134);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 14);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "开关";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("黑体", 10F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label5.Location = new System.Drawing.Point(216, 134);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 14);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "温度";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("黑体", 10F);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label6.Location = new System.Drawing.Point(376, 134);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 14);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "风力";
             // 
             // Client
             // 
