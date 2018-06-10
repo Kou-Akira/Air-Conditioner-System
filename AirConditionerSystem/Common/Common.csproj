@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientStatus.cs" />
-    <Compile Include="Consts.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="HostStatus.cs" />
     <Compile Include="IHost.cs" />
