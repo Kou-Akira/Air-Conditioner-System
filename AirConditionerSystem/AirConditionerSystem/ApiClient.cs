@@ -28,5 +28,9 @@ namespace AirConditionerSystem
             return true;
         }
 
+        public static bool sendLoginInfo(string roomNum,string ID)
+        {
+            return true;
+        }
     }
 }
