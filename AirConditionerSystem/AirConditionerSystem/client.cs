@@ -43,7 +43,7 @@ namespace AirConditionerSystem
 
         private void tcpCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
-            Request res = (Request)e.Result;
+            Package res = (Package)e.Result;
             MessageBox.Show(res.ToString());
         }
 

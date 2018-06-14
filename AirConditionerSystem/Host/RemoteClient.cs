@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Common {
+namespace Host {
 	class RemoteClient {
 		private TcpClient client;
 		private NetworkStream streamToClient;
@@ -21,7 +21,7 @@ namespace Common {
 		String clientNum;
 		private ClientStatus clientStatus;
 
-		public RemoteClient(TcpClient client, IHostCallback callback) {
+		public RemoteClient(TcpClient client, IHostServiceCallback callback) {
 			this.client = client;
 			LOGGER = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			LOGGER.InfoFormat("Client Connected ! {0} < -- {1}",
@@ -31,20 +31,20 @@ namespace Common {
 			requestThread = new Thread(run);
 			heartbreatThread = new Thread(heartBeat);
 			requestThread.Start(callback);
-			heartbreatThread.Start();
+			//heartbreatThread.Start();
 		}
 
 		private void run(object cb) {
-			IHostCallback callback = cb as IHostCallback;
+			IHostServiceCallback callback = cb as IHostServiceCallback;
 			try {
 				while (true) {
-					Request request = null;
+					Common.Package request = null;
 					lock (streamToClient) {
-						request = RequestHelper.GetRequest(streamToClient);
+						request = Common.PackageHelper.GetRequest(streamToClient);
 					}
-					Response[] responses = RequestHandler.Deal(request, callback);
-					foreach (Response response in responses) {
-						byte[] responseBytes = RequestHelper.GetByte(response);
+					Common.Package[] responses = PackageHandler.Deal(request, callback);
+					foreach (Common.Package response in responses) {
+						byte[] responseBytes = Common.PackageHelper.GetByte(response);
 						lock (streamToClient) {
 							streamToClient.Write(responseBytes, 0, responseBytes.Length);
 						}
@@ -61,10 +61,10 @@ namespace Common {
 
 		private void heartBeat() {
 			if (clientStatus.Speed == ESpeed.Unauthorized) return;
-			Response response1 = new HostCostResponse(clientStatus.Cost);
-			byte[] responseBytes1 = RequestHelper.GetByte(response1);
-			Response response2 = new HostSpeedResponse((int)clientStatus.Speed);
-			byte[] responseBytes2 = RequestHelper.GetByte(response2);
+			Common.Package response1 = new Common.HostCostPackage(clientStatus.Cost);
+			byte[] responseBytes1 = Common.PackageHelper.GetByte(response1);
+			Common.Package response2 = new Common.HostSpeedPackage((int)clientStatus.Speed);
+			byte[] responseBytes2 = Common.PackageHelper.GetByte(response2);
 			lock (streamToClient) {
 				streamToClient.Write(responseBytes1, 0, responseBytes1.Length);
 				streamToClient.Write(responseBytes2, 0, responseBytes2.Length);

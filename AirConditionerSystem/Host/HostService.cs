@@ -9,11 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 
-namespace Common {
-	internal delegate void RequestDelegate(Request request);
+namespace Host {
+	internal delegate void RequestDelegate(Common.Package request);
 
 
-	class Host : IHost, IHostCallback {
+	class HostService : IHostService, IHostServiceCallback {
 		private static readonly int HotMaxTemperature = 30;
 		private static readonly int HotMinTemperature = 25;
 		private static readonly int HotTemperatureDefault = 28;
@@ -27,13 +27,13 @@ namespace Common {
 		private static readonly double HighSpeedPower = 1.3;
 		private static readonly int CostPrePower = 5;
 
-		private HostStatus hostState;
+		private HostServiceStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
 		private IDictionary<RemoteClient, SchedulingInformation> clients;
 
 
-		public Host() {
+		public HostService() {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			netWork = new Network(this);
 			clients = new ConcurrentDictionary<RemoteClient, SchedulingInformation>();
@@ -79,7 +79,7 @@ namespace Common {
 			return true;
 		}
 
-		public Response ChangeMode() {
+		public Common.Package ChangeMode() {
 			//return new HostModeResponse((int)this.hostState.mode, GetTemperatureDefault());
 			throw new NotImplementedException();
 		}

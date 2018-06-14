@@ -9,20 +9,20 @@ using System.Threading;
 using System.Threading.Tasks;
 using log4net;
 
-namespace Common {
+namespace Host {
 	class Network : INetWork {
 		private TcpListener listener;
 		private int state;
 		private ILog LOGGER;
-		private IHostCallback callback;
+		private IHostServiceCallback callback;
 		private Thread listenerThread;
 
-		public Network(IHostCallback callback) {
+		public Network(IHostServiceCallback callback) {
 			this.callback = callback;
 			state = 0;
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			LOGGER.Info("Network init!");
-			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.PORT);
+			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), Common.Constants.PORT);
 		}
 		
 		public void StartListen() {

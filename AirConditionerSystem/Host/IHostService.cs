@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common {
-	interface IHost {
+namespace Host {
+	interface IHostService {
 		/// <summary>
 		/// 
 		/// </summary>
@@ -24,7 +24,7 @@ namespace Common {
 		/// <returns></returns>
 		int SettModle(int modle);
 
-		// Response[] DealRequest(Request request);
+		// Package[] DealRequest(Request request);
 
 	}
 }

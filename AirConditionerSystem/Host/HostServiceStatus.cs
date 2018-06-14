@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common {
+namespace Host {
 
 	/// <summary>
 	/// 0关闭 1开启 2休眠
@@ -32,7 +32,7 @@ namespace Common {
 		HighSpeedFirst
 	}
 
-	struct HostStatus {
+	struct HostServiceStatus {
 
 		internal State state;
 
