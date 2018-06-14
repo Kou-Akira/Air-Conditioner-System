@@ -14,16 +14,16 @@ namespace Host {
 		[STAThread]
 		static void Main() {
 
-			ILog LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-			log4net.Config.XmlConfigurator.Configure();
-			IHostService host = new HostService();
-			host.TurnOn();
-			while (true) { }
+            //ILog LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+            //log4net.Config.XmlConfigurator.Configure();
+            //IHostService host = new HostService();
+            //host.TurnOn();
+            //while (true) { }
 
 
-			//Application.EnableVisualStyles();
-			//Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new Host());
-		}
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Host());
+        }
 	}
 }

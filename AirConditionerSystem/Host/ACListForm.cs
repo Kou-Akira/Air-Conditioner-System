@@ -16,5 +16,10 @@ namespace Host
         {
             InitializeComponent();
         }
+
+        private void ShutDownButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

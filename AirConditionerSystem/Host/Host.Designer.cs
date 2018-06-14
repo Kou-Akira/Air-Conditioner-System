@@ -94,6 +94,7 @@
             this.ShutDownButton.TabIndex = 12;
             this.ShutDownButton.TabStop = false;
             this.ShutDownButton.UseVisualStyleBackColor = false;
+            this.ShutDownButton.Click += new System.EventHandler(this.ShutDownButton_Click);
             // 
             // mainPanel
             // 
@@ -281,6 +282,7 @@
             this.watchBtn.Size = new System.Drawing.Size(50, 50);
             this.watchBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.watchBtn.TabIndex = 4;
+            this.watchBtn.Click += new System.EventHandler(this.watchBtn_Click);
             // 
             // coldBtn
             // 
