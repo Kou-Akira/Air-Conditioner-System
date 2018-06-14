@@ -27,5 +27,7 @@ namespace Common
         public const int PORT = 6000;
         public const int MAXBYTES = 20;
         public const int IDLENTH = 18;
+
+        public const int REFRESH_INTERVAL = 5;
     }
 }

@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace Host
 {
-    public partial class Host : DMSkin.Main
+    public partial class SettingForm : DMSkin.Main
     {
-        public Host()
+        public SettingForm()
         {
             InitializeComponent();
-        }
-
-        private void settingBtn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

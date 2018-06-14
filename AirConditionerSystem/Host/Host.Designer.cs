@@ -52,6 +52,7 @@
             this.workModeText = new System.Windows.Forms.Label();
             this.connectCountText = new System.Windows.Forms.Label();
             this.mainIcon = new System.Windows.Forms.PictureBox();
+            this.settingBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.SuspendLayout();
@@ -358,12 +359,30 @@
             this.mainIcon.TabIndex = 16;
             this.mainIcon.TabStop = false;
             // 
+            // settingBtn
+            // 
+            this.settingBtn.BackColor = System.Drawing.Color.Transparent;
+            this.settingBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("settingBtn.BackgroundImage")));
+            this.settingBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.settingBtn.FlatAppearance.BorderSize = 0;
+            this.settingBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
+            this.settingBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
+            this.settingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingBtn.Location = new System.Drawing.Point(74, 7);
+            this.settingBtn.Name = "settingBtn";
+            this.settingBtn.Size = new System.Drawing.Size(20, 20);
+            this.settingBtn.TabIndex = 20;
+            this.settingBtn.TabStop = false;
+            this.settingBtn.UseVisualStyleBackColor = false;
+            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
+            // 
             // Host
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
             this.ClientSize = new System.Drawing.Size(500, 500);
+            this.Controls.Add(this.settingBtn);
             this.Controls.Add(this.workModeText);
             this.Controls.Add(this.connectCountText);
             this.Controls.Add(this.mainIcon);
@@ -410,6 +429,7 @@
         private System.Windows.Forms.Label workModeText;
         private System.Windows.Forms.Label connectCountText;
         private System.Windows.Forms.PictureBox mainIcon;
+        private System.Windows.Forms.Button settingBtn;
     }
 }
 
