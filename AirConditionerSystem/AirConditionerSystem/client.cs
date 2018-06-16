@@ -126,16 +126,16 @@ namespace AirConditionerSystem
 
         private void switchDoWork(object sender, DoWorkEventArgs e)
         {
-            //bool result;
-            //if (!(bool)e.Argument)
-            //{
-            //    result = ApiClient.sendTurnOffRequest();
-            //}
-            //else
-            //{
-            //    result = ApiClient.sendTurnOnRequest();
-            //}
-            //e.Result = result;
+            bool result;
+            if (!(bool)e.Argument)
+            {
+                result = ApiClient.sendTurnOffRequest();
+            }
+            else
+            {
+                result = ApiClient.sendTurnOnRequest();
+            }
+            e.Result = result;
             ApiClient.sendLoginRequest(66,"650204199612181235");
         }
 
