@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Net.Sockets;
 using System.Threading;
 using Common;
 
@@ -11,6 +12,17 @@ namespace AirConditionerSystem
         private BackgroundWorker timeWordker;
         private BackgroundWorker refreshTimeWorker;
         private login lg;
+
+
+        private TcpClient client;
+        private static NetworkStream networkStream;
+        private RunWorkerCompletedEventHandler callBack;
+        private AsynTask asynTask;
+        private static Object writeLock = new Object();
+        private delegate void cb(Package p);
+        private SynchronizationContext context;
+        private Thread listen;
+
         private bool isOff;
         private int speedMode;
         private bool isClose;
@@ -24,6 +36,7 @@ namespace AirConditionerSystem
 
         private void Client_Load(object sender, EventArgs e)
         {
+            TemperatureSimulator.getInstance().startSimulating();
             mLoadingBox = new LoadingBox();
             timeWordker = new BackgroundWorker();
             refreshTimeWorker = new BackgroundWorker();
@@ -38,11 +51,38 @@ namespace AirConditionerSystem
             isClose = false;
             nowTp = Constants.DEFAULT_TEMPERATURE;
             tpText.Text = nowTp.ToString() + "℃";
+            context = SynchronizationContext.Current;
+
         }
 
-        private void tcpCallBack(object sender, RunWorkerCompletedEventArgs e)
+        private void tcpConnect()
         {
-            Package res = (Package)e.Result;
+            if (client == null || (client != null && !client.Connected))
+            {
+                client = new TcpClient(Constants.IP_ADDRESS, Constants.PORT);
+            }
+            networkStream = client.GetStream();
+            while (true)
+            {           
+                //get package
+                Package req = PackageHelper.GetRequest(networkStream);
+                context.Post(tcpCallBack,req);
+            }
+            
+        }
+
+        public static void sendPackage(byte[] buffer)
+        {
+            lock (writeLock)
+            {
+                networkStream.Write(buffer, 0, buffer.Length);
+            }
+        }
+
+
+
+        private void tcpCallBack(object pac)
+        {
             switch (sendType)
             {
                 case 0:
@@ -50,13 +90,12 @@ namespace AirConditionerSystem
                 case 1:
                     break;
                 case 2:
+                    lg.context.Post(lg.packageReceive, pac);
                     break;
                 case 3:
-                    lg.packageReceive(res);
                     break;
             }
             sendType = -1;
-            System.Windows.Forms.MessageBox.Show(res.ToString());
         }
 
         private void getSysTime(object sender, DoWorkEventArgs e)
@@ -118,39 +157,31 @@ namespace AirConditionerSystem
 
         private void switchCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
-            //if ((bool)e.Result)
-            //{
-            //    mLoadingBox.Hide();
-            //    refreshSwitchUI();
-            //    isOff = !isOff;
-            //    if (isClose)//关闭程序前的关机请求
-            //    {
-            //        Environment.Exit(0);
-            //    }
-            //}
-            //else
-            //{
-            //    mLoadingBox.setText("Error");
-            //    mLoadingBox.delayHide();
-            //}
-            mLoadingBox.Hide();
+            if (isClose)
+            {
+                Environment.Exit(0);
+            }
         }
 
         private void switchDoWork(object sender, DoWorkEventArgs e)
         {
-            if (!(bool)e.Argument)
+            if ((bool)e.Argument)
             {
-                TcpConnector.beginConnect(tcpCallBack);
-                lg = new login();
-                lg.ShowDialog();
+                if (listen == null)
+                {
+                    listen = new Thread(new ThreadStart(tcpConnect));
+                    listen.IsBackground = true;
+                    listen.Start();
+                }
                 sendType = 2;
+                lg = new login();
+                lg.ShowDialog();             
             }
             else
             {
-              
+                ApiClient.sendClientCloseRequest();
             }
-           
-            ApiClient.sendLoginRequest(66,"650204199612181235");
+          
         }
 
         private void switchBtn_Click(object sender, EventArgs e)

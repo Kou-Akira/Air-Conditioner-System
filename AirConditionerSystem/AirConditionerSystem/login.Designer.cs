@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.LoginButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.IDTextBox = new System.Windows.Forms.TextBox();
             this.IDBg = new System.Windows.Forms.PictureBox();
@@ -38,7 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ShutDownButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.LoginButton = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IDBg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserBg)).BeginInit();
@@ -58,6 +58,21 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(442, 251);
             this.mainPanel.TabIndex = 0;
+            // 
+            // LoginButton
+            // 
+            this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
+            this.LoginButton.FlatAppearance.BorderSize = 2;
+            this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoginButton.Font = new System.Drawing.Font("黑体", 12F);
+            this.LoginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
+            this.LoginButton.Location = new System.Drawing.Point(34, 177);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(376, 36);
+            this.LoginButton.TabIndex = 41;
+            this.LoginButton.Text = "登录";
+            this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // textBox1
             // 
@@ -152,21 +167,6 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "顾客登录";
             // 
-            // LoginButton
-            // 
-            this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
-            this.LoginButton.FlatAppearance.BorderSize = 2;
-            this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Font = new System.Drawing.Font("黑体", 12F);
-            this.LoginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
-            this.LoginButton.Location = new System.Drawing.Point(34, 177);
-            this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(376, 36);
-            this.LoginButton.TabIndex = 41;
-            this.LoginButton.Text = "登录";
-            this.LoginButton.UseVisualStyleBackColor = true;
-            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
-            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -176,8 +176,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ShutDownButton);
             this.Controls.Add(this.mainPanel);
+            this.DM_CanResize = false;
             this.DM_howBorder = false;
             this.Name = "login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "login";
             this.Load += new System.EventHandler(this.login_Load);
             this.mainPanel.ResumeLayout(false);

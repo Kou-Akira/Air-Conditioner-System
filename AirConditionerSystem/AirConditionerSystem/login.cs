@@ -16,6 +16,7 @@ namespace AirConditionerSystem
     public partial class login : DMSkin.Main
     {
         private LoadingBox mLoadingBox;
+        public SynchronizationContext context;
         public login()
         {
             InitializeComponent();
@@ -79,10 +80,12 @@ namespace AirConditionerSystem
         private void login_Load(object sender, EventArgs e)
         {
             mLoadingBox = new LoadingBox();
+            context = SynchronizationContext.Current;
         }
 
-        public void packageReceive(Package pack)
+        public void packageReceive(object pac)
         {
+            Package pack = (Package)pac;
             if (pack.Cat == 1)//success
             {
                 mLoadingBox.Hide();
