@@ -8,7 +8,7 @@ namespace AirConditionerSystem
 {
      class TemperatureSimulator
      {
-        private static object locker;
+        private static object locker = new Object();
         private static TemperatureSimulator instance;
         public static TemperatureSimulator getInstance()
         {
@@ -26,7 +26,7 @@ namespace AirConditionerSystem
         }
         private int roomNumber;
         private float roomTemperature;
-        public TemperatureSimulator()
+        private TemperatureSimulator()
         {
            
         }

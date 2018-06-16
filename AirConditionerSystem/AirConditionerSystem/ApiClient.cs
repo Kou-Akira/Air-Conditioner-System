@@ -12,7 +12,7 @@ namespace AirConditionerSystem
     {
         public static void sendLoginRequest(int roomNumber, String id)
         {
-            byte[] buffer = PackageHelper.GetByte(new ClientLoginPackage(roomNumber, id));
+            byte[] buffer = PackageHelper.GetByte(new ClientLoginPackage((byte)roomNumber, id));
             Client.sendPackage(buffer);
         }
 
@@ -22,12 +22,22 @@ namespace AirConditionerSystem
             Client.sendPackage(buffer);
         }
 
-        public static void sendRoomTemperature() { }
-
-        public static bool sendSpeedMode(int mode)
+        public static void sendRoomTemperature(float tp)
         {
-            Thread.Sleep(2000);
-            return true;
+            byte[] buffer = PackageHelper.GetByte(new ClientTemperaturePackage(tp));
+            Client.sendPackage(buffer);
+        }
+
+        public static void sendTpChange(float tp)
+        {
+            byte[] buffer = PackageHelper.GetByte(new ClientTargetTemperaturePackage(tp));
+            Client.sendPackage(buffer);
+        }
+
+        public static void sendSpeedRequest(int speed, float tp)
+        {
+            byte[] buffer = PackageHelper.GetByte(new ClientSpeedPackage(speed, tp));
+            Client.sendPackage(buffer);
         }
     }
 }

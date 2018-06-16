@@ -64,7 +64,7 @@
             this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
             this.LoginButton.FlatAppearance.BorderSize = 2;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Font = new System.Drawing.Font("黑体", 12F);
+            this.LoginButton.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold);
             this.LoginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
             this.LoginButton.Location = new System.Drawing.Point(34, 177);
             this.LoginButton.Name = "LoginButton";
@@ -148,7 +148,7 @@
             this.ShutDownButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
             this.ShutDownButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
             this.ShutDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShutDownButton.Location = new System.Drawing.Point(407, 6);
+            this.ShutDownButton.Location = new System.Drawing.Point(407, 2);
             this.ShutDownButton.Name = "ShutDownButton";
             this.ShutDownButton.Size = new System.Drawing.Size(35, 35);
             this.ShutDownButton.TabIndex = 8;
@@ -172,7 +172,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
-            this.ClientSize = new System.Drawing.Size(443, 291);
+            this.ClientSize = new System.Drawing.Size(442, 291);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ShutDownButton);
             this.Controls.Add(this.mainPanel);
