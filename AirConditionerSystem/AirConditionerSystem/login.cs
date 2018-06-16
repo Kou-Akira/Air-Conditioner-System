@@ -51,30 +51,17 @@ namespace AirConditionerSystem
 
         private void LoginCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
-            if((bool)e.Result)
-            {
-                mLoadingBox.Hide();
-                Close();
-            }
-            else
-            {
-                mLoadingBox.setText("Error");
-                mLoadingBox.delayHide();
-            }
-
         }
 
         private void LoginDoWork(object sender, DoWorkEventArgs e)
         {
-            bool result;
-            result = ApiClient.sendLoginInfo(textBox1.Text, IDTextBox.Text);
-            e.Result = result;
+            ApiClient.sendLoginRequest(Convert.ToInt32(textBox1.Text), IDTextBox.Text);
         }
 
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            if (IsID(IDTextBox.Text)&&(IsRoomNum(textBox1.Text)))
+            if (IsID(IDTextBox.Text) && (IsRoomNum(textBox1.Text)))
             {
                 AsynTask asynTask = new AsynTask(LoginDoWork, LoginCallBack);//线程
                 asynTask.startTask();
@@ -86,12 +73,26 @@ namespace AirConditionerSystem
                 infoBox.ShowDialog();
                 infoBox.Dispose();
             }
-            
+
         }
 
         private void login_Load(object sender, EventArgs e)
         {
             mLoadingBox = new LoadingBox();
+        }
+
+        public void packageReceive(Package pack)
+        {
+            if (pack.Cat == 1)//success
+            {
+                mLoadingBox.Hide();
+                Close();
+            }
+            else if (pack.Cat == 0)//failed
+            {
+                mLoadingBox.setText("Error");
+                mLoadingBox.delayHide();
+            }
         }
     }
 }

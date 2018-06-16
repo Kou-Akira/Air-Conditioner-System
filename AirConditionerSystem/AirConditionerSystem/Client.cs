@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading;
-using System.Windows.Forms;
 using Common;
 
 namespace AirConditionerSystem
@@ -11,6 +10,7 @@ namespace AirConditionerSystem
         private LoadingBox mLoadingBox;
         private BackgroundWorker timeWordker;
         private BackgroundWorker refreshTimeWorker;
+        private login lg;
         private bool isOff;
         private int speedMode;
         private bool isClose;
@@ -24,7 +24,6 @@ namespace AirConditionerSystem
 
         private void Client_Load(object sender, EventArgs e)
         {
-            new login().ShowDialog();
             mLoadingBox = new LoadingBox();
             timeWordker = new BackgroundWorker();
             refreshTimeWorker = new BackgroundWorker();
@@ -39,13 +38,25 @@ namespace AirConditionerSystem
             isClose = false;
             nowTp = Constants.DEFAULT_TEMPERATURE;
             tpText.Text = nowTp.ToString() + "℃";
-            TcpConnector.beginConnect(tcpCallBack);
         }
 
         private void tcpCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
             Package res = (Package)e.Result;
-            MessageBox.Show(res.ToString());
+            switch (sendType)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    lg.packageReceive(res);
+                    break;
+            }
+            sendType = -1;
+            System.Windows.Forms.MessageBox.Show(res.ToString());
         }
 
         private void getSysTime(object sender, DoWorkEventArgs e)
@@ -127,16 +138,18 @@ namespace AirConditionerSystem
 
         private void switchDoWork(object sender, DoWorkEventArgs e)
         {
-            bool result;
             if (!(bool)e.Argument)
             {
-                result = ApiClient.sendTurnOffRequest();
+                TcpConnector.beginConnect(tcpCallBack);
+                lg = new login();
+                lg.ShowDialog();
+                sendType = 2;
             }
             else
             {
-                result = ApiClient.sendTurnOnRequest();
+              
             }
-            e.Result = result;
+           
             ApiClient.sendLoginRequest(66,"650204199612181235");
         }
 
@@ -144,7 +157,6 @@ namespace AirConditionerSystem
         {
             AsynTask asynTask = new AsynTask(switchDoWork, switchCallBack);
             asynTask.startTask(isOff);
-            mLoadingBox.ShowDialog();
         }
 
         private void speedBtn_Click(object sender, EventArgs e)

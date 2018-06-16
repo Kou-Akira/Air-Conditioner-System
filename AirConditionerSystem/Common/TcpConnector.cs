@@ -18,6 +18,10 @@ namespace Common
 
         public static void beginConnect(RunWorkerCompletedEventHandler callback)
         {
+            if (client != null & client.Connected)
+            {
+                return;
+            }
             callBack = callback;
             asynTask = new AsynTask(tcpConnect,tcpCallBack);
             asynTask.startTask();
