@@ -34,11 +34,11 @@
             this.IDTextBox = new System.Windows.Forms.TextBox();
             this.IDBg = new System.Windows.Forms.PictureBox();
             this.UserBg = new System.Windows.Forms.PictureBox();
-            this.LoginButton = new DMSkin.Controls.DM.DMButtonImage();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ShutDownButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.LoginButton = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IDBg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserBg)).BeginInit();
@@ -47,16 +47,16 @@
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
+            this.mainPanel.Controls.Add(this.LoginButton);
             this.mainPanel.Controls.Add(this.textBox1);
             this.mainPanel.Controls.Add(this.IDTextBox);
             this.mainPanel.Controls.Add(this.IDBg);
             this.mainPanel.Controls.Add(this.UserBg);
-            this.mainPanel.Controls.Add(this.LoginButton);
             this.mainPanel.Controls.Add(this.label2);
             this.mainPanel.Controls.Add(this.label1);
-            this.mainPanel.Location = new System.Drawing.Point(-6, 40);
+            this.mainPanel.Location = new System.Drawing.Point(0, 40);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(518, 297);
+            this.mainPanel.Size = new System.Drawing.Size(442, 251);
             this.mainPanel.TabIndex = 0;
             // 
             // textBox1
@@ -65,9 +65,9 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("黑体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.textBox1.Location = new System.Drawing.Point(186, 36);
+            this.textBox1.Location = new System.Drawing.Point(169, 41);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(259, 22);
+            this.textBox1.Size = new System.Drawing.Size(229, 22);
             this.textBox1.TabIndex = 0;
             // 
             // IDTextBox
@@ -76,18 +76,18 @@
             this.IDTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.IDTextBox.Font = new System.Drawing.Font("黑体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.IDTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.IDTextBox.Location = new System.Drawing.Point(186, 111);
+            this.IDTextBox.Location = new System.Drawing.Point(169, 116);
             this.IDTextBox.Name = "IDTextBox";
-            this.IDTextBox.Size = new System.Drawing.Size(259, 22);
+            this.IDTextBox.Size = new System.Drawing.Size(229, 22);
             this.IDTextBox.TabIndex = 40;
             // 
             // IDBg
             // 
             this.IDBg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
             this.IDBg.Image = ((System.Drawing.Image)(resources.GetObject("IDBg.Image")));
-            this.IDBg.Location = new System.Drawing.Point(149, 102);
+            this.IDBg.Location = new System.Drawing.Point(132, 107);
             this.IDBg.Name = "IDBg";
-            this.IDBg.Size = new System.Drawing.Size(314, 42);
+            this.IDBg.Size = new System.Drawing.Size(278, 42);
             this.IDBg.TabIndex = 39;
             this.IDBg.TabStop = false;
             // 
@@ -96,35 +96,18 @@
             this.UserBg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
             this.UserBg.Enabled = false;
             this.UserBg.Image = ((System.Drawing.Image)(resources.GetObject("UserBg.Image")));
-            this.UserBg.Location = new System.Drawing.Point(149, 28);
+            this.UserBg.Location = new System.Drawing.Point(132, 33);
             this.UserBg.Name = "UserBg";
-            this.UserBg.Size = new System.Drawing.Size(314, 42);
+            this.UserBg.Size = new System.Drawing.Size(278, 42);
             this.UserBg.TabIndex = 38;
             this.UserBg.TabStop = false;
-            // 
-            // LoginButton
-            // 
-            this.LoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
-            this.LoginButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LoginButton.BackgroundImage")));
-            this.LoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.LoginButton.DM_DownImage = ((System.Drawing.Image)(resources.GetObject("LoginButton.DM_DownImage")));
-            this.LoginButton.DM_HoverImage = ((System.Drawing.Image)(resources.GetObject("LoginButton.DM_HoverImage")));
-            this.LoginButton.DM_Mode = false;
-            this.LoginButton.DM_NolImage = ((System.Drawing.Image)(resources.GetObject("LoginButton.DM_NolImage")));
-            this.LoginButton.Location = new System.Drawing.Point(204, 176);
-            this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(96, 96);
-            this.LoginButton.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
-            this.LoginButton.TabIndex = 33;
-            this.LoginButton.TabStop = false;
-            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
-            this.label2.Location = new System.Drawing.Point(46, 110);
+            this.label2.Location = new System.Drawing.Point(29, 115);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 27);
             this.label2.TabIndex = 2;
@@ -135,7 +118,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
-            this.label1.Location = new System.Drawing.Point(46, 36);
+            this.label1.Location = new System.Drawing.Point(29, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 27);
             this.label1.TabIndex = 0;
@@ -150,7 +133,7 @@
             this.ShutDownButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
             this.ShutDownButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
             this.ShutDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShutDownButton.Location = new System.Drawing.Point(465, 3);
+            this.ShutDownButton.Location = new System.Drawing.Point(407, 6);
             this.ShutDownButton.Name = "ShutDownButton";
             this.ShutDownButton.Size = new System.Drawing.Size(35, 35);
             this.ShutDownButton.TabIndex = 8;
@@ -169,12 +152,27 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "顾客登录";
             // 
+            // LoginButton
+            // 
+            this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
+            this.LoginButton.FlatAppearance.BorderSize = 2;
+            this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoginButton.Font = new System.Drawing.Font("黑体", 12F);
+            this.LoginButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
+            this.LoginButton.Location = new System.Drawing.Point(34, 177);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(376, 36);
+            this.LoginButton.TabIndex = 41;
+            this.LoginButton.Text = "登录";
+            this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
+            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
-            this.ClientSize = new System.Drawing.Size(504, 335);
+            this.ClientSize = new System.Drawing.Size(443, 291);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ShutDownButton);
             this.Controls.Add(this.mainPanel);
@@ -198,10 +196,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private DMSkin.Controls.DM.DMButtonImage LoginButton;
         private System.Windows.Forms.PictureBox IDBg;
         private System.Windows.Forms.PictureBox UserBg;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox IDTextBox;
+        private System.Windows.Forms.Button LoginButton;
     }
 }
