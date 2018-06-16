@@ -20,6 +20,7 @@ namespace Host {
 		private System.Timers.Timer heartBeatTimer;
 
 		public byte ClientNum { get => clientNum; set => clientNum = value; }
+		public ClientStatus ClientStatus { get => clientStatus; }
 
 		public RemoteClient(TcpClient client, IHostServiceCallback callback) {
 			this.client = client;
@@ -89,6 +90,5 @@ namespace Host {
 				LOGGER.DebugFormat("Package: {0}", BitConverter.ToString(bts));
 			}
 		}
-		private 
 	}
 }
