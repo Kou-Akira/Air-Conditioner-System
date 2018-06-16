@@ -42,7 +42,7 @@ namespace Host {
 				LOGGER.InfoFormat("Start listen on port {0}", Common.Constants.PORT);
 				while (state == 1) {
 					TcpClient tcpClient = listener.AcceptTcpClient();
-					callback.AddClient(new RemoteClient(tcpClient, callback));
+					//callback.AddClient(new RemoteClient(tcpClient, callback));
 				}
 			} catch (ThreadAbortException e) {
 				LOGGER.Warn("Network listen thread has been abort!", e);

@@ -95,5 +95,21 @@ namespace Host {
 		public void ClientHeartBeat(RemoteClient client, float temperature) {
 			throw new NotImplementedException();
 		}
+
+		public void AddClient(byte clientNum) {
+			throw new NotImplementedException();
+		}
+
+		public void CloseClient(byte clientNum) {
+			throw new NotImplementedException();
+		}
+
+		public void ClientHeartBeat(byte clientNum, float temperature) {
+			throw new NotImplementedException();
+		}
+
+		public void ClientSpeed(byte clientNum, ESpeed speed) {
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -58,7 +58,7 @@ namespace Host {
 				this.clientStatus.Speed = ESpeed.Unauthorized;
 				streamToClient.Dispose();
 				client.Close();
-				callback.CloseClient(this);
+				//callback.CloseClient(this);
 			}
 		}
 

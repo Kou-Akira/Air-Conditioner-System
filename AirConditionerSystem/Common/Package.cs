@@ -9,6 +9,10 @@ namespace Common {
 
 		public int Cat { get => cat; }
 	}
+	public class Ignored : Package {
+		public Ignored() : base(-1) {
+		}
+	}
 	public class HostNakPackage : Package {
 		public HostNakPackage() : base(0) { }
 
