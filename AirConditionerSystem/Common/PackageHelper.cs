@@ -33,8 +33,10 @@ namespace Common {
 					return res;
 				}
 				case 1: {
-					byte[] res = new byte[1];
+					HostAckPackage hostAckPackage = response as HostAckPackage;
+					byte[] res = new byte[6];
 					res[0] = 1;
+					res[1] = (byte)hostAckPackage.Mode;
 					return res;
 				}
 				case 2: {
@@ -65,6 +67,14 @@ namespace Common {
 			}
 			log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType).DebugFormat("Convert byte[]{0} to string{1} as id num!", bt, id);
 			return id;
+		}
+
+		private static byte[] ConvertFloatToByte(float f) {
+			byte[] bt = new byte[4];
+
+			
+
+			return bt;
 		}
 	}
 }
