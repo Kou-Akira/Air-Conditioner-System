@@ -14,11 +14,20 @@ namespace Common {
 			networkStream.Read(buffer, 0, 1);
 			int cat = Convert.ToInt32(buffer[0]);
 			switch (cat) {
+				case 0: {
+					return new HostNakPackage();
+				}
+				case 1: {
+					networkStream.Read(buffer, 0, 5);
+					int mode = BitConverter.ToBoolean(buffer, 0) == true ? 1 : 0;
+					float temperature = BitConverter.ToSingle(buffer, 1);
+					return new HostAckPackage(mode,temperature);
+				}
 				case 2: {
 					networkStream.Read(buffer, 0, 1);
-					int roomNum = Convert.ToInt32(buffer[0]);
+					char roomNum = BitConverter.ToChar(buffer,0);
 					networkStream.Read(buffer, 0, 18);
-					String id = GetId(buffer);
+					String id = ConvertBytesToId(buffer);
 					return new ClientLoginPackage(roomNum, id);
 				}
 				default:
@@ -37,6 +46,8 @@ namespace Common {
 					byte[] res = new byte[6];
 					res[0] = 1;
 					res[1] = (byte)hostAckPackage.Mode;
+					byte[] tbt = BitConverter.GetBytes(hostAckPackage.Temperature);
+					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i]; 
 					return res;
 				}
 				case 2: {
@@ -51,7 +62,7 @@ namespace Common {
 				}
 				case 3: {
 					HostModePackage hostModePackage = response as HostModePackage;
-					byte[] buffer = new byte[21];
+					byte[] buffer = new byte[20];
 					buffer[0] = 3;
 					buffer[1] = (byte)hostModePackage.Mode;
 
@@ -61,23 +72,30 @@ namespace Common {
 					throw new Exception("RequestFormatter::GetByte switch out of range with " + response.Cat);
 			}
 		}
-		private static String GetId(byte[] bt) {
-			if (bt.Length != Constants.IDLENTH)
-				log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType).ErrorFormat("Id lenth != {0}", Constants.IDLENTH);
+		private static String ConvertBytesToId(byte[] bt) {
 			String id = "";
 			for (int i = 0; i < bt.Length; i++) {
-				id = id + bt[i].ToString();
+				id = id + Convert.ToChar(bt[i]);
 			}
-			log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType).DebugFormat("Convert byte[]{0} to string{1} as id num!", bt, id);
 			return id;
 		}
 
+		private static byte[] ConvertIdToBytes(String id) {
+			byte[] res = new byte[18];
+			for(int i = 0; i < id.Length; i++) {
+				res[i] = Convert.ToByte(id[i]);
+			}
+			return res;
+		}
+
 		private static byte[] ConvertFloatToByte(float f) {
-			byte[] bt = new byte[4];
-
-
-
+			byte[] bt = BitConverter.GetBytes(f);
 			return bt;
+		}
+
+		private static float ConvertByteToFloat(byte[] bt) {
+			float fl = BitConverter.ToSingle(bt, 0);
+			return fl;
 		}
 	}
 }
