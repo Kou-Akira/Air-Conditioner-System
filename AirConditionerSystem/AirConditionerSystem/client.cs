@@ -24,6 +24,7 @@ namespace AirConditionerSystem
 
         private void Client_Load(object sender, EventArgs e)
         {
+            new login().ShowDialog();
             mLoadingBox = new LoadingBox();
             timeWordker = new BackgroundWorker();
             refreshTimeWorker = new BackgroundWorker();
