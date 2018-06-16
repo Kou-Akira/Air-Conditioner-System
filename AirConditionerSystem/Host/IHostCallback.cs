@@ -11,5 +11,7 @@ namespace Host {
 		bool Login(int roomNumber, string idNum);
 		Common.Package ChangeMode();
 		void CloseClient(RemoteClient client);
+
+		void ClientHeartBeat(RemoteClient client, float temperature);
 	}
 }

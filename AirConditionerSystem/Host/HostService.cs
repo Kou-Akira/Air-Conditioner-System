@@ -91,5 +91,9 @@ namespace Host {
 			clients.Remove(client);
 			client.Abort();
 		}
+
+		public void ClientHeartBeat(RemoteClient client, float temperature) {
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common {
 	public class Package {
@@ -37,14 +33,14 @@ namespace Common {
 	}
 	public class ClientLoginPackage : Package {
 		String idNum;
-		int roomNumber;
-		public ClientLoginPackage(int roomNumber, String IdNum) : base(2) {
+		byte roomNumber;
+		public ClientLoginPackage(byte roomNumber, String IdNum) : base(2) {
 			this.roomNumber = roomNumber;
 			this.idNum = IdNum;
 		}
 
 		public string IdNum { get => idNum; }
-		public int RoomNumber { get => roomNumber; }
+		public byte RoomNumber { get => roomNumber; }
 
 		public override string ToString() {
 			return String.Format("ClientLoginPackage! idNum:{0}, roomNumber:{1}.", idNum, roomNumber);

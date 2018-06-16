@@ -15,9 +15,11 @@ namespace Host {
 		private const int BufferSize = 8192;
 		private ILog LOGGER = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private System.Threading.Thread requestThread;
-		String clientNum;
+		private byte clientNum;
 		private ClientStatus clientStatus;
 		private System.Timers.Timer heartBeatTimer;
+
+		public byte ClientNum { get => clientNum; set => clientNum = value; }
 
 		public RemoteClient(TcpClient client, IHostServiceCallback callback) {
 			this.client = client;
@@ -46,7 +48,7 @@ namespace Host {
 						LOGGER.InfoFormat("Receive package {0} from client {1}!", request.ToString(), 
 							clientNum == null ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 					}
-					Common.Package response = PackageHandler.Deal(request, callback);
+					Common.Package response = PackageHandler.Deal(this,request, callback);
 					SendPackage(response);
 				}
 			} catch (IOException e) {
