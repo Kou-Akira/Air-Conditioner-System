@@ -7,9 +7,15 @@ using System.Threading.Tasks;
 namespace Host {
 	interface IHostServiceCallback {
 		Tuple<int, float> GetDefaultWorkingState();
-		void AddClient(RemoteClient remoteClient);
+		void AddClient(byte clientNum);
 		bool Login(int roomNumber, string idNum);
 		Common.Package ChangeMode();
-		void CloseClient(RemoteClient client);
+		void CloseClient(byte clientNum);
+
+		void ClientHeartBeat(byte clientNum, float temperature);
+
+		void ClientSpeed(byte clientNum, ESpeed speed);
+
+		void SetTargetTemperature(byte clientNum, float temperature);
 	}
 }

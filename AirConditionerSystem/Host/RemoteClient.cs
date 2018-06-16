@@ -15,13 +15,15 @@ namespace Host {
 		private const int BufferSize = 8192;
 		private ILog LOGGER = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private System.Threading.Thread requestThread;
-		String clientNum;
+		private byte clientNum;
 		private ClientStatus clientStatus;
 		private System.Timers.Timer heartBeatTimer;
 
+		public byte ClientNum { get => clientNum; set => clientNum = value; }
+
 		public RemoteClient(TcpClient client, IHostServiceCallback callback) {
 			this.client = client;
-			LOGGER.InfoFormat("Client Connected ! {0} < -- {1}",
+			LOGGER.InfoFormat("Client Connected! {0} < -- {1}",
 				client.Client.LocalEndPoint, client.Client.RemoteEndPoint);
 			streamToClient = client.GetStream();
 			clientStatus = new ClientStatus();
@@ -43,8 +45,10 @@ namespace Host {
 					Common.Package request = null;
 					lock (streamToClient) {
 						request = Common.PackageHelper.GetRequest(streamToClient);
+						LOGGER.InfoFormat("Receive package {0} from client {1}!", request.ToString(), 
+							clientNum == null ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 					}
-					Common.Package response = PackageHandler.Deal(request, callback);
+					Common.Package response = PackageHandler.Deal(this,request, callback);
 					SendPackage(response);
 				}
 			} catch (IOException e) {
@@ -54,7 +58,7 @@ namespace Host {
 				this.clientStatus.Speed = ESpeed.Unauthorized;
 				streamToClient.Dispose();
 				client.Close();
-				callback.CloseClient(this);
+				//callback.CloseClient(this);
 			}
 		}
 
@@ -74,6 +78,8 @@ namespace Host {
 			lock (streamToClient) {
 				byte[] bts = Common.PackageHelper.GetByte(package);
 				streamToClient.Write(bts, 0, bts.Length);
+				LOGGER.InfoFormat("Send package {0} to host {1}", package.ToString(), 
+					clientNum == null ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 			}
 		}
 	}
