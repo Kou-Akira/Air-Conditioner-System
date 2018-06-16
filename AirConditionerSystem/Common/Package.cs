@@ -17,7 +17,15 @@ namespace Common {
 		public HostNakPackage() : base(0) { }
 	}
 	public class HostAckPackage : Package {
-		public HostAckPackage() : base(1) { }
+		int mode;
+		float temperature;
+		public HostAckPackage(int mode, float temperature) : base(1) {
+			this.mode = mode;
+			this.temperature = temperature;
+		}
+
+		public int Mode { get => mode; }
+		public float Temperature { get => temperature; }
 	}
 	public class ClientLoginPackage : Package {
 		String idNum;
@@ -51,15 +59,21 @@ namespace Common {
 	}
 	public class ClientSpeedPackage : Package {
 		int speed;
-		public ClientSpeedPackage(int speed) : base(5) {
+		float temperature;
+		public ClientSpeedPackage(int speed, float temperature) : base(5) {
 			this.speed = speed;
+			this.temperature = temperature;
 		}
 
 		public int Speed { get => speed; }
+		public float Temperature { get => temperature; }
 	}
 	public class ClientStopPackage : Package {
-		public ClientStopPackage() : base(6) {
+		float temperature;
+		public ClientStopPackage(float temperature) : base(6) {
+			this.temperature = temperature;
 		}
+		public float Temperature { get => temperature; }
 	}
 	public class HostCostPackage : Package {
 		float cost;
@@ -78,7 +92,29 @@ namespace Common {
 		public int Speed { get => speed; }
 	}
 	public class ClientClosePackage : Package {
-		public ClientClosePackage() : base(9) {
+		float temperature;
+		public ClientClosePackage(float temperature) : base(9) {
+			this.temperature = temperature;
 		}
+
+		public float Temperature { get => temperature; }
+	}
+	public class RefreshFrequencyPackage : Package {
+		int frequency;
+
+		public RefreshFrequencyPackage(int frequency) : base(10) {
+			this.frequency = frequency;
+		}
+
+		public int Frequency { get => frequency; }
+	}
+	public class ClientTargetTemperaturePackage : Package {
+		float temperature;
+
+		public ClientTargetTemperaturePackage(float temperature) :base(11) {
+			this.temperature = temperature;
+		}
+
+		public float Temperature { get => temperature; }
 	}
 }

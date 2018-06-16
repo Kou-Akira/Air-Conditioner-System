@@ -32,7 +32,6 @@ namespace Host {
 		private ILog LOGGER;
 		private IDictionary<RemoteClient, SchedulingInformation> clients;
 
-
 		public HostService() {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			netWork = new Network(this);

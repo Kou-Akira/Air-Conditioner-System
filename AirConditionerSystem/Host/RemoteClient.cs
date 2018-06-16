@@ -31,7 +31,7 @@ namespace Host {
 			requestThread = new Thread(run);
 			heartbreatThread = new Thread(heartBeat);
 			requestThread.Start(callback);
-			//heartbreatThread.Start();
+			heartbreatThread.Start();
 		}
 
 		private void run(object cb) {
@@ -51,7 +51,7 @@ namespace Host {
 					}
 				}
 			} catch (IOException e) {
-				LOGGER.Warn("CLient close!", e);
+				LOGGER.Warn("Client stop run, maybe close!", e);
 			} finally {
 				streamToClient.Dispose();
 				client.Close();
@@ -73,7 +73,6 @@ namespace Host {
 
 		public void Abort() {
 			heartbreatThread.Abort();
-
 			requestThread.Abort();
 		}
 	}
