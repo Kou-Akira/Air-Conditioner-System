@@ -61,6 +61,7 @@
       <DependentUpon>ACListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ClientStatus.cs" />
+    <Compile Include="DataManager.cs" />
     <Compile Include="Host.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +70,7 @@
     </Compile>
     <Compile Include="HostService.cs" />
     <Compile Include="HostServiceStatus.cs" />
+    <Compile Include="IDataClient.cs" />
     <Compile Include="IHostCallback.cs" />
     <Compile Include="IHostService.cs" />
     <Compile Include="INetWork.cs" />

@@ -22,6 +22,7 @@ namespace Common
         public const String WORKING_MODE_STR = "工作模式：";
         public const String NOW_PAYMENT = "当前费用：";
         public const String ROOM_TP = "房间温度：";
+        public const String ROOM_NUM = "Room ";
 
         public const String IP_ADDRESS = "10.105.249.190";
         public const int PORT = 6000;

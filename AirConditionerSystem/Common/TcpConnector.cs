@@ -44,7 +44,7 @@ namespace Common
 
         private static void tcpCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            //一般不会调用，因为tcp连接一直进行
         }
 
         private static void handleResponse(object sender, DoWorkEventArgs e)

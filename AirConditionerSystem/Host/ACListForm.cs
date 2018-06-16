@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Host
 {
-    public partial class ACListForm : DMSkin.Main
+    public partial class ACListForm : DMSkin.Main, IDataClient
     {
         public ACListForm()
         {
@@ -20,6 +20,11 @@ namespace Host
         private void ShutDownButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        void IDataClient.onDataRefreshed(ClientStatus[] clientList)
+        {
+            
         }
     }
 }
