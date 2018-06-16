@@ -26,6 +26,7 @@ namespace Common {
 				case 2: {
 					networkStream.Read(buffer, 0, 1);
 					byte roomNum = buffer[0];
+					buffer = new byte[18];
 					networkStream.Read(buffer, 0, 18);
 					String id = ConvertBytesToId(buffer);
 					return new ClientLoginPackage(roomNum, id);

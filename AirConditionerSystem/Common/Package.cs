@@ -32,7 +32,7 @@ namespace Common {
 		public float Temperature { get => temperature; }
 
 		public override string ToString() {
-			return String.Format("HostAckPackage! mode:{0}, temperature{1}.", mode, temperature);
+			return String.Format("HostAckPackage! mode:{0}, temperature{1}", mode, temperature);
 		}
 	}
 	public class ClientLoginPackage : Package {
@@ -47,7 +47,7 @@ namespace Common {
 		public byte RoomNumber { get => roomNumber; }
 
 		public override string ToString() {
-			return String.Format("ClientLoginPackage! idNum:{0}, roomNumber:{1}.", idNum, roomNumber);
+			return String.Format("ClientLoginPackage! idNum:{0}, roomNumber:{1}", idNum, roomNumber);
 		}
 	}
 	public class HostModePackage : Package {
@@ -61,7 +61,7 @@ namespace Common {
 		public int Mode { get => mode; }
 		public float Temperature { get => temperature; }
 		public override string ToString() {
-			return String.Format("HostModePackage! mode:{0}, temperature:{1}.", mode, temperature);
+			return String.Format("HostModePackage! mode:{0}, temperature:{1}", mode, temperature);
 		}
 	}
 	public class ClientTemperaturePackage : Package {
@@ -72,7 +72,7 @@ namespace Common {
 
 		public float Temperature { get => temperature; }
 		public override string ToString() {
-			return String.Format("ClientTemperaturePackage! temperature:{0}, Temperature:{1}.", temperature, Temperature);
+			return String.Format("ClientTemperaturePackage! temperature:{0}, Temperature:{1}", temperature, Temperature);
 		}
 	}
 	public class ClientSpeedPackage : Package {
@@ -86,7 +86,7 @@ namespace Common {
 		public int Speed { get => speed; }
 		public float Temperature { get => temperature; }
 		public override string ToString() {
-			return String.Format("ClientSpeedPackage! speed:{0}, temperature:{1}.", speed, temperature);
+			return String.Format("ClientSpeedPackage! speed:{0}, temperature:{1}", speed, temperature);
 		}
 	}
 	public class ClientStopPackage : Package {
@@ -96,7 +96,7 @@ namespace Common {
 		}
 		public float Temperature { get => temperature; }
 		public override string ToString() {
-			return String.Format("ClientStopPackage! temperature:{0}.", temperature);
+			return String.Format("ClientStopPackage! temperature:{0}", temperature);
 		}
 	}
 	public class HostCostPackage : Package {
@@ -107,7 +107,7 @@ namespace Common {
 
 		public float Cost { get => cost; }
 		public override string ToString() {
-			return String.Format("HostCostPackage! cost:{0}.", cost);
+			return String.Format("HostCostPackage! cost:{0}", cost);
 		}
 	}
 	public class HostSpeedPackage : Package {
@@ -118,7 +118,7 @@ namespace Common {
 
 		public int Speed { get => speed; }
 		public override string ToString() {
-			return String.Format("HostSpeedPackage! speed:{0}.", speed);
+			return String.Format("HostSpeedPackage! speed:{0}", speed);
 		}
 	}
 	public class ClientClosePackage : Package {
@@ -129,7 +129,7 @@ namespace Common {
 
 		public float Temperature { get => temperature; }
 		public override string ToString() {
-			return String.Format("ClientClosePackage! temperature:{0}.", temperature);
+			return String.Format("ClientClosePackage! temperature:{0}", temperature);
 		}
 	}
 	public class RefreshFrequencyPackage : Package {
@@ -141,7 +141,7 @@ namespace Common {
 
 		public int Frequency { get => frequency; }
 		public override string ToString() {
-			return String.Format("RefreshFrequencyPackage! frequency:{0}.", frequency);
+			return String.Format("RefreshFrequencyPackage! frequency:{0}", frequency);
 		}
 	}
 	public class ClientTargetTemperaturePackage : Package {
@@ -153,7 +153,7 @@ namespace Common {
 
 		public float Temperature { get => temperature; }
 		public override string ToString() {
-			return String.Format("ClientTargetTemperaturePackage! temperature:{0}.", temperature);
+			return String.Format("ClientTargetTemperaturePackage! temperature:{0}", temperature);
 		}
 	}
 }

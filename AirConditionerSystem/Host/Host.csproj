@@ -84,6 +84,7 @@
     <Compile Include="SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLConnector.cs" />
     <EmbeddedResource Include="ACListForm.resx">
       <DependentUpon>ACListForm.cs</DependentUpon>
     </EmbeddedResource>

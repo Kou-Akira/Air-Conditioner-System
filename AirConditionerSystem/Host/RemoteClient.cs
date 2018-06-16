@@ -47,6 +47,7 @@ namespace Host {
 						request = Common.PackageHelper.GetRequest(streamToClient);
 						LOGGER.InfoFormat("Receive package {0} from client {1}!", request.ToString(), 
 							clientNum == 0 ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
+
 					}
 					Common.Package response = PackageHandler.Deal(this,request, callback);
 					SendPackage(response);
@@ -55,7 +56,9 @@ namespace Host {
 				LOGGER.Warn("Client stop run, maybe close!", e);
 			} finally {
 				heartBeatTimer.Enabled = false;
-				this.clientStatus.Speed = ESpeed.Unauthorized;
+				lock (this) {
+					this.clientStatus.Speed = ESpeed.Unauthorized;
+				}
 				streamToClient.Dispose();
 				client.Close();
 				callback.CloseClient(this.clientNum);
@@ -63,9 +66,12 @@ namespace Host {
 		}
 
 		private void heartBeat(object source, System.Timers.ElapsedEventArgs e) {
-			if (clientStatus.Speed == ESpeed.Unauthorized) return;
-			Common.Package response1 = new Common.HostCostPackage(clientStatus.Cost);
-			Common.Package response2 = new Common.HostSpeedPackage((int)clientStatus.Speed);
+			Common.Package response1, response2;
+			lock (this) {
+				if (clientStatus.Speed == ESpeed.Unauthorized) return;
+				response1 = new Common.HostCostPackage(clientStatus.Cost);
+				response2 = new Common.HostSpeedPackage((int)clientStatus.Speed);
+			}
 			SendPackage(response1);
 			SendPackage(response2);
 		}
@@ -78,9 +84,11 @@ namespace Host {
 			lock (streamToClient) {
 				byte[] bts = Common.PackageHelper.GetByte(package);
 				streamToClient.Write(bts, 0, bts.Length);
-				LOGGER.InfoFormat("Send package {0} to host {1}", package.ToString(), 
+				LOGGER.InfoFormat("Send package {0} to host {1}.", package.ToString(), 
 					clientNum == 0 ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
+				LOGGER.DebugFormat("Package: {0}", BitConverter.ToString(bts));
 			}
 		}
+		private 
 	}
 }

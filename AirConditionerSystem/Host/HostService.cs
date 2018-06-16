@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
+using System.Data.SqlClient;
 
 namespace Host {
 	internal delegate void RequestDelegate(Common.Package request);
 
 
 	class HostService : IHostService, IHostServiceCallback {
+
+		#region Constants
 		private static readonly int HotMaxTemperature = 30;
 		private static readonly int HotMinTemperature = 25;
 		private static readonly int HotTemperatureDefault = 28;
@@ -26,16 +29,20 @@ namespace Host {
 		private static readonly double LowSpeedPower = 0.8;
 		private static readonly double HighSpeedPower = 1.3;
 		private static readonly int CostPrePower = 5;
+		#endregion
 
 		private HostServiceStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
 		private IDictionary<Byte, Tuple<RemoteClient, SchedulingInformation>> clients;
 
+		private SQLConnector sql;
+
 		public HostService() {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			netWork = new Network(this);
 			clients = new ConcurrentDictionary<Byte, Tuple<RemoteClient, SchedulingInformation>>();
+			sql = new SQLConnector();
 		}
 
 		public int SettModle(int modle) {
@@ -74,8 +81,17 @@ namespace Host {
 		}
 
 		public bool Login(int roomNumber, string idNum) {
-			// Todo checkLogin
-			return false;
+			using(SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
+				con.Open();
+				SqlCommand cmd = con.CreateCommand();
+				cmd.CommandText = "select count(*) from dt_RoomIDCard where RoomNum = @a and IDCardNum = @b";
+				cmd.Parameters.Clear();
+				cmd.Parameters.AddWithValue("@a", roomNumber);
+				cmd.Parameters.AddWithValue("@b", idNum);
+
+				int count = Convert.ToInt32(cmd.ExecuteScalar());
+				return count > 0;
+			}
 		}
 
 		public Common.Package ChangeMode() {

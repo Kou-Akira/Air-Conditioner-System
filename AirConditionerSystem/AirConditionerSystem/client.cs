@@ -75,7 +75,9 @@ namespace AirConditionerSystem
             }
             finally
             {
+				if(networkStream!=null)
                 networkStream.Dispose();
+				if(client!=null)
                 client.Close();
             }
 
