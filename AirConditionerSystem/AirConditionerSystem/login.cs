@@ -66,6 +66,7 @@ namespace AirConditionerSystem
             {
                 AsynTask asynTask = new AsynTask(LoginDoWork, LoginCallBack);//线程
                 asynTask.startTask();
+                mLoadingBox = new LoadingBox();
                 mLoadingBox.ShowDialog();
             }
             else
@@ -79,7 +80,6 @@ namespace AirConditionerSystem
 
         private void login_Load(object sender, EventArgs e)
         {
-            mLoadingBox = new LoadingBox();
             context = SynchronizationContext.Current;
         }
 
@@ -88,13 +88,14 @@ namespace AirConditionerSystem
             Package pack = (Package)pac;
             if (pack.Cat == 1)//success
             {
-                mLoadingBox.Hide();
+                mLoadingBox.Close();
                 Close();
             }
             else if (pack.Cat == 0)//failed
             {
                 mLoadingBox.setText("Error");
                 mLoadingBox.delayHide();
+                Client.sendType = 2;
             }
         }
     }

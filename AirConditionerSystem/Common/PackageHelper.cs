@@ -78,7 +78,7 @@ namespace Common {
 					byte[] res = new byte[5];
 					res[0] = 9;
 					byte[] tbt = BitConverter.GetBytes(clientClosePackage.Temperature);
-					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i];
+					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
 					return res;
 				}
 				default:
