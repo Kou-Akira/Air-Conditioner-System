@@ -20,7 +20,7 @@ namespace AirConditionerSystem
         public static bool sendTurnOnRequest()
         {
             //Network send request
-
+            byte[] buffer = PackageHelper.GetByte(new )
             Thread.Sleep(2000);
             return false;
         }
