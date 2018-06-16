@@ -43,11 +43,12 @@ namespace Host
             if (isOff)
             {
                 hostService.TurnOn();
-                isOff = true;
+                isOff = false;
             }
             else
             {
-                isOff = false;
+				hostService.ShutDown();
+                isOff = true;
             }
         }
     }

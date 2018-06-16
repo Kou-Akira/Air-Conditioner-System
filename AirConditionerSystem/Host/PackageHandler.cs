@@ -12,6 +12,7 @@ namespace Host {
 				case 2: {
 					Common.ClientLoginPackage loginRequest = request as Common.ClientLoginPackage;
 					client.ClientNum = loginRequest.RoomNumber;
+					callback.AddClient(client);
 					bool loginOk = callback.Login(loginRequest.RoomNumber, loginRequest.IdNum);
 					if (loginOk) {
 						var tmp = callback.GetDefaultWorkingState();

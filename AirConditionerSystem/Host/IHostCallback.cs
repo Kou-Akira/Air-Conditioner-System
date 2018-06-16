@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Host {
 	interface IHostServiceCallback {
 		Tuple<int, float> GetDefaultWorkingState();
-		void AddClient(byte clientNum);
+		void AddClient(RemoteClient client);
 		bool Login(int roomNumber, string idNum);
 		Common.Package ChangeMode();
 		void CloseClient(byte clientNum);

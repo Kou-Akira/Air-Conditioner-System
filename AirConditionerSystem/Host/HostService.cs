@@ -30,12 +30,12 @@ namespace Host {
 		private HostServiceStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
-		private IDictionary<RemoteClient, SchedulingInformation> clients;
+		private IDictionary<Byte, Tuple<RemoteClient, SchedulingInformation>> clients;
 
 		public HostService() {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			netWork = new Network(this);
-			clients = new ConcurrentDictionary<RemoteClient, SchedulingInformation>();
+			clients = new ConcurrentDictionary<Byte, Tuple<RemoteClient, SchedulingInformation>>();
 		}
 
 		public int SettModle(int modle) {
@@ -58,7 +58,7 @@ namespace Host {
 
 		public Tuple<int, float> GetDefaultWorkingState() {
 			return new Tuple<int, float>
-				((int)hostState.mode, 
+				((int)hostState.mode,
 				hostState.mode == Mode.COLD ?
 				ColdTemperatureDefault :
 				HotTemperatureDefault);
@@ -84,24 +84,17 @@ namespace Host {
 		}
 
 		public void AddClient(RemoteClient remoteClient) {
-			clients.Add(remoteClient, new SchedulingInformation());
-		}
-
-		public void CloseClient(RemoteClient client) {
-			clients.Remove(client);
-			client.Abort();
+			clients.Add(remoteClient.ClientNum, 
+				new Tuple<RemoteClient, SchedulingInformation>(remoteClient, new SchedulingInformation()));
 		}
 
 		public void ClientHeartBeat(RemoteClient client, float temperature) {
 			throw new NotImplementedException();
 		}
 
-		public void AddClient(byte clientNum) {
-			throw new NotImplementedException();
-		}
-
 		public void CloseClient(byte clientNum) {
-			throw new NotImplementedException();
+			clients.Remove(clientNum);
+			LOGGER.InfoFormat("Remove client {0} from dictionary!", clientNum);
 		}
 
 		public void ClientHeartBeat(byte clientNum, float temperature) {
@@ -109,6 +102,10 @@ namespace Host {
 		}
 
 		public void ClientSpeed(byte clientNum, ESpeed speed) {
+			throw new NotImplementedException();
+		}
+
+		public void SetTargetTemperature(byte clientNum, float temperature) {
 			throw new NotImplementedException();
 		}
 	}
