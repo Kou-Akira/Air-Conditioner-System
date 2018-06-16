@@ -75,7 +75,7 @@ namespace Host {
 
 		public bool Login(int roomNumber, string idNum) {
 			// Todo checkLogin
-			return true;
+			return false;
 		}
 
 		public Common.Package ChangeMode() {
@@ -84,8 +84,8 @@ namespace Host {
 		}
 
 		public void AddClient(RemoteClient remoteClient) {
-			clients.Add(remoteClient.ClientNum, 
-				new Tuple<RemoteClient, SchedulingInformation>(remoteClient, new SchedulingInformation()));
+			clients[remoteClient.ClientNum] = 
+				new Tuple<RemoteClient, SchedulingInformation>(remoteClient, new SchedulingInformation());
 		}
 
 		public void ClientHeartBeat(RemoteClient client, float temperature) {

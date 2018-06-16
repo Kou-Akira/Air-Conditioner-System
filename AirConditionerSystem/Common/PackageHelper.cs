@@ -30,13 +30,51 @@ namespace Common {
 					String id = ConvertBytesToId(buffer);
 					return new ClientLoginPackage(roomNum, id);
 				}
+				case 3: {
+					networkStream.Read(buffer, 0, 5);
+					float temp = BitConverter.ToSingle(buffer, 1);
+					return new HostModePackage((int)buffer[0], temp);
+				}
+				case 4: {
+					networkStream.Read(buffer, 0, 4);
+					float temp = BitConverter.ToSingle(buffer, 0);
+					return new ClientTemperaturePackage(temp);
+				}
+				case 5: {
+					networkStream.Read(buffer, 0, 5);
+					float temp = BitConverter.ToSingle(buffer, 1);
+					return new ClientSpeedPackage((int)buffer[0], temp);
+				}
+				case 6: {
+					networkStream.Read(buffer, 0, 4);
+					float temp = BitConverter.ToSingle(buffer, 0);
+					return new ClientStopPackage(temp);
+				}
+				case 7: {
+					networkStream.Read(buffer, 0, 4);
+					float temp = BitConverter.ToSingle(buffer, 0);
+					return new HostCostPackage(temp);
+				}
+				case 8: {
+					networkStream.Read(buffer, 0, 1);
+					return new HostSpeedPackage(buffer[0]);
+				}
 				case 9: {
 					networkStream.Read(buffer, 0, 4);
 					float temperature = BitConverter.ToSingle(buffer, 0);
 					return new ClientClosePackage(temperature);
 				}
+				case 10: {
+					networkStream.Read(buffer, 0, 1);
+					return new RefreshFrequencyPackage(buffer[0]);
+				}
+				case 11: {
+					networkStream.Read(buffer, 0, 4);
+					float temperature = BitConverter.ToSingle(buffer, 0);
+					return new ClientTargetTemperaturePackage(temperature);
+				}
 				default:
-					throw new Exception("RequestFormatter::GetRequest switch out of range with " + cat);
+					throw new Exception("PackageHelper::GetRequest switch out of range with " + cat);
 			}
 		}
 		public static byte[] GetByte(Package response) {
@@ -73,12 +111,67 @@ namespace Common {
 
 					return buffer;
 				}
+				case 4: {
+					ClientTemperaturePackage clientTemperaturePackage = response as ClientTemperaturePackage;
+					byte[] res = new byte[5];
+					res[0] = 4;
+					byte[] tbt = BitConverter.GetBytes(clientTemperaturePackage.Temperature);
+					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
+					return res;
+				}
+				case 5: {
+					ClientSpeedPackage clientSpeedPackage = response as ClientSpeedPackage;
+					byte[] res = new byte[6];
+					res[0] = 5;
+					res[1] = (byte)clientSpeedPackage.Speed;
+					byte[] tbt = BitConverter.GetBytes(clientSpeedPackage.Temperature);
+					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i];
+					return res;
+				}
+				case 6: {
+					ClientStopPackage clientStopPackage = response as ClientStopPackage;
+					byte[] res = new byte[5];
+					res[0] = 6;
+					byte[] tbt = BitConverter.GetBytes(clientStopPackage.Temperature);
+					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
+					return res;
+				}
+				case 7: {
+					HostCostPackage hostCostPackage = response as HostCostPackage;
+					byte[] res = new byte[5];
+					res[0] = 7;
+					byte[] tbt = BitConverter.GetBytes(hostCostPackage.Cost);
+					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
+					return res;
+				}
+				case 8: {
+					HostSpeedPackage hostSpeedPackage = response as HostSpeedPackage;
+					byte[] res = new byte[2];
+					res[0] = 8;
+					res[1] = (byte)hostSpeedPackage.Speed;
+					return res;
+				}
 				case 9: {
 					ClientClosePackage clientClosePackage = response as ClientClosePackage;
 					byte[] res = new byte[5];
 					res[0] = 9;
 					byte[] tbt = BitConverter.GetBytes(clientClosePackage.Temperature);
-					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i];
+					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
+					return res;
+				}
+				case 10: {
+					RefreshFrequencyPackage refreshFrequencyPackage = response as RefreshFrequencyPackage;
+					byte[] res = new byte[2];
+					res[0] = 10;
+					res[1] = (byte)refreshFrequencyPackage.Frequency;
+					return res;
+				}
+				case 11: {
+					ClientTargetTemperaturePackage clientTargetTemperaturePackage = response as ClientTargetTemperaturePackage;
+					byte[] res = new byte[5];
+					res[0] = 11;
+					byte[] tbt = BitConverter.GetBytes(clientTargetTemperaturePackage.Temperature);
+					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
 					return res;
 				}
 				default:

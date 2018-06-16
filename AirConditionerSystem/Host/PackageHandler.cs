@@ -11,10 +11,10 @@ namespace Host {
 			switch (request.Cat) {
 				case 2: {
 					Common.ClientLoginPackage loginRequest = request as Common.ClientLoginPackage;
-					client.ClientNum = loginRequest.RoomNumber;
 					callback.AddClient(client);
 					bool loginOk = callback.Login(loginRequest.RoomNumber, loginRequest.IdNum);
 					if (loginOk) {
+						client.ClientNum = loginRequest.RoomNumber;
 						var tmp = callback.GetDefaultWorkingState();
 						return new Common.HostAckPackage(tmp.Item1,tmp.Item2);
 					} else {

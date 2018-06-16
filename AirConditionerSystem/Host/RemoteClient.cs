@@ -79,7 +79,7 @@ namespace Host {
 				byte[] bts = Common.PackageHelper.GetByte(package);
 				streamToClient.Write(bts, 0, bts.Length);
 				LOGGER.InfoFormat("Send package {0} to host {1}", package.ToString(), 
-					clientNum == null ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
+					clientNum == 0 ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 			}
 		}
 	}
