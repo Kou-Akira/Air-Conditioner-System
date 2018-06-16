@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace Host {
 	static class PackageHandler {
-		public static Common.Package[] Deal(Common.Package request, IHostServiceCallback callback) {
+		public static Common.Package Deal(Common.Package request, IHostServiceCallback callback) {
 			switch (request.Cat) {
 				case 2: {
 					Common.ClientLoginPackage loginRequest = request as Common.ClientLoginPackage;
 					bool loginOk = callback.Login(loginRequest.RoomNumber, loginRequest.IdNum);
 					if (loginOk) {
 						var tmp = callback.GetDefaultWorkingState();
-						return new Common.Package[2] {
-							new Common.HostAckPackage(),
-							new Common.HostModePackage(tmp.Item1,tmp.Item2) };
+						return new Common.HostAckPackage(tmp.Item1,tmp.Item2);
 					} else {
-						return new Common.Package[1] { new Common.HostNakPackage() };
+						return new Common.HostNakPackage();
 					}
 				}
 				case 9: {

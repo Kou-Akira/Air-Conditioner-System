@@ -23,7 +23,7 @@ namespace Common
         public const String NOW_PAYMENT = "当前费用：";
         public const String ROOM_TP = "房间温度：";
 
-        public const String IP_ADDRESS = "10.206.16.146";
+        public const String IP_ADDRESS = "10.105.249.190";
         public const int PORT = 6000;
         public const int MAXBYTES = 20;
         public const int IDLENTH = 18;
