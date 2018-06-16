@@ -21,10 +21,11 @@ namespace AirConditionerSystem
         private Thread listen;
 
         private bool isOff;
-        private int speedMode;
+        private bool isLogin;
         private bool isClose;
-        private int nowTp;
-        private int sendType;
+        private int nowTp;  
+
+        public static int sendType;
 
         public Client()
         {
@@ -45,6 +46,7 @@ namespace AirConditionerSystem
             refreshTimeWorker.WorkerReportsProgress = true;
             refreshTimeWorker.RunWorkerAsync();
             isOff = true;
+            isLogin = false;
             isClose = false;
             nowTp = Constants.DEFAULT_TEMPERATURE;
             tpText.Text = nowTp.ToString() + "℃";
@@ -54,16 +56,27 @@ namespace AirConditionerSystem
 
         private void tcpConnect()
         {
-            if (client == null || (client != null && !client.Connected))
+            try
             {
-                client = new TcpClient(Constants.IP_ADDRESS, Constants.PORT);
+                if (client == null || (client != null && !client.Connected))
+                {
+                    client = new TcpClient(Constants.IP_ADDRESS, Constants.PORT);
+                }
+                networkStream = client.GetStream();
+                while (true)
+                {
+                    //get package
+                    Package req = PackageHelper.GetRequest(networkStream);
+                    context.Post(tcpCallBack, req);
+                }
             }
-            networkStream = client.GetStream();
-            while (true)
+            catch (Exception)
             {
-                //get package
-                Package req = PackageHelper.GetRequest(networkStream);
-                context.Post(tcpCallBack, req);
+            }
+            finally
+            {
+                networkStream.Dispose();
+                client.Close();
             }
 
         }
@@ -162,12 +175,11 @@ namespace AirConditionerSystem
         {
             if ((bool)e.Argument)
             {
-                if (listen == null)
-                {
-                    listen = new Thread(new ThreadStart(tcpConnect));
-                    listen.IsBackground = true;
-                    listen.Start();
-                }
+
+                listen = new Thread(new ThreadStart(tcpConnect));
+                listen.IsBackground = true;
+                listen.Start();
+
                 sendType = 2;
                 lg = new login();
                 lg.ShowDialog();
@@ -176,6 +188,8 @@ namespace AirConditionerSystem
             else
             {
                 ApiClient.sendClientCloseRequest();
+                isOff = true;
+                listen.Abort();
             }
 
         }
@@ -191,7 +205,7 @@ namespace AirConditionerSystem
             timeWordker.RunWorkerAsync();
             SpeedPanel.Visible = true;
         }
-      
+
         private void lowSpeedBtn_Click(object sender, EventArgs e)
         {
             timeWordker.CancelAsync();
