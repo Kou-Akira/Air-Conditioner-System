@@ -8,12 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Host
 {
     public partial class Host : DMSkin.Main
     {
+        IHostService hostService;
+        private bool isOff;
+
         public Host()
         {
+            isOff = true;
+            hostService = new HostService();
             InitializeComponent();
         }
 
@@ -30,6 +36,19 @@ namespace Host
         private void watchBtn_Click(object sender, EventArgs e)
         {
             new ACListForm().ShowDialog();
+        }
+
+        private void switchBtn_Click(object sender, EventArgs e)
+        {
+            if (isOff)
+            {
+                hostService.TurnOn();
+                isOff = true;
+            }
+            else
+            {
+                isOff = false;
+            }
         }
     }
 }

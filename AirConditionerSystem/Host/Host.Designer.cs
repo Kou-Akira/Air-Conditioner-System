@@ -328,6 +328,7 @@
             this.switchBtn.Size = new System.Drawing.Size(50, 50);
             this.switchBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.switchBtn.TabIndex = 1;
+            this.switchBtn.Click += new System.EventHandler(this.switchBtn_Click);
             // 
             // workModeText
             // 
