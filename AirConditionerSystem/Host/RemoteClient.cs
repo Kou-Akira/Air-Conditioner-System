@@ -43,6 +43,8 @@ namespace Host {
 					Common.Package request = null;
 					lock (streamToClient) {
 						request = Common.PackageHelper.GetRequest(streamToClient);
+						LOGGER.InfoFormat("Receive package {0} from client {1}!", request.ToString(), 
+							clientNum == null ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 					}
 					Common.Package response = PackageHandler.Deal(request, callback);
 					SendPackage(response);
@@ -74,6 +76,8 @@ namespace Host {
 			lock (streamToClient) {
 				byte[] bts = Common.PackageHelper.GetByte(package);
 				streamToClient.Write(bts, 0, bts.Length);
+				LOGGER.InfoFormat("Send package {0} to host {1}", package.ToString(), 
+					clientNum == null ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 			}
 		}
 	}
