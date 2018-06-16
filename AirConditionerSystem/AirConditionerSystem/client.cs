@@ -16,10 +16,7 @@ namespace AirConditionerSystem
 
         private TcpClient client;
         private static NetworkStream networkStream;
-        private RunWorkerCompletedEventHandler callBack;
-        private AsynTask asynTask;
         private static Object writeLock = new Object();
-        private delegate void cb(Package p);
         private SynchronizationContext context;
         private Thread listen;
 
@@ -28,7 +25,7 @@ namespace AirConditionerSystem
         private bool isClose;
         private int nowTp;
         private int sendType;
-      
+
         public Client()
         {
             InitializeComponent();
@@ -63,12 +60,12 @@ namespace AirConditionerSystem
             }
             networkStream = client.GetStream();
             while (true)
-            {           
+            {
                 //get package
                 Package req = PackageHelper.GetRequest(networkStream);
-                context.Post(tcpCallBack,req);
+                context.Post(tcpCallBack, req);
             }
-            
+
         }
 
         public static void sendPackage(byte[] buffer)
@@ -78,8 +75,6 @@ namespace AirConditionerSystem
                 networkStream.Write(buffer, 0, buffer.Length);
             }
         }
-
-
 
         private void tcpCallBack(object pac)
         {
@@ -131,7 +126,7 @@ namespace AirConditionerSystem
             BackgroundWorker worker = sender as BackgroundWorker;
             int limit = Constants.PANEL_INTERVAL / 100;
             int i = 0;
-            while(i < limit && !worker.CancellationPending)
+            while (i < limit && !worker.CancellationPending)
             {
                 Thread.Sleep(100);
                 i++;
@@ -175,13 +170,14 @@ namespace AirConditionerSystem
                 }
                 sendType = 2;
                 lg = new login();
-                lg.ShowDialog();             
+                lg.ShowDialog();
+                isOff = false;
             }
             else
             {
                 ApiClient.sendClientCloseRequest();
             }
-          
+
         }
 
         private void switchBtn_Click(object sender, EventArgs e)
@@ -195,60 +191,26 @@ namespace AirConditionerSystem
             timeWordker.RunWorkerAsync();
             SpeedPanel.Visible = true;
         }
-
-        private void doRefreshSpeedUI()
-        {
-
-        }
-
-        private void speedCallBack(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (!e.Cancelled)//暂时用cancel参数表示是否成功
-            {
-                //set speed success
-                mLoadingBox.Hide();
-                speedMode = (int)e.Result;
-                doRefreshSpeedUI();               
-            }
-            else
-            {
-                //failed
-                mLoadingBox.setText("Error");
-                mLoadingBox.delayHide();
-            }
-        }
-
-        private void speedDoWork(object sender, DoWorkEventArgs e)
-        {
-            e.Cancel = !ApiClient.sendSpeedMode((int)e.Argument);
-            e.Result = (int)e.Argument;
-        }
-
+      
         private void lowSpeedBtn_Click(object sender, EventArgs e)
         {
             timeWordker.CancelAsync();
             SpeedPanel.Visible = false;
-            AsynTask asynTask = new AsynTask(speedDoWork, speedCallBack);
-            asynTask.startTask(Constants.LOW_SPEED);
-            mLoadingBox.ShowDialog();
+            ApiClient.sendSpeedRequest(Constants.LOW_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
         }
 
         private void midSpeedBtn_Click(object sender, EventArgs e)
         {
             timeWordker.CancelAsync();
             SpeedPanel.Visible = false;
-            AsynTask asynTask = new AsynTask(speedDoWork, speedCallBack);
-            asynTask.startTask(Constants.MID_SPEED);
-            mLoadingBox.ShowDialog();
+            ApiClient.sendSpeedRequest(Constants.MID_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
         }
 
         private void highSpeedBtn_Click(object sender, EventArgs e)
         {
             timeWordker.CancelAsync();
             SpeedPanel.Visible = false;
-            AsynTask asynTask = new AsynTask(speedDoWork, speedCallBack);
-            asynTask.startTask(Constants.HIGH_SPEED);
-            mLoadingBox.ShowDialog();
+            ApiClient.sendSpeedRequest(Constants.HIGH_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
         }
 
         private void tpUpBtn_Click(object sender, EventArgs e)
@@ -257,6 +219,7 @@ namespace AirConditionerSystem
             {
                 nowTp++;
                 tpText.Text = nowTp.ToString() + "℃";
+                ApiClient.sendTpChange(nowTp);
             }
         }
 
@@ -266,6 +229,7 @@ namespace AirConditionerSystem
             {
                 nowTp--;
                 tpText.Text = nowTp.ToString() + "℃";
+                ApiClient.sendTpChange(nowTp);
             }
         }
     }
