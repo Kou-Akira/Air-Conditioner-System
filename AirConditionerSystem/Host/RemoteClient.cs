@@ -15,7 +15,7 @@ namespace Host {
 		private const int BufferSize = 8192;
 		private ILog LOGGER = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private System.Threading.Thread requestThread;
-		private byte clientNum;
+		private byte clientNum = 0;
 		private ClientStatus clientStatus;
 		private System.Timers.Timer heartBeatTimer;
 
@@ -46,7 +46,7 @@ namespace Host {
 					lock (streamToClient) {
 						request = Common.PackageHelper.GetRequest(streamToClient);
 						LOGGER.InfoFormat("Receive package {0} from client {1}!", request.ToString(), 
-							clientNum == null ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
+							clientNum == 0 ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 					}
 					Common.Package response = PackageHandler.Deal(this,request, callback);
 					SendPackage(response);
@@ -58,7 +58,7 @@ namespace Host {
 				this.clientStatus.Speed = ESpeed.Unauthorized;
 				streamToClient.Dispose();
 				client.Close();
-				//callback.CloseClient(this);
+				callback.CloseClient(this.clientNum);
 			}
 		}
 

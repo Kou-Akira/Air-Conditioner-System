@@ -30,6 +30,11 @@ namespace Common {
 					String id = ConvertBytesToId(buffer);
 					return new ClientLoginPackage(roomNum, id);
 				}
+				case 9: {
+					networkStream.Read(buffer, 0, 4);
+					float temperature = BitConverter.ToSingle(buffer, 0);
+					return new ClientClosePackage(temperature);
+				}
 				default:
 					throw new Exception("RequestFormatter::GetRequest switch out of range with " + cat);
 			}
@@ -67,6 +72,14 @@ namespace Common {
 					buffer[1] = (byte)hostModePackage.Mode;
 
 					return buffer;
+				}
+				case 9: {
+					ClientClosePackage clientClosePackage = response as ClientClosePackage;
+					byte[] res = new byte[5];
+					res[0] = 9;
+					byte[] tbt = BitConverter.GetBytes(clientClosePackage.Temperature);
+					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i];
+					return res;
 				}
 				default:
 					throw new Exception("RequestFormatter::GetByte switch out of range with " + response.Cat);
