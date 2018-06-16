@@ -24,7 +24,7 @@ namespace Host {
 			LOGGER.Info("Network init!");
 			listener = new TcpListener(IPAddress.Parse("0.0.0.0"), Common.Constants.PORT);
 		}
-		
+
 		public void StartListen() {
 			Interlocked.Increment(ref state);
 			listenerThread = new Thread(listen);
@@ -32,15 +32,25 @@ namespace Host {
 		}
 
 		public void StopListen() {
-			listenerThread.Abort();
 			Interlocked.Decrement(ref state);
+			listenerThread.Abort();
 		}
 
 		private void listen() {
-			listener.Start();
-			while(state == 1) {
-				TcpClient tcpClient = listener.AcceptTcpClient();
-				callback.AddClient(new RemoteClient(tcpClient, callback));
+			try {
+				listener.Start();
+				LOGGER.InfoFormat("Start listen on port {0}", Common.Constants.PORT);
+				while (state == 1) {
+					TcpClient tcpClient = listener.AcceptTcpClient();
+					callback.AddClient(new RemoteClient(tcpClient, callback));
+				}
+			} catch (ThreadAbortException e) {
+				LOGGER.Warn("Network listen thread has been abort!", e);
+			} finally {
+				if (listener != null) {
+					listener.Stop();
+					LOGGER.Info("Stop Listen!");
+				}
 			}
 		}
 	}
