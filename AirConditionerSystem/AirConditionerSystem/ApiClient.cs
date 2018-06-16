@@ -12,22 +12,14 @@ namespace AirConditionerSystem
     {
         public static void sendLoginRequest(int roomNumber, String id)
         {
-            byte[] buffer = PackageHelper.GetByte(new ClientLoginPackage(632, "650204199612181235"));
-            TcpConnector.sendPackage(buffer);
+            byte[] buffer = PackageHelper.GetByte(new ClientLoginPackage(roomNumber, id));
+            Client.sendPackage(buffer);
         }
 
-
-        public static bool sendTurnOnRequest()
+        public static void sendClientCloseRequest()
         {
-            //Network send request
-           // byte[] buffer = PackageHelper.GetByte(new )
-            Thread.Sleep(2000);
-            return false;
-        }
-
-        public static bool sendTurnOffRequest()
-        {
-            return true;
+            byte[] buffer = PackageHelper.GetByte(new ClientClosePackage(TemperatureSimulator.getInstance().getRoomTemperature()));
+            Client.sendPackage(buffer);
         }
 
         public static void sendRoomTemperature() { }

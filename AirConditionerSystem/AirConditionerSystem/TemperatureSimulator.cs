@@ -25,7 +25,7 @@ namespace AirConditionerSystem
             return instance;
         }
         private int roomNumber;
-        private int roomTemperature;
+        private float roomTemperature;
         public TemperatureSimulator()
         {
            
@@ -33,10 +33,10 @@ namespace AirConditionerSystem
 
         public void startSimulating()
         {
-
+            roomTemperature = 23.5F;
         }
 
-        public int getRoomTemperature()
+        public float getRoomTemperature()
         {
             return roomTemperature;
         }
