@@ -23,7 +23,8 @@ namespace Host {
 				}
 				case 4: {
 					Common.ClientTemperaturePackage clientTemperaturePackage = request as Common.ClientTemperaturePackage;
-					callback.ClientHeartBeat(client.ClientNum, clientTemperaturePackage.Temperature);
+					client.SetNowTemperature(clientTemperaturePackage.Temperature);
+					callback.ReceiveClientHeartBeat(client.ClientNum);
 					return new Common.Ignored();
 				}
 				case 5: {
@@ -41,7 +42,7 @@ namespace Host {
 				}
 				case 11: {
 					Common.ClientTargetTemperaturePackage clientTargetTemperaturePackage = request as Common.ClientTargetTemperaturePackage;
-					callback.SetTargetTemperature(client.ClientNum, clientTargetTemperaturePackage.Temperature);
+					client.SetTargetTemperature(clientTargetTemperaturePackage.Temperature);
 					return new Common.Ignored();
 				}
 				default:

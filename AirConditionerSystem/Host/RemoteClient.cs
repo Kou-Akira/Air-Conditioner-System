@@ -20,7 +20,7 @@ namespace Host {
 		private System.Timers.Timer heartBeatTimer;
 
 		public byte ClientNum { get => clientNum; set => clientNum = value; }
-		public ClientStatus ClientStatus { get => clientStatus; }
+		public ClientStatus ClientStatus { get => clientStatus; set => clientStatus = value; }
 
 		public RemoteClient(TcpClient client, IHostServiceCallback callback) {
 			this.client = client;
@@ -28,7 +28,7 @@ namespace Host {
 				client.Client.LocalEndPoint, client.Client.RemoteEndPoint);
 			streamToClient = client.GetStream();
 			clientStatus = new ClientStatus();
-			clientStatus.Speed = ESpeed.Unauthorized;
+			clientStatus.Speed = (int)ESpeed.Unauthorized;
 
 			heartBeatTimer = new System.Timers.Timer(5000);
 			heartBeatTimer.AutoReset = true;
@@ -46,11 +46,11 @@ namespace Host {
 					Common.Package request = null;
 					lock (streamToClient) {
 						request = Common.PackageHelper.GetRequest(streamToClient);
-						LOGGER.InfoFormat("Receive package {0} from client {1}!", request.ToString(), 
+						LOGGER.InfoFormat("Receive package {0} from client {1}!", request.ToString(),
 							clientNum == 0 ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 
 					}
-					Common.Package response = PackageHandler.Deal(this,request, callback);
+					Common.Package response = PackageHandler.Deal(this, request, callback);
 					SendPackage(response);
 				}
 			} catch (IOException e) {
@@ -58,7 +58,7 @@ namespace Host {
 			} finally {
 				heartBeatTimer.Enabled = false;
 				lock (this) {
-					this.clientStatus.Speed = ESpeed.Unauthorized;
+					this.clientStatus.Speed = (int)ESpeed.Unauthorized;
 				}
 				streamToClient.Dispose();
 				client.Close();
@@ -69,7 +69,7 @@ namespace Host {
 		private void heartBeat(object source, System.Timers.ElapsedEventArgs e) {
 			Common.Package response1, response2;
 			lock (this) {
-				if (clientStatus.Speed == ESpeed.Unauthorized) return;
+				if (clientStatus.Speed == (int)ESpeed.Unauthorized) return;
 				response1 = new Common.HostCostPackage(clientStatus.Cost);
 				response2 = new Common.HostSpeedPackage((int)clientStatus.Speed);
 			}
@@ -85,10 +85,18 @@ namespace Host {
 			lock (streamToClient) {
 				byte[] bts = Common.PackageHelper.GetByte(package);
 				streamToClient.Write(bts, 0, bts.Length);
-				LOGGER.InfoFormat("Send package {0} to host {1}.", package.ToString(), 
+				LOGGER.InfoFormat("Send package {0} to host {1}.", package.ToString(),
 					clientNum == 0 ? client.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 				LOGGER.DebugFormat("Package: {0}", BitConverter.ToString(bts));
 			}
+		}
+
+		public void SetTargetTemperature(float temperature) {
+			this.clientStatus.TargetTemperature = temperature;
+		}
+
+		public void SetNowTemperature(float temperature) {
+			this.clientStatus.NowTemperature = temperature;
 		}
 	}
 }

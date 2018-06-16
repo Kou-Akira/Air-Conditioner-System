@@ -33,6 +33,8 @@ namespace Host {
 
 		public void StopListen() {
 			Interlocked.Decrement(ref state);
+			listener.Stop();
+			LOGGER.Info("Stop Listen!");
 			listenerThread.Abort();
 		}
 
@@ -46,11 +48,8 @@ namespace Host {
 				}
 			} catch (ThreadAbortException e) {
 				LOGGER.Warn("Network listen thread has been abort!", e);
-			} finally {
-				if (listener != null) {
-					listener.Stop();
-					LOGGER.Info("Stop Listen!");
-				}
+			} catch (System.Net.Sockets.SocketException e) {
+				LOGGER.Warn("Network listen thread has been abort!", e);
 			}
 		}
 	}

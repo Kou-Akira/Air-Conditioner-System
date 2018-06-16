@@ -9,10 +9,10 @@ namespace Host {
 		Tuple<int, float> GetDefaultWorkingState();
 		void AddClient(RemoteClient client);
 		bool Login(int roomNumber, string idNum);
-		Common.Package ChangeMode();
+
 		void CloseClient(byte clientNum);
 
-		void ClientHeartBeat(byte clientNum, float temperature);
+		void ReceiveClientHeartBeat(byte clientNum, float temperature);
 
 		void ClientSpeed(byte clientNum, ESpeed speed);
 

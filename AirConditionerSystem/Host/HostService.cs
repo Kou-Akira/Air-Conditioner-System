@@ -34,23 +34,27 @@ namespace Host {
 		private HostServiceStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
-		private IDictionary<Byte, Tuple<RemoteClient, SchedulingInformation>> clients;
+		private IDictionary<Byte, RemoteClient> clients;
 
 		private SQLConnector sql;
 
 		public HostService() {
 			LOGGER = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 			netWork = new Network(this);
-			clients = new ConcurrentDictionary<Byte, Tuple<RemoteClient, SchedulingInformation>>();
+			clients = new ConcurrentDictionary<Byte, RemoteClient>();
 			sql = new SQLConnector();
 		}
 
-		public int SettModle(int modle) {
-			throw new NotImplementedException();
-		}
+		//public int SettModle(int modle) {
+		//	throw new NotImplementedException();
+		//}
 
-		public int ShutDown() {
-			throw new NotImplementedException();
+		public void ShutDown() {
+			if (hostState.state == State.OFF)
+				throw new Exception("AirConditioner is already off!");
+			netWork.StopListen();
+			hostState.state = State.OFF;
+			LOGGER.Info("AirConditioner Turn Off!");
 		}
 
 		private void Init() {
@@ -100,8 +104,7 @@ namespace Host {
 		}
 
 		public void AddClient(RemoteClient remoteClient) {
-			clients[remoteClient.ClientNum] = 
-				new Tuple<RemoteClient, SchedulingInformation>(remoteClient, new SchedulingInformation());
+			clients[remoteClient.ClientNum] = remoteClient;
 		}
 
 		public void ClientHeartBeat(RemoteClient client, float temperature) {
@@ -113,7 +116,7 @@ namespace Host {
 			LOGGER.InfoFormat("Remove client {0} from dictionary!", clientNum);
 		}
 
-		public void ClientHeartBeat(byte clientNum, float temperature) {
+		public void ReceiveClientHeartBeat(byte clientNum, float temperature) {
 			throw new NotImplementedException();
 		}
 
@@ -122,6 +125,10 @@ namespace Host {
 		}
 
 		public void SetTargetTemperature(byte clientNum, float temperature) {
+			clients[clientNum].SetTargetTemperature(temperature);
+		}
+
+		public int SettModle(int modle) {
 			throw new NotImplementedException();
 		}
 	}
