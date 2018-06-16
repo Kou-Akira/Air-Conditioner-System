@@ -20,7 +20,7 @@ namespace AirConditionerSystem
         public static bool sendTurnOnRequest()
         {
             //Network send request
-            byte[] buffer = PackageHelper.GetByte(new )
+           // byte[] buffer = PackageHelper.GetByte(new )
             Thread.Sleep(2000);
             return false;
         }
@@ -35,11 +35,6 @@ namespace AirConditionerSystem
         public static bool sendSpeedMode(int mode)
         {
             Thread.Sleep(2000);
-            return true;
-        }
-
-        public static bool sendLoginInfo(string roomNum,string ID)
-        {
             return true;
         }
     }
