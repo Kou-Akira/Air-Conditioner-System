@@ -41,9 +41,12 @@ namespace Common {
 				}
 				case 2: {
 					ClientLoginPackage clientLoginRequest = response as ClientLoginPackage;
-					byte[] buffer = new byte[21];
+					byte[] buffer = new byte[20];
 					buffer[0] = 2;
-					buffer[1] = (byte)clientLoginRequest.RoomNumber;
+					buffer[1] = Convert.ToByte(clientLoginRequest.RoomNumber);
+					for (int i = 0; i < 18; i++) {
+						buffer[2 + i] = Convert.ToByte(clientLoginRequest.IdNum[i]);
+					}
 					return buffer;
 				}
 				case 3: {
@@ -72,7 +75,7 @@ namespace Common {
 		private static byte[] ConvertFloatToByte(float f) {
 			byte[] bt = new byte[4];
 
-			
+
 
 			return bt;
 		}
