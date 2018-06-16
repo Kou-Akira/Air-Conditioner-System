@@ -21,7 +21,7 @@ namespace Host {
 
 		public RemoteClient(TcpClient client, IHostServiceCallback callback) {
 			this.client = client;
-			LOGGER.InfoFormat("Client Connected ! {0} < -- {1}",
+			LOGGER.InfoFormat("Client Connected! {0} < -- {1}",
 				client.Client.LocalEndPoint, client.Client.RemoteEndPoint);
 			streamToClient = client.GetStream();
 			clientStatus = new ClientStatus();
