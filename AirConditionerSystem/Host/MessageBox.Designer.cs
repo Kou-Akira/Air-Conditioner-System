@@ -1,4 +1,4 @@
-﻿namespace AirConditionerSystem
+﻿namespace Host
 {
     partial class MessageBox
     {
@@ -43,7 +43,7 @@
             this.mainPanel.Location = new System.Drawing.Point(0, 30);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(300, 120);
-            this.mainPanel.TabIndex = 1;
+            this.mainPanel.TabIndex = 2;
             // 
             // TextBox
             // 
@@ -79,10 +79,10 @@
             this.TitleLabel.BackColor = System.Drawing.Color.Transparent;
             this.TitleLabel.Font = new System.Drawing.Font("黑体", 12F);
             this.TitleLabel.ForeColor = System.Drawing.Color.White;
-            this.TitleLabel.Location = new System.Drawing.Point(7, 7);
+            this.TitleLabel.Location = new System.Drawing.Point(5, 7);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(104, 16);
-            this.TitleLabel.TabIndex = 3;
+            this.TitleLabel.TabIndex = 4;
             this.TitleLabel.Text = "空调管理系统";
             // 
             // MessageBox
@@ -97,6 +97,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MessageBox";
             this.Load += new System.EventHandler(this.MessageBox_Load);
+            this.Enter += new System.EventHandler(this.ConfirmButton_Click);
             this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
