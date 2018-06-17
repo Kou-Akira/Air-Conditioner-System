@@ -22,9 +22,16 @@ namespace Host {
 		/// </summary>
 		/// <param name="modle"></param>
 		/// <returns></returns>
-		bool SettModle(Mode mode);
+		bool SettModle(ServiceMode mode);
 
-		// Package[] DealRequest(Request request);
+		bool Regist(byte roomId, string Id);
+
+		bool UnRegist(byte roomId);
+
+		bool CheckOut(byte roomId);
+
+		IList<ClientStatus> GetClientStatus(out int waiting);
+
 
 	}
 }

@@ -33,12 +33,11 @@ namespace Host {
 				case 5: {
 					Common.ClientSpeedPackage clientSpeedPackage = request as Common.ClientSpeedPackage;
 					client.ChangeSpeed(clientSpeedPackage.Speed);
-					callback.ClientSpeed(client.ClientNum, (ESpeed)clientSpeedPackage.Speed);
 					return new Common.Ignored();
 				}
 				case 6: {
 					Common.ClientStopPackage clientStopPackage = request as Common.ClientStopPackage;
-					callback.ClientSpeed(client.ClientNum, ESpeed.NoWind);
+					client.StopWind();
 					return new Common.Ignored();
 				}
 				case 9: {

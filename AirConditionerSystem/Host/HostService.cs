@@ -14,7 +14,7 @@ namespace Host {
 	internal delegate void RequestDelegate(Common.Package request);
 
 
-	class HostService : IHostService, IHostServiceCallback {
+	internal class HostService : IHostService, IHostServiceCallback {
 
 		//#region Constants
 		//private static readonly int HotMaxTemperature = 30;
@@ -45,6 +45,7 @@ namespace Host {
 			netWork = new Network(this);
 			clients = new ConcurrentDictionary<Byte, RemoteClient>();
 			sql = new SQLConnector();
+			hostState = new HostServiceStatus();
 
 			clientHeartBeatChecker = new System.Timers.Timer(5000);
 			clientHeartBeatChecker.AutoReset = true;
@@ -53,36 +54,36 @@ namespace Host {
 		}
 
 		public void ShutDown() {
-			if (hostState.state == State.OFF)
+			if (hostState.State == (int)ServiceState.OFF)
 				throw new Exception("AirConditioner is already off!");
 			netWork.StopListen();
-			hostState.state = State.OFF;
+			hostState.State = (int)ServiceState.OFF;
 			LOGGER.Info("AirConditioner Turn Off!");
 		}
 
 		private void Init() {
 			clients.Clear();
-			hostState.state = State.OFF;
-			hostState.mode = Mode.COLD;
-			hostState.nowServiceAmount = 0;
-			hostState.refreshFrequency = 1;
-			hostState.serviceStage = ServiceStage.FIFO;
+			hostState.State = (int)ServiceState.OFF;
+			hostState.Mode = (int)ServiceMode.COLD;
+			hostState.NowServiceAmount = 0;
+			hostState.RefreshFrequency = 1;
+			hostState.Stage = (int)ServiceStage.RoundRobin;
 			LOGGER.Info("State init! " + hostState.ToString());
 		}
 
 		public Tuple<int, float> GetDefaultWorkingState() {
 			return new Tuple<int, float>
-				((int)hostState.mode,
-				hostState.mode == Mode.COLD ?
+				(hostState.Mode,
+				hostState.Mode == (int)ServiceMode.COLD ?
 				Common.Constants.ColdTemperatureDefault :
 				Common.Constants.HotTemperatureDefault);
 		}
 
 		public void TurnOn() {
-			if (hostState.state != State.OFF)
+			if (hostState.State != (int)ServiceState.OFF)
 				throw new Exception("AirConditioner is already on!");
 			Init();
-			hostState.state = State.Sleep;
+			hostState.State = (int)ServiceState.Sleep;
 			netWork.StartListen();
 			LOGGER.Info("AirConditioner Turn On!");
 		}
@@ -127,20 +128,17 @@ namespace Host {
 			throw new NotImplementedException();
 		}
 
-		public void ClientSpeed(byte clientNum, ESpeed speed) {
-			throw new NotImplementedException();
-		}
-
 		public void SetTargetTemperature(byte clientNum, float temperature) {
 			clients[clientNum].SetTargetTemperature(temperature);
 		}
 
-		public bool SettModle(Mode mode) {
-			if (mode == hostState.mode) {
+		public bool SettModle(ServiceMode mode) {
+			if ((int)mode == hostState.Mode) {
 				LOGGER.WarnFormat("Cannot set to the same mode as before:{0}!", mode.ToString());
 				return false;
 			}
-			Parallel.ForEach<RemoteClient>(clients.Values, client => client.ChangeMode(this));
+			void body(RemoteClient client) { client.ChangeMode(this); }
+			Parallel.ForEach<RemoteClient>(clients.Values, body);
 			LOGGER.InfoFormat("Finish send change mode package to each clients total:{0}!", clients.Count);
 			return true;
 		}
@@ -155,6 +153,107 @@ namespace Host {
 			}
 			Parallel.ForEach(clients, body);
 			LOGGER.Debug("Check clients finish!");
+		}
+
+		public void SendWind(byte id) {
+			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return;
+			lock (this) {
+				if (this.hostState.NowServiceAmount < 3) {
+					this.hostState.NowServiceAmount++;
+					clients[id].ResetRealSpeed();
+					LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
+				} else {
+					LOGGER.InfoFormat("Client {0} send wind request failed for host is full!", (int)id);
+				}
+			}
+		}
+		public void StopWind(byte id) {
+			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return;
+			lock (this) {
+				this.hostState.NowServiceAmount--;
+				clients[id].ClientStatus.Speed = (int)ESpeed.NoWind;
+				LOGGER.InfoFormat("Scheduler stop wind to client {0}", (int)id);
+				foreach (var client in clients) {
+					if (client.Key > id && client.Value.CanWind()) {
+						client.Value.ResetRealSpeed();
+						LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
+						this.hostState.NowServiceAmount++;
+						if (this.hostState.NowServiceAmount == 3) return;
+					}
+				}
+				foreach (var client in clients) {
+					if (client.Key <= id && client.Value.CanWind()) {
+						client.Value.ResetRealSpeed();
+						LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
+						this.hostState.NowServiceAmount++;
+						if (this.hostState.NowServiceAmount == 3) return;
+					}
+				}
+			}
+		}
+
+		public void RefreshFrequency(byte f) {
+			this.hostState.RefreshFrequency = f;
+			void body(RemoteClient client) { client.ChangeMode(this); }
+			Parallel.ForEach<RemoteClient>(clients.Values, body);
+			LOGGER.InfoFormat("Finish send change frequency package to each clients total:{0}!", clients.Count);
+		}
+
+		public bool Regist(byte roomId, string Id) {
+			using (SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
+				con.Open();
+				SqlCommand cmd = con.CreateCommand();
+				cmd.CommandText = "update dt_RoomIDCard set IDCardNum = @b,cost = 0.0 where RoomNum = @a";
+				cmd.Parameters.Clear();
+				cmd.Parameters.AddWithValue("@a", (int)roomId);
+				cmd.Parameters.AddWithValue("@b", Id);
+
+				int ln = cmd.ExecuteNonQuery();
+
+				if (ln == 1) return true;
+				else return false;
+			}
+		}
+
+		public bool UnRegist(byte roomId) {
+			using (SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
+				con.Open();
+				SqlCommand cmd = con.CreateCommand();
+				cmd.CommandText = "update dt_RoomIDCard set IDCardNum = null,cost = 0.0 where RoomNum = @a";
+				cmd.Parameters.Clear();
+				cmd.Parameters.AddWithValue("@a", (int)roomId);
+
+				int ln = cmd.ExecuteNonQuery();
+
+				if (ln == 1) return true;
+				else return false;
+			}
+		}
+
+		public bool CheckOut(byte roomId) {
+			using (SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
+				con.Open();
+				SqlCommand cmd = con.CreateCommand();
+				cmd.CommandText = "update dt_RoomIDCard set cost = 0.0 where RoomNum = @a";
+				cmd.Parameters.Clear();
+				cmd.Parameters.AddWithValue("@a", (int)roomId);
+
+				int ln = cmd.ExecuteNonQuery();
+
+				if (ln == 1) return true;
+				else return false;
+			}
+		}
+
+		public IList<ClientStatus> GetClientStatus(out int waiting) {
+			IList<ClientStatus> clientStatuses = new List<ClientStatus>();
+			foreach (RemoteClient client in clients.Values) {
+				if (client.ClientStatus.RealSpeed >= (int)ESpeed.Small) {
+					clientStatuses.Add(client.ClientStatus.Clone());
+				}
+			}
+			waiting = clients.Count - clientStatuses.Count;
+			return clientStatuses;
 		}
 	}
 }

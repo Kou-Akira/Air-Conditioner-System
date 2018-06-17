@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Host {
@@ -9,7 +10,7 @@ namespace Host {
 	/// <summary>
 	/// 0关闭 1开启 2休眠
 	/// </summary>
-	enum State {
+	public enum ServiceState {
 		OFF = 0,
 		On,
 		Sleep
@@ -18,7 +19,7 @@ namespace Host {
 	/// <summary>
 	/// 0hot 1cold
 	/// </summary>
-	internal enum Mode {
+	public enum ServiceMode {
 		HOT = 0,
 		COLD
 	}
@@ -26,33 +27,71 @@ namespace Host {
 	/// <summary>
 	/// 服务策略
 	/// </summary>
-	internal enum ServiceStage {
+	public enum ServiceStage {
 		FIFO = 0,
 		RoundRobin,
 		HighSpeedFirst
 	}
 
-	struct HostServiceStatus {
+	class HostServiceStatus {
 
-		internal State state;
+		private int state;
 
-		internal Mode mode;
+		private int mode;
 
 		/// <summary>
 		/// 刷新频率
 		/// </summary>
-		internal int refreshFrequency;
+		private int refreshFrequency;
 
-		internal ServiceStage serviceStage;
+		private int stage;
 
 		/// <summary>
 		/// 当前服务主机数
 		/// </summary>
-		internal int nowServiceAmount;
+		private int nowServiceAmount;
+
+		public HostServiceStatus() {
+			state = (int)ServiceState.OFF;
+			mode = (int)ServiceMode.COLD;
+			refreshFrequency = 5;
+			stage = (int)ServiceStage.RoundRobin;
+		}
+
+		internal int State {
+			get { return Interlocked.Exchange(ref state, state); }
+			set {
+				Interlocked.Exchange(ref state, value);
+			}
+		}
+		internal int Mode {
+			get { return Interlocked.Exchange(ref mode, mode); }
+			set {
+				Interlocked.Exchange(ref mode, value);
+			}
+		}
+		internal int RefreshFrequency {
+			get { return Interlocked.Exchange(ref refreshFrequency, refreshFrequency); }
+			set {
+				Interlocked.Exchange(ref refreshFrequency, value);
+			}
+		}
+		internal int Stage {
+			get { return Interlocked.Exchange(ref stage, stage); }
+			set {
+				Interlocked.Exchange(ref stage, value);
+			}
+		}
+		internal int NowServiceAmount {
+			get { return Interlocked.Exchange(ref nowServiceAmount, nowServiceAmount); }
+			set {
+				Interlocked.Exchange(ref nowServiceAmount, value);
+			}
+		}
 
 		public override string ToString() {
-			return String.Format("State:{0},Mode:{1},RefreshFrequency:{2},ServiceStage:{3},NowServiceAmount:{4}",
-				state, mode, refreshFrequency, serviceStage, nowServiceAmount);
+			return String.Format("State:{0}, Mode:{1}, RefreshFrequency:{2}, ServiceStage:{3}, NowServiceAmount:{4}.",
+				state, mode, refreshFrequency, stage, nowServiceAmount);
 		}
 	}
 }

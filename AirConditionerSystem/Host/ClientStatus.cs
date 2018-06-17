@@ -29,13 +29,16 @@ namespace Host {
 			this.lastHeartBeat = DateTime.Now;
 		}
 
-		//public ClientStatus(int speed, float targetTemperature, float nowTemperature, float cost) {
-		//	this.speed = speed;
-		//	this.targetTemperature = targetTemperature;
-		//	this.nowTemperature = nowTemperature;
-		//	this.cost = cost;
-		//	lastHeartBeat = DateTime.Now;
-		//}
+		public ClientStatus Clone() {
+			ClientStatus rtv = new ClientStatus();
+			rtv.speed = this.Speed;
+			rtv.RealSpeed = this.RealSpeed;
+			rtv.TargetTemperature = this.TargetTemperature;
+			rtv.NowTemperature = this.NowTemperature;
+			rtv.Cost = this.Cost;
+			rtv.LastHeartBeat = this.LastHeartBeat;
+			return rtv;
+		}
 
 		public int Speed {
 			get { return Interlocked.Exchange(ref speed, speed); }

@@ -53,7 +53,7 @@ namespace Host {
 		}
 
 		private void run(object cb) {
-			heartBeatTimer.Enabled = true;
+			//heartBeatTimer.Enabled = true;
 			IHostServiceCallback callback = cb as IHostServiceCallback;
 			try {
 				while (true) {
@@ -110,12 +110,10 @@ namespace Host {
 
 			this.updateCost();
 
-			Common.Package response1, response2;
+			Common.Package response1;
 			if (clientStatus.Speed == (int)ESpeed.Unauthorized) return;
-			response1 = new Common.HostCostPackage(clientStatus.Cost);
-			response2 = new Common.HostSpeedPackage((int)clientStatus.RealSpeed);
+			response1 = new Common.HostRequestPackage((byte)clientStatus.RealSpeed, clientStatus.Cost);
 			SendPackage(response1);
-			SendPackage(response2);
 		}
 
 		public void Abort() {
@@ -126,6 +124,7 @@ namespace Host {
 
 		private void SendPackage(Common.Package package) {
 			try {
+				if (package.Cat == -1) return;
 				lock (writeLock) {
 					byte[] bts = Common.PackageHelper.GetByte(package);
 					streamToClient.Write(bts, 0, bts.Length);
@@ -133,8 +132,8 @@ namespace Host {
 						clientNum == 0 ? tcpclient.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 					LOGGER.DebugFormat("Package: {0}", BitConverter.ToString(bts));
 				}
-			} catch (Exception) {
-				LOGGER.ErrorFormat("Error when send package to client:{0}, abort client.", this.ClientNum);
+			} catch (Exception e) {
+				LOGGER.ErrorFormat("Error when send package to client:{0}, abort client.", this.ClientNum,e);
 				requestThread.Abort();
 			}
 		}
@@ -156,13 +155,35 @@ namespace Host {
 		}
 
 		public void ChangeSpeed(int speed) {
-			LOGGER.InfoFormat("Client {0} try to change speed from {1} to {2}", ClientNum, ClientStatus.Speed, speed);
 			this.ClientStatus.Speed = speed;
-			callback.
+			if (this.ClientStatus.RealSpeed >= (int)ESpeed.Small) {
+				LOGGER.InfoFormat("Client {0} change speed from {1} to {2}.", ClientNum, ClientStatus.RealSpeed, speed);
+				this.ResetRealSpeed();
+			} else {
+				LOGGER.InfoFormat("Client {0} ask for wind!", ClientNum);
+				callback.SendWind(this.clientNum);
+			}
 		}
 
 		public void StopWind() {
+			this.ClientStatus.Speed = (int)ESpeed.NoWind;
+			this.ClientStatus.RealSpeed = (int)ESpeed.NoWind;
+			callback.StopWind(this.clientNum);
+			LOGGER.InfoFormat("Client {0} stop wind!", (int)clientNum);
+		}
 
+		internal void ResetRealSpeed() {
+			this.ClientStatus.RealSpeed = this.ClientStatus.Speed;
+		}
+
+		internal bool CanWind() {
+			return (ClientStatus.RealSpeed == (int)ESpeed.NoWind) && (clientStatus.Speed >= (int)ESpeed.Small);
+		}
+
+		public void ChangeFrequency(byte f) {
+			Common.RefreshFrequencyPackage package = new Common.RefreshFrequencyPackage(f);
+			SendPackage(package);
+			LOGGER.InfoFormat("Host frequency change to {0}!", f);
 		}
 	}
 }

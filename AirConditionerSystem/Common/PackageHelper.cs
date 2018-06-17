@@ -21,7 +21,7 @@ namespace Common {
 					networkStream.Read(buffer, 0, 5);
 					int mode = BitConverter.ToBoolean(buffer, 0) == true ? 1 : 0;
 					float temperature = BitConverter.ToSingle(buffer, 1);
-					return new HostAckPackage(mode,temperature);
+					return new HostAckPackage(mode, temperature);
 				}
 				case 2: {
 					networkStream.Read(buffer, 0, 1);
@@ -52,14 +52,14 @@ namespace Common {
 					return new ClientStopPackage(temp);
 				}
 				case 7: {
-					networkStream.Read(buffer, 0, 4);
-					float temp = BitConverter.ToSingle(buffer, 0);
-					return new HostCostPackage(temp);
+					networkStream.Read(buffer, 0, 5);
+					float temp = BitConverter.ToSingle(buffer, 1);
+					return new HostRequestPackage(buffer[0], temp);
 				}
-				case 8: {
-					networkStream.Read(buffer, 0, 1);
-					return new HostSpeedPackage(buffer[0]);
-				}
+				//case 8: {
+				//	networkStream.Read(buffer, 0, 1);
+				//	return new HostSpeedPackage(buffer[0]);
+				//}
 				case 9: {
 					networkStream.Read(buffer, 0, 4);
 					float temperature = BitConverter.ToSingle(buffer, 0);
@@ -91,7 +91,7 @@ namespace Common {
 					res[0] = 1;
 					res[1] = (byte)hostAckPackage.Mode;
 					byte[] tbt = BitConverter.GetBytes(hostAckPackage.Temperature);
-					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i]; 
+					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i];
 					return res;
 				}
 				case 2: {
@@ -138,20 +138,20 @@ namespace Common {
 					return res;
 				}
 				case 7: {
-					HostCostPackage hostCostPackage = response as HostCostPackage;
+					HostRequestPackage hostCostPackage = response as HostRequestPackage;
 					byte[] res = new byte[5];
 					res[0] = 7;
 					byte[] tbt = BitConverter.GetBytes(hostCostPackage.Cost);
 					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
 					return res;
 				}
-				case 8: {
-					HostSpeedPackage hostSpeedPackage = response as HostSpeedPackage;
-					byte[] res = new byte[2];
-					res[0] = 8;
-					res[1] = (byte)hostSpeedPackage.Speed;
-					return res;
-				}
+				//case 8: {
+				//	HostSpeedPackage hostSpeedPackage = response as HostSpeedPackage;
+				//	byte[] res = new byte[2];
+				//	res[0] = 8;
+				//	res[1] = (byte)hostSpeedPackage.Speed;
+				//	return res;
+				//}
 				case 9: {
 					ClientClosePackage clientClosePackage = response as ClientClosePackage;
 					byte[] res = new byte[5];
@@ -189,7 +189,7 @@ namespace Common {
 
 		private static byte[] ConvertIdToBytes(String id) {
 			byte[] res = new byte[18];
-			for(int i = 0; i < id.Length; i++) {
+			for (int i = 0; i < id.Length; i++) {
 				res[i] = Convert.ToByte(id[i]);
 			}
 			return res;

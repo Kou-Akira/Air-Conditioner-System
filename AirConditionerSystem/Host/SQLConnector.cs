@@ -39,15 +39,5 @@ namespace Host {
 		public void Print() {
 			Console.WriteLine(sqlName + "\n" + loginName + "\n" + loginPassword);
 		}
-
-		public DataSet Query(string SQLstr, string tableName) {
-			DataSet ds = new DataSet();
-			using (SqlConnection con = new SqlConnection(Builder.ConnectionString)) {
-				con.Open();
-				SqlDataAdapter SQLda = new SqlDataAdapter(SQLstr, con);
-				SQLda.Fill(ds, tableName);
-			}
-			return ds;
-		}
 	}
 }

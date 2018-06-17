@@ -104,7 +104,7 @@ namespace Common {
 			}
 		}
 		public override string ToString() {
-			return String.Format("ClientTemperaturePackage! temperature:{0}, Temperature:{1}", temperature, Temperature);
+			return String.Format("ClientTemperaturePackage! temperature:{0}.", Temperature);
 		}
 	}
 	public class ClientSpeedPackage : Package {
@@ -143,10 +143,12 @@ namespace Common {
 			return String.Format("ClientStopPackage! temperature:{0}", temperature);
 		}
 	}
-	public class HostCostPackage : Package {
+	public class HostRequestPackage : Package {
+		byte speed;
 		float cost;
-		public HostCostPackage(float cost) : base(7) {
+		public HostRequestPackage(byte speed, float cost) : base(7) {
 			this.cost = cost;
+			this.speed = speed;
 		}
 
 		public float Cost {
@@ -154,8 +156,15 @@ namespace Common {
 				return cost;
 			}
 		}
+
+		public byte Speed {
+			get {
+				return speed;
+			}
+		}
+
 		public override string ToString() {
-			return String.Format("HostCostPackage! cost:{0}", cost);
+			return String.Format("HostRequestPackage! speed:{0} cost:{1}", speed, cost);
 		}
 	}
 	public class HostSpeedPackage : Package {
@@ -189,13 +198,13 @@ namespace Common {
 		}
 	}
 	public class RefreshFrequencyPackage : Package {
-		int frequency;
+		byte frequency;
 
-		public RefreshFrequencyPackage(int frequency) : base(10) {
+		public RefreshFrequencyPackage(byte frequency) : base(10) {
 			this.frequency = frequency;
 		}
 
-		public int Frequency {
+		public byte Frequency {
 			get {
 				return frequency;
 			}
