@@ -127,6 +127,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(ProjectDir)log4net.config $(ProjectDir)$(OutDir)log4net.config /Y</PostBuildEvent>
+    <PostBuildEvent>copy $(ProjectDir)log4net.config $(ProjectDir)$(OutDir)log4net.config /Y
+copy $(ProjectDir)sql.xml $(ProjectDir)$(OutDir)sql.xml /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

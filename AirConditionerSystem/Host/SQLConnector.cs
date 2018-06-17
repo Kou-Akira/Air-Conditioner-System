@@ -14,7 +14,12 @@ namespace Host {
 		private string initialCatalog;
 		private SqlConnectionStringBuilder builder;
 
-		public SqlConnectionStringBuilder Builder { get => builder; set => builder = value; }
+		public SqlConnectionStringBuilder Builder {
+			get { return builder; }
+			set {
+				builder = value;
+			}
+		}
 
 		public SQLConnector() {
 			XmlDocument doc = new XmlDocument();

@@ -19,8 +19,18 @@ namespace Host {
 		private ClientStatus clientStatus;
 		private System.Timers.Timer heartBeatTimer;
 
-		public byte ClientNum { get => clientNum; set => clientNum = value; }
-		public ClientStatus ClientStatus { get => clientStatus; set => clientStatus = value; }
+		public byte ClientNum {
+			get { return clientNum; }
+			set {
+				clientNum = value;
+			}
+		}
+		public ClientStatus ClientStatus {
+			get { return clientStatus; }
+			set {
+				clientStatus = value;
+			}
+		}
 
 		public RemoteClient(TcpClient client, IHostServiceCallback callback) {
 			this.client = client;
