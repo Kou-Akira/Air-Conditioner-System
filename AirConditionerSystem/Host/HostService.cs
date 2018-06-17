@@ -35,6 +35,7 @@ namespace Host {
 		private INetWork netWork;
 		private ILog LOGGER;
 		private IDictionary<Byte, RemoteClient> clients;
+		//private IDictionary<Byte, >
 
 		private SQLConnector sql;
 
@@ -44,10 +45,6 @@ namespace Host {
 			clients = new ConcurrentDictionary<Byte, RemoteClient>();
 			sql = new SQLConnector();
 		}
-
-		//public int SettModle(int modle) {
-		//	throw new NotImplementedException();
-		//}
 
 		public void ShutDown() {
 			if (hostState.state == State.OFF)
@@ -107,16 +104,12 @@ namespace Host {
 			clients[remoteClient.ClientNum] = remoteClient;
 		}
 
-		public void ClientHeartBeat(RemoteClient client, float temperature) {
-			throw new NotImplementedException();
-		}
-
 		public void CloseClient(byte clientNum) {
 			clients.Remove(clientNum);
 			LOGGER.InfoFormat("Remove client {0} from dictionary!", clientNum);
 		}
 
-		public void ReceiveClientHeartBeat(byte clientNum, float temperature) {
+		public void ReceiveClientHeartBeat(byte clientNum) {
 			throw new NotImplementedException();
 		}
 

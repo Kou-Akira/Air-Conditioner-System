@@ -12,7 +12,7 @@ namespace Host {
 
 		void CloseClient(byte clientNum);
 
-		void ReceiveClientHeartBeat(byte clientNum, float temperature);
+		void ReceiveClientHeartBeat(byte clientNum);
 
 		void ClientSpeed(byte clientNum, ESpeed speed);
 

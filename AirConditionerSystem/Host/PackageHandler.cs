@@ -23,8 +23,7 @@ namespace Host {
 				}
 				case 4: {
 					Common.ClientTemperaturePackage clientTemperaturePackage = request as Common.ClientTemperaturePackage;
-					client.SetNowTemperature(clientTemperaturePackage.Temperature);
-					callback.ReceiveClientHeartBeat(client.ClientNum);
+					client.ReceiveHeartBeat(clientTemperaturePackage.Temperature);
 					return new Common.Ignored();
 				}
 				case 5: {

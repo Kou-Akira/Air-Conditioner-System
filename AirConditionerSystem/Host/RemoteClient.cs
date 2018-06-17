@@ -28,7 +28,6 @@ namespace Host {
 				client.Client.LocalEndPoint, client.Client.RemoteEndPoint);
 			streamToClient = client.GetStream();
 			clientStatus = new ClientStatus();
-			clientStatus.Speed = (int)ESpeed.Unauthorized;
 
 			heartBeatTimer = new System.Timers.Timer(5000);
 			heartBeatTimer.AutoReset = true;
@@ -95,7 +94,8 @@ namespace Host {
 			this.clientStatus.TargetTemperature = temperature;
 		}
 
-		public void SetNowTemperature(float temperature) {
+		public void ReceiveHeartBeat(float temperature){
+			this.clientStatus.LastHeartBeat = DateTime.Now;
 			this.clientStatus.NowTemperature = temperature;
 		}
 	}
