@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace Host {
 	static class PackageHandler {
-		public static Common.Package Deal(RemoteClient client,Common.Package request, IHostServiceCallback callback) {
+		public static Common.Package Deal(RemoteClient client, Common.Package request, IHostServiceCallback callback) {
 			switch (request.Cat) {
 				case 2: {
 					Common.ClientLoginPackage loginRequest = request as Common.ClientLoginPackage;
-					callback.AddClient(client);
-					bool loginOk = callback.Login(loginRequest.RoomNumber, loginRequest.IdNum);
+					float cost;
+					bool loginOk = callback.Login(loginRequest.RoomNumber, loginRequest.IdNum, out cost);
 					if (loginOk) {
 						client.ClientNum = loginRequest.RoomNumber;
+						client.ClientStatus.Cost = cost;
+						client.ClientStatus.Speed = (int)ESpeed.NoWind;
+						client.ClientStatus.RealSpeed = (int)ESpeed.NoWind;
+						callback.AddClient(client);
 						var tmp = callback.GetDefaultWorkingState();
-						return new Common.HostAckPackage(tmp.Item1,tmp.Item2);
+						return new Common.HostAckPackage(tmp.Item1, tmp.Item2);
 					} else {
 						return new Common.HostNakPackage();
 					}
@@ -28,6 +32,7 @@ namespace Host {
 				}
 				case 5: {
 					Common.ClientSpeedPackage clientSpeedPackage = request as Common.ClientSpeedPackage;
+					client.ChangeSpeed(clientSpeedPackage.Speed);
 					callback.ClientSpeed(client.ClientNum, (ESpeed)clientSpeedPackage.Speed);
 					return new Common.Ignored();
 				}

@@ -16,26 +16,27 @@ namespace Host {
 
 	class HostService : IHostService, IHostServiceCallback {
 
-		#region Constants
-		private static readonly int HotMaxTemperature = 30;
-		private static readonly int HotMinTemperature = 25;
-		private static readonly int HotTemperatureDefault = 28;
+		//#region Constants
+		//private static readonly int HotMaxTemperature = 30;
+		//private static readonly int HotMinTemperature = 25;
+		//private static readonly int HotTemperatureDefault = 28;
 
-		private static readonly int ColdMaxTemperature = 25;
-		private static readonly int ColdMinTemperature = 18;
-		private static readonly int ColdTemperatureDefault = 22;
+		//private static readonly int ColdMaxTemperature = 25;
+		//private static readonly int ColdMinTemperature = 18;
+		//private static readonly int ColdTemperatureDefault = 22;
 
-		private static readonly double MidSpeedPower = 1.0;
-		private static readonly double LowSpeedPower = 0.8;
-		private static readonly double HighSpeedPower = 1.3;
-		private static readonly int CostPrePower = 5;
-		#endregion
+		//private static readonly double MidSpeedPower = 1.0;
+		//private static readonly double LowSpeedPower = 0.8;
+		//private static readonly double HighSpeedPower = 1.3;
+		//private static readonly int CostPrePower = 5;
+		//#endregion
 
 		private HostServiceStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
 		private IDictionary<Byte, RemoteClient> clients;
 		//private IDictionary<Byte, >
+		private System.Timers.Timer clientHeartBeatChecker;
 
 		private SQLConnector sql;
 
@@ -44,6 +45,11 @@ namespace Host {
 			netWork = new Network(this);
 			clients = new ConcurrentDictionary<Byte, RemoteClient>();
 			sql = new SQLConnector();
+
+			clientHeartBeatChecker = new System.Timers.Timer(5000);
+			clientHeartBeatChecker.AutoReset = true;
+			clientHeartBeatChecker.Elapsed += this.checkClientAlive;
+			//clientHeartBeatChecker.Enabled = true;
 		}
 
 		public void ShutDown() {
@@ -68,8 +74,8 @@ namespace Host {
 			return new Tuple<int, float>
 				((int)hostState.mode,
 				hostState.mode == Mode.COLD ?
-				ColdTemperatureDefault :
-				HotTemperatureDefault);
+				Common.Constants.ColdTemperatureDefault :
+				Common.Constants.HotTemperatureDefault);
 		}
 
 		public void TurnOn() {
@@ -81,17 +87,25 @@ namespace Host {
 			LOGGER.Info("AirConditioner Turn On!");
 		}
 
-		public bool Login(int roomNumber, string idNum) {
-			using(SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
+		public bool Login(byte roomNumber, string idNum, out float cost) {
+			using (SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
 				con.Open();
 				SqlCommand cmd = con.CreateCommand();
-				cmd.CommandText = "select count(*) from dt_RoomIDCard where RoomNum = @a and IDCardNum = @b";
+				cmd.CommandText = "select * from dt_RoomIDCard where RoomNum = @a and IDCardNum = @b";
 				cmd.Parameters.Clear();
 				cmd.Parameters.AddWithValue("@a", roomNumber);
 				cmd.Parameters.AddWithValue("@b", idNum);
 
-				int count = Convert.ToInt32(cmd.ExecuteScalar());
-				return count > 0;
+				SqlDataReader dr = cmd.ExecuteReader();
+				if (dr.HasRows) {
+					dr.Read();
+					cost = (float)dr.GetDouble(2);
+					if (dr.Read()) throw new Exception(String.Format("have two same row [{0},{1}] in DB!", roomNumber, idNum));
+					return true;
+				} else {
+					cost = 0;
+					return false;
+				}
 			}
 		}
 
@@ -121,8 +135,26 @@ namespace Host {
 			clients[clientNum].SetTargetTemperature(temperature);
 		}
 
-		public int SettModle(int modle) {
-			throw new NotImplementedException();
+		public bool SettModle(Mode mode) {
+			if (mode == hostState.mode) {
+				LOGGER.WarnFormat("Cannot set to the same mode as before:{0}!", mode.ToString());
+				return false;
+			}
+			Parallel.ForEach<RemoteClient>(clients.Values, client => client.ChangeMode(this));
+			LOGGER.InfoFormat("Finish send change mode package to each clients total:{0}!", clients.Count);
+			return true;
+		}
+
+		private void checkClientAlive(object source, System.Timers.ElapsedEventArgs e) {
+			void body(KeyValuePair<byte, RemoteClient> clientAndId) {
+				if (DateTime.Now - clientAndId.Value.ClientStatus.LastHeartBeat > TimeSpan.FromSeconds(20)) {
+					clients.Remove(clientAndId.Key);
+					LOGGER.WarnFormat("Client {0} timeout, removed!", clientAndId.Key);
+					clientAndId.Value.Abort();
+				}
+			}
+			Parallel.ForEach(clients, body);
+			LOGGER.Debug("Check clients finish!");
 		}
 	}
 }

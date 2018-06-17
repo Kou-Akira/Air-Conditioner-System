@@ -47,7 +47,7 @@ namespace Host {
 					Object ignored = new RemoteClient(tcpClient, callback);
 				}
 			} catch (ThreadAbortException e) {
-				LOGGER.Warn("Network listen thread has been abort!", e);
+				LOGGER.Debug("Network listen thread has been abort!", e);
 			} catch (System.Net.Sockets.SocketException e) {
 				LOGGER.Warn("Network listen thread has been abort!", e);
 			}

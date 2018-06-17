@@ -8,7 +8,7 @@ namespace Host {
 	interface IHostServiceCallback {
 		Tuple<int, float> GetDefaultWorkingState();
 		void AddClient(RemoteClient client);
-		bool Login(int roomNumber, string idNum);
+		bool Login(byte roomNumber, string idNum, out float cost);
 
 		void CloseClient(byte clientNum);
 

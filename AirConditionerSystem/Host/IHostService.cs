@@ -22,7 +22,7 @@ namespace Host {
 		/// </summary>
 		/// <param name="modle"></param>
 		/// <returns></returns>
-		int SettModle(int modle);
+		bool SettModle(Mode mode);
 
 		// Package[] DealRequest(Request request);
 

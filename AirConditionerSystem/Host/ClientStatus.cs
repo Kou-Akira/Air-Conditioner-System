@@ -15,6 +15,7 @@ namespace Host {
 	}
 	class ClientStatus {
 		int speed;
+		int realSpeed;
 		float targetTemperature;
 		float nowTemperature;
 		float cost;
@@ -22,18 +23,19 @@ namespace Host {
 
 		public ClientStatus() {
 			this.speed = (int)ESpeed.Unauthorized;
+			this.realSpeed = (int)ESpeed.NoWind;
 			this.targetTemperature = this.nowTemperature = -1;
 			this.cost = 0;
 			this.lastHeartBeat = DateTime.Now;
 		}
 
-		public ClientStatus(int speed, float targetTemperature, float nowTemperature, float cost) {
-			this.speed = speed;
-			this.targetTemperature = targetTemperature;
-			this.nowTemperature = nowTemperature;
-			this.cost = cost;
-			lastHeartBeat = DateTime.Now;
-		}
+		//public ClientStatus(int speed, float targetTemperature, float nowTemperature, float cost) {
+		//	this.speed = speed;
+		//	this.targetTemperature = targetTemperature;
+		//	this.nowTemperature = nowTemperature;
+		//	this.cost = cost;
+		//	lastHeartBeat = DateTime.Now;
+		//}
 
 		public int Speed {
 			get { return Interlocked.Exchange(ref speed, speed); }
@@ -67,6 +69,13 @@ namespace Host {
 				lock (this) {
 					lastHeartBeat = value;
 				}
+			}
+		}
+
+		public int RealSpeed {
+			get { return Interlocked.Exchange(ref realSpeed, realSpeed); }
+			set {
+				Interlocked.Exchange(ref realSpeed, value);
 			}
 		}
 	}
