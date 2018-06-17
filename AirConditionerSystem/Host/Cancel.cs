@@ -73,7 +73,7 @@ namespace Host
             }
             else
             {
-                MessageBox infoBox = new MessageBox("请输入正确的房间号和身份证号");
+                MessageBox infoBox = new MessageBox("请输入正确的房间号");
                 infoBox.ShowDialog();
                 infoBox.Dispose();
             }
