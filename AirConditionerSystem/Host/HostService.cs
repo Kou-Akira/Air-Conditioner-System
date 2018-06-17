@@ -155,15 +155,17 @@ namespace Host {
 			LOGGER.Debug("Check clients finish!");
 		}
 
-		public void SendWind(byte id) {
-			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return;
+		public bool SendWind(byte id) {
+			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return false;
 			lock (this) {
 				if (this.hostState.NowServiceAmount < 3) {
 					this.hostState.NowServiceAmount++;
 					clients[id].ResetRealSpeed();
 					LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
+					return true;
 				} else {
 					LOGGER.InfoFormat("Client {0} send wind request failed for host is full!", (int)id);
+					return false;
 				}
 			}
 		}
@@ -254,6 +256,26 @@ namespace Host {
 			}
 			waiting = clients.Count - clientStatuses.Count;
 			return clientStatuses;
+		}
+
+		public IDictionary<byte, List<HostLog>> GetLog(DateTime start, DateTime end) {
+			using (SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
+				con.Open();
+				SqlCommand cmd = con.CreateCommand();
+				cmd.CommandText = "select * from dt_Log where Time between @a and @b order by Time";
+				cmd.Parameters.Clear();
+				cmd.Parameters.AddWithValue("@a", start);
+				cmd.Parameters.AddWithValue("@b", end);
+
+				SqlDataReader reader = cmd.ExecuteReader();
+				IDictionary<byte, List<HostLog>> dic = new Dictionary<byte, List<HostLog>>();
+				while (reader.HasRows && reader.Read()) {
+					var v = new HostLog(reader);
+					if (!dic.ContainsKey(v.RoomNum)) dic[v.RoomNum] = new List<HostLog>();
+					dic[v.RoomNum].Add(v);
+				}
+				return dic;
+			}
 		}
 	}
 }

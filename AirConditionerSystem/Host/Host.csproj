@@ -68,6 +68,7 @@
     <Compile Include="Host.Designer.cs">
       <DependentUpon>Host.cs</DependentUpon>
     </Compile>
+    <Compile Include="HostLog.cs" />
     <Compile Include="HostService.cs" />
     <Compile Include="HostServiceStatus.cs" />
     <Compile Include="IDataClient.cs" />

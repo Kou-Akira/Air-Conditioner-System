@@ -16,7 +16,7 @@ namespace Host {
 
 		void SetTargetTemperature(byte clientNum, float temperature);
 
-		void SendWind(byte id);
+		bool SendWind(byte id);
 
 		void StopWind(byte id);
 	}

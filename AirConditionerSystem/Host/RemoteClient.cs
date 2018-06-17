@@ -29,6 +29,7 @@ namespace Host {
 				clientNum = value;
 			}
 		}
+
 		public ClientStatus ClientStatus {
 			get { return clientStatus; }
 			set {
@@ -64,6 +65,10 @@ namespace Host {
 							clientNum == 0 ? tcpclient.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 					}
 					Common.Package response = PackageHandler.Deal(this, request, callback);
+					if (response.Cat == 2) {
+						new System.Threading.Thread(WriteLog).Start(
+							new Tuple<byte, int, int, float, float>(clientNum, 0, 0, 0, 0));
+					}
 					SendPackage(response);
 				}
 			} catch (IOException e) {
@@ -71,6 +76,7 @@ namespace Host {
 			} catch (System.Threading.ThreadAbortException) {
 				LOGGER.WarnFormat("Client {0} has been aborted!", this.ClientNum);
 			} finally {
+				WriteLog(new Tuple<byte, int, int, float, float>(clientNum, 1, this.ClientStatus.RealSpeed, this.ClientStatus.NowTemperature, this.ClientStatus.Cost));
 				heartBeatTimer.Enabled = false;
 				lock (this) {
 					this.clientStatus.Speed = (int)ESpeed.Unauthorized;
@@ -120,6 +126,7 @@ namespace Host {
 			if (streamToClient != null)
 				this.streamToClient.Dispose();
 			requestThread.Abort();
+
 		}
 
 		private void SendPackage(Common.Package package) {
@@ -133,7 +140,7 @@ namespace Host {
 					LOGGER.DebugFormat("Package: {0}", BitConverter.ToString(bts));
 				}
 			} catch (Exception e) {
-				LOGGER.ErrorFormat("Error when send package to client:{0}, abort client.", this.ClientNum,e);
+				LOGGER.ErrorFormat("Error when send package to client:{0}, abort client.", this.ClientNum, e);
 				requestThread.Abort();
 			}
 		}
@@ -159,9 +166,14 @@ namespace Host {
 			if (this.ClientStatus.RealSpeed >= (int)ESpeed.Small) {
 				LOGGER.InfoFormat("Client {0} change speed from {1} to {2}.", ClientNum, ClientStatus.RealSpeed, speed);
 				this.ResetRealSpeed();
+				new System.Threading.Thread(WriteLog).Start(
+							new Tuple<byte, int, int, float, float>(clientNum, 2, this.ClientStatus.RealSpeed, this.ClientStatus.NowTemperature, this.ClientStatus.Cost));
 			} else {
 				LOGGER.InfoFormat("Client {0} ask for wind!", ClientNum);
-				callback.SendWind(this.clientNum);
+				if (callback.SendWind(this.clientNum)) {
+					new System.Threading.Thread(WriteLog).Start(
+			new Tuple<byte, int, int, float, float>(clientNum, 2, this.ClientStatus.RealSpeed, this.ClientStatus.NowTemperature, this.ClientStatus.Cost));
+				}
 			}
 		}
 
@@ -170,6 +182,8 @@ namespace Host {
 			this.ClientStatus.RealSpeed = (int)ESpeed.NoWind;
 			callback.StopWind(this.clientNum);
 			LOGGER.InfoFormat("Client {0} stop wind!", (int)clientNum);
+			new System.Threading.Thread(WriteLog).Start(
+			new Tuple<byte, int, int, float, float>(clientNum, 2, this.ClientStatus.RealSpeed, this.ClientStatus.NowTemperature, this.ClientStatus.Cost));
 		}
 
 		internal void ResetRealSpeed() {
@@ -184,6 +198,33 @@ namespace Host {
 			Common.RefreshFrequencyPackage package = new Common.RefreshFrequencyPackage(f);
 			SendPackage(package);
 			LOGGER.InfoFormat("Host frequency change to {0}!", f);
+		}
+
+		public void WriteLog(object obj) {
+			Tuple<byte, int, int, float, float> tuple = obj as Tuple<byte, int, int, float, float>;
+			byte roomNum = tuple.Item1;
+			int opera = tuple.Item2;
+			int speed = tuple.Item3;
+			float temperature = tuple.Item4;
+			float cost = tuple.Item5;
+			using (SqlConnection con = new SqlConnection(new SQLConnector().Builder.ConnectionString)) {
+				con.Open();
+				SqlCommand cmd = con.CreateCommand();
+				cmd.CommandText = "insert into dt_Log values(@a,@b,@c,@d,@e,@f)";
+				cmd.Parameters.Clear();
+				cmd.Parameters.AddWithValue("@a", roomNum);
+				cmd.Parameters.AddWithValue("@b", DateTime.Now);
+				cmd.Parameters.AddWithValue("@c", opera);
+				cmd.Parameters.AddWithValue("@d", speed);
+				cmd.Parameters.AddWithValue("@e", temperature);
+				cmd.Parameters.AddWithValue("@f", cost);
+				int tmp = cmd.ExecuteNonQuery();
+
+				if (tmp == 1)
+					LOGGER.DebugFormat("Update db_Log success, [{0},{1},{2},{3},{4}]", roomNum, opera, speed, temperature, cost);
+				else
+					LOGGER.WarnFormat("Update db_Log fail, [{0},{1},{2},{3},{4}]", roomNum, opera, speed, temperature, cost);
+			}
 		}
 	}
 }

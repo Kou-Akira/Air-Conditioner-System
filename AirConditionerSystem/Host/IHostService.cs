@@ -32,6 +32,6 @@ namespace Host {
 
 		IList<ClientStatus> GetClientStatus(out int waiting);
 
-
+		IDictionary<Byte, List<HostLog>> GetLog(DateTime start, DateTime end);
 	}
 }
