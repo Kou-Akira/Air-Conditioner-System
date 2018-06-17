@@ -35,10 +35,30 @@ namespace Host {
 			lastHeartBeat = DateTime.Now;
 		}
 
-		public int Speed { get => Interlocked.Exchange(ref speed, speed); set => Interlocked.Exchange(ref speed, value); }
-		public float TargetTemperature { get => Interlocked.Exchange(ref targetTemperature, targetTemperature); set => Interlocked.Exchange(ref targetTemperature, value); }
-		public float Cost { get => Interlocked.Exchange(ref cost, cost); set => Interlocked.Exchange(ref cost, value); }
-		public float NowTemperature { get => Interlocked.Exchange(ref nowTemperature, nowTemperature); set => Interlocked.Exchange(ref nowTemperature, value); }
+		public int Speed {
+			get { return Interlocked.Exchange(ref speed, speed); }
+			set {
+				Interlocked.Exchange(ref speed, value);
+			}
+		}
+		public float TargetTemperature {
+			get { return Interlocked.Exchange(ref targetTemperature, targetTemperature); }
+			set {
+				Interlocked.Exchange(ref targetTemperature, value);
+			}
+		}
+		public float Cost {
+			get { return Interlocked.Exchange(ref cost, cost); }
+			set {
+				Interlocked.Exchange(ref cost, value);
+			}
+		}
+		public float NowTemperature {
+			get { return Interlocked.Exchange(ref nowTemperature, nowTemperature); }
+			set {
+				Interlocked.Exchange(ref nowTemperature, value);
+			}
+		}
 		public DateTime LastHeartBeat {
 			get {
 				return lastHeartBeat;
