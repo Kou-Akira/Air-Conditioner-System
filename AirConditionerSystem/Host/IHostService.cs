@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common {
-	interface IHost {
+namespace Host {
+	interface IHostService {
 		/// <summary>
 		/// 
 		/// </summary>
@@ -15,7 +15,7 @@ namespace Common {
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		int ShutDown();
+		void ShutDown();
 
 		/// <summary>
 		/// 
@@ -24,8 +24,7 @@ namespace Common {
 		/// <returns></returns>
 		int SettModle(int modle);
 
-		void run();
-
+		// Package[] DealRequest(Request request);
 
 	}
 }

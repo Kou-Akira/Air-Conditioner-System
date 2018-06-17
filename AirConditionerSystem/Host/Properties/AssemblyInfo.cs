@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("AirConditionerSystem")]
+[assembly: AssemblyTitle("Host")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AirConditionerSystem")]
+[assembly: AssemblyProduct("Host")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("8957a79e-4cc2-40cf-8313-6b6b6fec4753")]
+[assembly: Guid("bd0ea24f-834e-49cc-8c75-a966d6c7d879")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

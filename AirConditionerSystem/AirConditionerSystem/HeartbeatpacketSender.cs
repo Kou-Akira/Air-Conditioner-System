@@ -20,8 +20,8 @@ namespace AirConditionerSystem
 
         private void onTimeSend(object source, ElapsedEventArgs e)
         {
-            int tp = TemperatureSimulator.getInstance().getRoomTemperature();
-            ApiClient.sendRoomTemperature();
+            float tp = TemperatureSimulator.getInstance().getRoomTemperature();
+            ApiClient.sendRoomTemperature(tp);
         }
 
         public void startSend()

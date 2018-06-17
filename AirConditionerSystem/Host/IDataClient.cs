@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common {
-	interface INetworkCallback {
-		void OnSuccess();
-		void OnError();
-	}
+namespace Host
+{
+    interface IDataClient
+    {
+        void onDataRefreshed(ClientStatus[] clientList);
+    }
 }
