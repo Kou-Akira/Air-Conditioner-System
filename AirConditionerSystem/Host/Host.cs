@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +16,7 @@ namespace Host
     {
         IHostService hostService;
         private bool isOff;
+        public SynchronizationContext context;
 
         public Host()
         {
@@ -50,6 +52,11 @@ namespace Host
 				hostService.ShutDown();
                 isOff = true;
             }
+        }
+
+        private void Host_Load(object sender, EventArgs e)
+        {
+            context = SynchronizationContext.Current;
         }
     }
 }

@@ -165,6 +165,21 @@ namespace AirConditionerSystem
 
         }
 
+        public void beginThread()
+        {
+            listen = new Thread(new ThreadStart(tcpConnect));
+            listen.IsBackground = true;
+            listen.Start();
+        }
+
+        public void closeThread()
+        {
+            if (listen != null)
+            {
+                listen.Abort();
+            }
+        }
+
         private void switchCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
             if (isClose)
@@ -177,13 +192,8 @@ namespace AirConditionerSystem
         {
             if ((bool)e.Argument)
             {
-
-                listen = new Thread(new ThreadStart(tcpConnect));
-                listen.IsBackground = true;
-                listen.Start();
-
                 sendType = 2;
-                lg = new login();
+                lg = new login(this);
                 lg.ShowDialog();
                 isOff = false;
             }

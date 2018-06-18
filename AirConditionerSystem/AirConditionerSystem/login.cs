@@ -17,8 +17,10 @@ namespace AirConditionerSystem
     {
         private LoadingBox mLoadingBox;
         public SynchronizationContext context;
-        public login()
+        private Client client;
+        public login(Client c)
         {
+            client = c;
             InitializeComponent();
         }
 
@@ -64,6 +66,7 @@ namespace AirConditionerSystem
         {
             if (IsID(IDTextBox.Text) && (IsRoomNum(textBox1.Text)))
             {
+                client.beginThread();
                 AsynTask asynTask = new AsynTask(LoginDoWork, LoginCallBack);//线程
                 asynTask.startTask();
                 mLoadingBox = new LoadingBox();
@@ -96,6 +99,7 @@ namespace AirConditionerSystem
                 mLoadingBox.setText("Error");
                 mLoadingBox.delayHide();
                 Client.sendType = 2;
+                client.closeThread();
             }
         }
     }

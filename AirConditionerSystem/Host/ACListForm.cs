@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,6 +13,8 @@ namespace Host
 {
     public partial class ACListForm : DMSkin.Main, IDataClient
     {
+        public SynchronizationContext context;
+
         public ACListForm()
         {
             InitializeComponent();
@@ -25,6 +28,11 @@ namespace Host
         void IDataClient.onDataRefreshed(ClientStatus[] clientList)
         {
             
+        }
+
+        private void ACListForm_Load(object sender, EventArgs e)
+        {
+            context = SynchronizationContext.Current;
         }
     }
 }
