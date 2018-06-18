@@ -209,7 +209,8 @@ namespace Host {
 
 				if (ln == 1) {
 					LOGGER.InfoFormat("Regist success! room:{0}, user:{1}", roomId, Id);
-					return true; } else return false;
+					return true;
+				} else return false;
 			}
 		}
 
@@ -243,11 +244,11 @@ namespace Host {
 			}
 		}
 
-		public IList<ClientStatus> GetClientStatus(out int waiting) {
-			IList<ClientStatus> clientStatuses = new List<ClientStatus>();
-			foreach (RemoteClient client in clients.Values) {
-				if (client.ClientStatus.RealSpeed >= (int)ESpeed.Small) {
-					clientStatuses.Add(client.ClientStatus.Clone());
+		public IDictionary<byte, ClientStatus> GetClientStatus(out int waiting) {
+			IDictionary<byte, ClientStatus> clientStatuses = new Dictionary<byte, ClientStatus>();
+			foreach (KeyValuePair<byte, RemoteClient> client in clients) {
+				if (client.Value.ClientStatus.RealSpeed >= (int)ESpeed.Small) {
+					clientStatuses.Add(client.Key, client.Value.ClientStatus.Clone());
 				}
 			}
 			waiting = clients.Count - clientStatuses.Count;
