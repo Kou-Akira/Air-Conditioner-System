@@ -23,7 +23,8 @@ namespace AirConditionerSystem
         private bool isOff;
         private bool isLogin;
         private bool isClose;
-        private int nowTp;  
+        private int nowTp;
+        private int mode;
 
         public static int sendType;
 
@@ -75,10 +76,10 @@ namespace AirConditionerSystem
             }
             finally
             {
-				if(networkStream!=null)
-                networkStream.Dispose();
-				if(client!=null)
-                client.Close();
+                if (networkStream != null)
+                    networkStream.Dispose();
+                if (client != null)
+                    client.Close();
             }
 
         }
@@ -221,26 +222,35 @@ namespace AirConditionerSystem
         {
             timeWordker.CancelAsync();
             SpeedPanel.Visible = false;
-            ApiClient.sendSpeedRequest(Constants.LOW_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+            if (shouldRequestSpeed())
+            {
+                ApiClient.sendSpeedRequest(Constants.LOW_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+            }
         }
 
         private void midSpeedBtn_Click(object sender, EventArgs e)
         {
             timeWordker.CancelAsync();
             SpeedPanel.Visible = false;
-            ApiClient.sendSpeedRequest(Constants.MID_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+            if (shouldRequestSpeed())
+            {
+                ApiClient.sendSpeedRequest(Constants.MID_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+            }
         }
 
         private void highSpeedBtn_Click(object sender, EventArgs e)
         {
             timeWordker.CancelAsync();
             SpeedPanel.Visible = false;
-            ApiClient.sendSpeedRequest(Constants.HIGH_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+            if (shouldRequestSpeed())
+            {
+                ApiClient.sendSpeedRequest(Constants.HIGH_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+            }
         }
 
         private void tpUpBtn_Click(object sender, EventArgs e)
         {
-            if (nowTp < Constants.TEMPERATURE_MAX)
+            if (nowTp < (mode == 0 ? Constants.ColdMaxTemperature : Constants.HotMaxTemperature))
             {
                 nowTp++;
                 tpText.Text = nowTp.ToString() + "℃";
@@ -250,12 +260,25 @@ namespace AirConditionerSystem
 
         private void tpDownBtn_Click(object sender, EventArgs e)
         {
-            if (nowTp > Constants.TEMPERATURE_MIN)
+            if (nowTp > (mode == 0 ? Constants.ColdMinTemperature : Constants.HotMinTemperature))
             {
                 nowTp--;
                 tpText.Text = nowTp.ToString() + "℃";
                 ApiClient.sendTpChange(nowTp);
             }
+        }
+
+        private bool shouldRequestSpeed()
+        {
+            if (mode == 0 && TemperatureSimulator.getInstance().getRoomTemperature() <= nowTp)
+            {
+                return false;
+            }
+            else if (mode == 1 && TemperatureSimulator.getInstance().getRoomTemperature() >= nowTp)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
