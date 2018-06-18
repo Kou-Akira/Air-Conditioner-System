@@ -203,7 +203,6 @@ namespace AirConditionerSystem
                 isOff = true;
                 listen.Abort();
             }
-
         }
 
         private void switchBtn_Click(object sender, EventArgs e)
