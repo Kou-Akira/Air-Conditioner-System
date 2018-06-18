@@ -53,12 +53,14 @@ namespace Host {
 			//clientHeartBeatChecker.Enabled = true;
 		}
 
-		public void ShutDown() {
+		public bool ShutDown() {
 			if (hostState.State == (int)ServiceState.OFF)
 				throw new Exception("AirConditioner is already off!");
+			if (clients.Count != 0) return false;
 			netWork.StopListen();
 			hostState.State = (int)ServiceState.OFF;
 			LOGGER.Info("AirConditioner Turn Off!");
+			return true;
 		}
 
 		private void Init() {
@@ -119,17 +121,9 @@ namespace Host {
 			clients[remoteClient.ClientNum] = remoteClient;
 		}
 
-		public void CloseClient(byte clientNum) {
+		public void RemoveClient(byte clientNum) {
 			clients.Remove(clientNum);
 			LOGGER.InfoFormat("Remove client {0} from dictionary!", clientNum);
-		}
-
-		public void ReceiveClientHeartBeat(byte clientNum) {
-			throw new NotImplementedException();
-		}
-
-		public void SetTargetTemperature(byte clientNum, float temperature) {
-			clients[clientNum].SetTargetTemperature(temperature);
 		}
 
 		public bool SettModle(ServiceMode mode) {
@@ -169,6 +163,7 @@ namespace Host {
 				}
 			}
 		}
+
 		public void StopWind(byte id) {
 			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return;
 			lock (this) {
@@ -212,8 +207,9 @@ namespace Host {
 
 				int ln = cmd.ExecuteNonQuery();
 
-				if (ln == 1) return true;
-				else return false;
+				if (ln == 1) {
+					LOGGER.InfoFormat("Regist success! room:{0}, user:{1}", roomId, Id);
+					return true; } else return false;
 			}
 		}
 

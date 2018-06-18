@@ -13,7 +13,6 @@ namespace Host {
 	class RemoteClient {
 		private TcpClient tcpclient;
 		private NetworkStream streamToClient;
-		private const int BufferSize = 8192;
 		private ILog LOGGER = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private System.Threading.Thread requestThread;
 		private byte clientNum = 0;
@@ -86,7 +85,7 @@ namespace Host {
 					streamToClient.Dispose();
 				if (tcpclient != null)
 					tcpclient.Close();
-				callback.CloseClient(this.clientNum);
+				callback.RemoveClient(this.clientNum);
 			}
 		}
 
@@ -126,7 +125,6 @@ namespace Host {
 			if (streamToClient != null)
 				this.streamToClient.Dispose();
 			requestThread.Abort();
-
 		}
 
 		private void SendPackage(Common.Package package) {

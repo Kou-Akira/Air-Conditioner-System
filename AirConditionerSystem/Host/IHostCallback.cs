@@ -10,11 +10,7 @@ namespace Host {
 		void AddClient(RemoteClient client);
 		bool Login(byte roomNumber, string idNum, out float cost);
 
-		void CloseClient(byte clientNum);
-
-		void ReceiveClientHeartBeat(byte clientNum);
-
-		void SetTargetTemperature(byte clientNum, float temperature);
+		void RemoveClient(byte clientNum);
 
 		bool SendWind(byte id);
 

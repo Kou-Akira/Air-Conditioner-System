@@ -15,7 +15,7 @@ namespace Host {
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		void ShutDown();
+		bool ShutDown();
 
 		/// <summary>
 		/// 
