@@ -41,17 +41,19 @@ namespace Host
         private void onDataRefreshed()
         {
             int count = 0;
-            IList<ClientStatus> list = host.getHostService().GetClientStatus(out count);
+            IDictionary<byte, ClientStatus> list = host.getHostService().GetClientStatus(out count);
             queueText.Text = Constants.WAITING_CONN_COUNT + count.ToString();
             int i = 0;
-            for (; i < list.Count; i++)
+            foreach (KeyValuePair<byte, ClientStatus> client in list)
             {
+                i++;
+                if (i >= 3) break;
                 panelList[i].Visible = true;
-                //roomNumList[i].Text = Constants.ROOM_NUM + list[i].
-                iconList[i].BackgroundImage = Utils.getRuningImage(host.mode, (ESpeed)(list[i].Speed));
-                tpTextList[i].Text = ((int)(list[i].TargetTemperature)).ToString() + "℃";
-                roomTpTextList[i].Text = Constants.ROOM_TP + list[i].NowTemperature.ToString();
-                nowPayTextList[i].Text = Constants.NOW_PAYMENT + list[i].Cost.ToString();
+                roomNumList[i].Text = Constants.ROOM_NUM + client.Key.ToString();
+                iconList[i].BackgroundImage = Utils.getRuningImage(host.mode, (ESpeed)(client.Value.Speed));
+                tpTextList[i].Text = ((int)(client.Value.TargetTemperature)).ToString() + "℃";
+                roomTpTextList[i].Text = Constants.ROOM_TP + client.Value.NowTemperature.ToString();
+                nowPayTextList[i].Text = Constants.NOW_PAYMENT + client.Value.Cost.ToString();
             }
             for (; i < 3; i++)
             {
