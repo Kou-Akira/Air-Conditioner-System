@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace Host
 {
-    class Utils
+    public class Utils
     {
         public static Image getRuningImage(ServiceMode mode, ESpeed speed)
         {

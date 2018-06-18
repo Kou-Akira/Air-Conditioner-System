@@ -17,14 +17,15 @@ namespace AirConditionerSystem
         private TcpClient client;
         private static NetworkStream networkStream;
         private static Object writeLock = new Object();
-        private SynchronizationContext context;
+        public SynchronizationContext context;
         private Thread listen;
 
         private bool isOff;
         private bool isLogin;
         private bool isClose;
         private int nowTp;
-        private int mode;
+        public int mode;
+        public int speed;
 
         public static int sendType;
 
@@ -35,7 +36,7 @@ namespace AirConditionerSystem
 
         private void Client_Load(object sender, EventArgs e)
         {
-            TemperatureSimulator.getInstance().startSimulating();
+            TemperatureSimulator.getInstance(this).startSimulating();
             mLoadingBox = new LoadingBox();
             timeWordker = new BackgroundWorker();
             refreshTimeWorker = new BackgroundWorker();
@@ -84,6 +85,12 @@ namespace AirConditionerSystem
 
         }
 
+        public void roomTpCallBack(object o)
+        {
+            int tp = (int)o;
+            roomTpText.Text = Constants.ROOM_TP + tp.ToString();
+        }
+
         public static void sendPackage(byte[] buffer)
         {
             lock (writeLock)
@@ -94,19 +101,25 @@ namespace AirConditionerSystem
 
         private void tcpCallBack(object pac)
         {
-            switch (sendType)
+            Package p = pac as Package;
+            if (sendType == 2 && (p.Cat == 0 || p.Cat == 1))
             {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    lg.context.Post(lg.packageReceive, pac);
-                    break;
-                case 3:
-                    break;
+                lg.context.Post(lg.packageReceive, pac);
+                sendType = -1;
+                return;
             }
-            sendType = -1;
+            
+            if(p.Cat == 7)
+            {
+                HostRequestPackage res = p as HostRequestPackage;
+                refreshUI(res.Speed, res.Cost);
+            }
+        }
+
+        private void refreshUI(int speed, float cost)
+        {
+            mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
+            nowPayText.Text = Constants.NOW_PAYMENT + cost.ToString();
         }
 
         private void getSysTime(object sender, DoWorkEventArgs e)
@@ -200,7 +213,7 @@ namespace AirConditionerSystem
             }
             else
             {
-                ApiClient.sendClientCloseRequest();
+                ApiClient.sendClientCloseRequest(TemperatureSimulator.getInstance(this).getRoomTemperature());
                 isOff = true;
                 listen.Abort();
             }
@@ -224,7 +237,9 @@ namespace AirConditionerSystem
             SpeedPanel.Visible = false;
             if (shouldRequestSpeed())
             {
-                ApiClient.sendSpeedRequest(Constants.LOW_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+                ApiClient.sendSpeedRequest(Constants.LOW_SPEED, TemperatureSimulator.getInstance(this).getRoomTemperature());
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, Host.ESpeed.Small);
+                speed = Constants.LOW_SPEED;
             }
         }
 
@@ -234,7 +249,9 @@ namespace AirConditionerSystem
             SpeedPanel.Visible = false;
             if (shouldRequestSpeed())
             {
-                ApiClient.sendSpeedRequest(Constants.MID_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+                ApiClient.sendSpeedRequest(Constants.MID_SPEED, TemperatureSimulator.getInstance(this).getRoomTemperature());
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, Host.ESpeed.Mid);
+                speed = Constants.MID_SPEED;
             }
         }
 
@@ -244,7 +261,9 @@ namespace AirConditionerSystem
             SpeedPanel.Visible = false;
             if (shouldRequestSpeed())
             {
-                ApiClient.sendSpeedRequest(Constants.HIGH_SPEED, TemperatureSimulator.getInstance().getRoomTemperature());
+                ApiClient.sendSpeedRequest(Constants.HIGH_SPEED, TemperatureSimulator.getInstance(this).getRoomTemperature());
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, Host.ESpeed.Large);
+                speed = Constants.HIGH_SPEED;
             }
         }
 
@@ -270,11 +289,11 @@ namespace AirConditionerSystem
 
         private bool shouldRequestSpeed()
         {
-            if (mode == 0 && TemperatureSimulator.getInstance().getRoomTemperature() <= nowTp)
+            if (mode == 0 && TemperatureSimulator.getInstance(this).getRoomTemperature() <= nowTp)
             {
                 return false;
             }
-            else if (mode == 1 && TemperatureSimulator.getInstance().getRoomTemperature() >= nowTp)
+            else if (mode == 1 && TemperatureSimulator.getInstance(this).getRoomTemperature() >= nowTp)
             {
                 return false;
             }

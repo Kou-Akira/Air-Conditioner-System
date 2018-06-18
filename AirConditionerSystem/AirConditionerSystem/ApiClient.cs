@@ -16,9 +16,9 @@ namespace AirConditionerSystem
             Client.sendPackage(buffer);
         }
 
-        public static void sendClientCloseRequest()
+        public static void sendClientCloseRequest(float tp)
         {
-            byte[] buffer = PackageHelper.GetByte(new ClientClosePackage(TemperatureSimulator.getInstance().getRoomTemperature()));
+            byte[] buffer = PackageHelper.GetByte(new ClientClosePackage(tp));
             Client.sendPackage(buffer);
         }
 
