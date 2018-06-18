@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Host));
             this.timeText = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ShutDownButton = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -41,6 +40,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lowText = new System.Windows.Forms.Label();
+            this.workModeText = new System.Windows.Forms.Label();
+            this.connectCountText = new System.Windows.Forms.Label();
+            this.settingBtn = new System.Windows.Forms.Button();
+            this.mainIcon = new System.Windows.Forms.PictureBox();
             this.registBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.logoutBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.logBtn = new DMSkin.Controls.DM.DMButtonImage();
@@ -49,10 +52,7 @@
             this.coldBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.heatBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.switchBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.workModeText = new System.Windows.Forms.Label();
-            this.connectCountText = new System.Windows.Forms.Label();
-            this.mainIcon = new System.Windows.Forms.PictureBox();
-            this.settingBtn = new System.Windows.Forms.Button();
+            this.ShutDownButton = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.SuspendLayout();
@@ -78,23 +78,6 @@
             this.label3.Size = new System.Drawing.Size(64, 24);
             this.label3.TabIndex = 13;
             this.label3.Text = "中央机";
-            // 
-            // ShutDownButton
-            // 
-            this.ShutDownButton.BackColor = System.Drawing.Color.Transparent;
-            this.ShutDownButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ShutDownButton.BackgroundImage")));
-            this.ShutDownButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ShutDownButton.FlatAppearance.BorderSize = 0;
-            this.ShutDownButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
-            this.ShutDownButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
-            this.ShutDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShutDownButton.Location = new System.Drawing.Point(470, 0);
-            this.ShutDownButton.Name = "ShutDownButton";
-            this.ShutDownButton.Size = new System.Drawing.Size(30, 30);
-            this.ShutDownButton.TabIndex = 12;
-            this.ShutDownButton.TabStop = false;
-            this.ShutDownButton.UseVisualStyleBackColor = false;
-            this.ShutDownButton.Click += new System.EventHandler(this.ShutDownButton_Click);
             // 
             // mainPanel
             // 
@@ -208,6 +191,55 @@
             this.lowText.TabIndex = 12;
             this.lowText.Text = "开关";
             // 
+            // workModeText
+            // 
+            this.workModeText.AutoSize = true;
+            this.workModeText.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.workModeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.workModeText.Location = new System.Drawing.Point(284, 163);
+            this.workModeText.Name = "workModeText";
+            this.workModeText.Size = new System.Drawing.Size(167, 30);
+            this.workModeText.TabIndex = 19;
+            this.workModeText.Text = "工作模式：制冷";
+            // 
+            // connectCountText
+            // 
+            this.connectCountText.AutoSize = true;
+            this.connectCountText.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.connectCountText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.connectCountText.Location = new System.Drawing.Point(284, 122);
+            this.connectCountText.Name = "connectCountText";
+            this.connectCountText.Size = new System.Drawing.Size(136, 30);
+            this.connectCountText.TabIndex = 18;
+            this.connectCountText.Text = "连接数量：2";
+            // 
+            // settingBtn
+            // 
+            this.settingBtn.BackColor = System.Drawing.Color.Transparent;
+            this.settingBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("settingBtn.BackgroundImage")));
+            this.settingBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.settingBtn.FlatAppearance.BorderSize = 0;
+            this.settingBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
+            this.settingBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
+            this.settingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingBtn.Location = new System.Drawing.Point(74, 7);
+            this.settingBtn.Name = "settingBtn";
+            this.settingBtn.Size = new System.Drawing.Size(20, 20);
+            this.settingBtn.TabIndex = 20;
+            this.settingBtn.TabStop = false;
+            this.settingBtn.UseVisualStyleBackColor = false;
+            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
+            // 
+            // mainIcon
+            // 
+            this.mainIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mainIcon.BackgroundImage")));
+            this.mainIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.mainIcon.Location = new System.Drawing.Point(45, 81);
+            this.mainIcon.Name = "mainIcon";
+            this.mainIcon.Size = new System.Drawing.Size(184, 156);
+            this.mainIcon.TabIndex = 16;
+            this.mainIcon.TabStop = false;
+            // 
             // registBtn
             // 
             this.registBtn.BackColor = System.Drawing.Color.Transparent;
@@ -252,6 +284,7 @@
             this.logBtn.Size = new System.Drawing.Size(50, 50);
             this.logBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.logBtn.TabIndex = 6;
+            this.logBtn.Click += new System.EventHandler(this.logBtn_Click);
             // 
             // payBtn
             // 
@@ -330,54 +363,22 @@
             this.switchBtn.TabIndex = 1;
             this.switchBtn.Click += new System.EventHandler(this.switchBtn_Click);
             // 
-            // workModeText
+            // ShutDownButton
             // 
-            this.workModeText.AutoSize = true;
-            this.workModeText.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.workModeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.workModeText.Location = new System.Drawing.Point(284, 163);
-            this.workModeText.Name = "workModeText";
-            this.workModeText.Size = new System.Drawing.Size(167, 30);
-            this.workModeText.TabIndex = 19;
-            this.workModeText.Text = "工作模式：制冷";
-            // 
-            // connectCountText
-            // 
-            this.connectCountText.AutoSize = true;
-            this.connectCountText.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.connectCountText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.connectCountText.Location = new System.Drawing.Point(284, 122);
-            this.connectCountText.Name = "connectCountText";
-            this.connectCountText.Size = new System.Drawing.Size(136, 30);
-            this.connectCountText.TabIndex = 18;
-            this.connectCountText.Text = "连接数量：2";
-            // 
-            // mainIcon
-            // 
-            this.mainIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mainIcon.BackgroundImage")));
-            this.mainIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.mainIcon.Location = new System.Drawing.Point(45, 81);
-            this.mainIcon.Name = "mainIcon";
-            this.mainIcon.Size = new System.Drawing.Size(184, 156);
-            this.mainIcon.TabIndex = 16;
-            this.mainIcon.TabStop = false;
-            // 
-            // settingBtn
-            // 
-            this.settingBtn.BackColor = System.Drawing.Color.Transparent;
-            this.settingBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("settingBtn.BackgroundImage")));
-            this.settingBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.settingBtn.FlatAppearance.BorderSize = 0;
-            this.settingBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
-            this.settingBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
-            this.settingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settingBtn.Location = new System.Drawing.Point(74, 7);
-            this.settingBtn.Name = "settingBtn";
-            this.settingBtn.Size = new System.Drawing.Size(20, 20);
-            this.settingBtn.TabIndex = 20;
-            this.settingBtn.TabStop = false;
-            this.settingBtn.UseVisualStyleBackColor = false;
-            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
+            this.ShutDownButton.BackColor = System.Drawing.Color.Transparent;
+            this.ShutDownButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ShutDownButton.BackgroundImage")));
+            this.ShutDownButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ShutDownButton.FlatAppearance.BorderSize = 0;
+            this.ShutDownButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
+            this.ShutDownButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
+            this.ShutDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ShutDownButton.Location = new System.Drawing.Point(470, 0);
+            this.ShutDownButton.Name = "ShutDownButton";
+            this.ShutDownButton.Size = new System.Drawing.Size(30, 30);
+            this.ShutDownButton.TabIndex = 12;
+            this.ShutDownButton.TabStop = false;
+            this.ShutDownButton.UseVisualStyleBackColor = false;
+            this.ShutDownButton.Click += new System.EventHandler(this.ShutDownButton_Click);
             // 
             // Host
             // 

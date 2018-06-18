@@ -64,5 +64,10 @@ namespace Host
         {
             context = SynchronizationContext.Current;
         }
+
+        private void logBtn_Click(object sender, EventArgs e)
+        {
+            new LogForm(this).ShowDialog();
+        }
     }
 }

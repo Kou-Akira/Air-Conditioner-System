@@ -75,6 +75,12 @@
     <Compile Include="IHostCallback.cs" />
     <Compile Include="IHostService.cs" />
     <Compile Include="INetWork.cs" />
+    <Compile Include="LogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogForm.Designer.cs">
+      <DependentUpon>LogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Network.cs" />
     <Compile Include="PackageHandler.cs" />
     <Compile Include="Program.cs" />
@@ -94,6 +100,9 @@
     <Compile Include="SchedulingInformation.cs" />
     <EmbeddedResource Include="Host.resx">
       <DependentUpon>Host.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
