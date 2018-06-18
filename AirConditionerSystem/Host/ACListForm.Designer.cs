@@ -155,7 +155,7 @@
             // 
             // stateIcon0
             // 
-            this.stateIcon0.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stateIcon0.BackgroundImage")));
+            this.stateIcon0.BackgroundImage = global::Host.Properties.Resources.C3;
             this.stateIcon0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.stateIcon0.Location = new System.Drawing.Point(25, 30);
             this.stateIcon0.Name = "stateIcon0";
@@ -221,7 +221,7 @@
             // 
             // stateIcon1
             // 
-            this.stateIcon1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stateIcon1.BackgroundImage")));
+            this.stateIcon1.BackgroundImage = global::Host.Properties.Resources.C3;
             this.stateIcon1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.stateIcon1.Location = new System.Drawing.Point(26, 30);
             this.stateIcon1.Name = "stateIcon1";
@@ -287,7 +287,7 @@
             // 
             // stateIcon2
             // 
-            this.stateIcon2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stateIcon2.BackgroundImage")));
+            this.stateIcon2.BackgroundImage = global::Host.Properties.Resources.C3;
             this.stateIcon2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.stateIcon2.Location = new System.Drawing.Point(28, 30);
             this.stateIcon2.Name = "stateIcon2";

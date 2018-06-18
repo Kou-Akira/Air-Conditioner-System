@@ -17,6 +17,7 @@ namespace Host
         IHostService hostService;
         private bool isOff;
         public SynchronizationContext context;
+        public ServiceMode mode;
 
         public Host()
         {

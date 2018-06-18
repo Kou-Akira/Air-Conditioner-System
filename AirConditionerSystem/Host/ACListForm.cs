@@ -12,41 +12,50 @@ using Common;
 
 namespace Host
 {
-    public partial class ACListForm : DMSkin.Main, IDataClient
+    public partial class ACListForm : DMSkin.Main
     {
         public SynchronizationContext context;
+        private bool isInterrupt;
         private List<Panel> panelList;
         private List<Label> roomNumList;
         private List<PictureBox> iconList;
         private List<Label> tpTextList;
         private List<Label> roomTpTextList;
         private List<Label> nowPayTextList;
+        private const int REFRESH_INTERVAL = 500;
 
         private Host host;
         public ACListForm(Host h)
         {
             host = h;
+            isInterrupt = false;
             InitializeComponent();
         }
 
         private void ShutDownButton_Click(object sender, EventArgs e)
         {
+            isInterrupt = true;
             Close();
-        }
-
-        void IDataClient.onDataRefreshed(ClientStatus[] clientList)
-        {
-            
         }
 
         private void onDataRefreshed()
         {
             int count = 0;
             IList<ClientStatus> list = host.getHostService().GetClientStatus(out count);
-            for(int i = 0; i < list.Count; i++)
+            queueText.Text = Constants.WAITING_CONN_COUNT + count.ToString();
+            int i = 0;
+            for (; i < list.Count; i++)
             {
                 panelList[i].Visible = true;
                 //roomNumList[i].Text = Constants.ROOM_NUM + list[i].
+                iconList[i].BackgroundImage = Utils.getRuningImage(host.mode, (ESpeed)(list[i].Speed));
+                tpTextList[i].Text = ((int)(list[i].TargetTemperature)).ToString() + "℃";
+                roomTpTextList[i].Text = Constants.ROOM_TP + list[i].NowTemperature.ToString();
+                nowPayTextList[i].Text = Constants.NOW_PAYMENT + list[i].Cost.ToString();
+            }
+            for (; i < 3; i++)
+            {
+                panelList[i].Visible = false;
             }
         }
 
@@ -79,6 +88,27 @@ namespace Host
             nowPayTextList.Add(nowPayText0);
             nowPayTextList.Add(nowPayText1);
             nowPayTextList.Add(nowPayText2);
+
+            onDataRefreshed();
+
+            Thread refresh = new Thread(new ThreadStart(refreshDoWork));
+            refresh.IsBackground = true;
+            refresh.Start();
+        }
+
+
+        private void refreshHandle(object o)
+        {
+            onDataRefreshed();
+        }
+
+        private void refreshDoWork()
+        {
+            while (!isInterrupt)
+            {
+                Thread.Sleep(REFRESH_INTERVAL);
+                context.Post(refreshHandle, null);
+            }
         }
     }
 }

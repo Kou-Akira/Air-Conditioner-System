@@ -86,6 +86,7 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLConnector.cs" />
+    <Compile Include="Utils.cs" />
     <EmbeddedResource Include="ACListForm.resx">
       <DependentUpon>ACListForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +103,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
@@ -125,6 +127,30 @@
       <Project>{3b788fa6-1d09-4018-9b2a-93b6ca07654d}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

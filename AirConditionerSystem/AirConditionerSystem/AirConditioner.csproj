@@ -98,13 +98,14 @@
       <DependentUpon>MessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="log4net.config" />
     <None Include="Properties\Settings.settings">
@@ -125,6 +126,34 @@
       <Project>{3b788fa6-1d09-4018-9b2a-93b6ca07654d}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Host\Host.csproj">
+      <Project>{bd0ea24f-834e-49cc-8c75-a966d6c7d879}</Project>
+      <Name>Host</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
