@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -61,10 +62,10 @@ namespace Host {
 			}
 		}
 
-		public HostLog(DbDataReader dr) {
+		public HostLog(IDataReader dr) {
 			this.RoomNum = (byte)Convert.ToInt32(dr["RoomNum"].ToString());
 			this.Time = Convert.ToDateTime(dr["Time"].ToString());
-			this.Opera = Convert.ToInt32(dr["Opera"].ToString());
+			this.Opera = Convert.ToInt32(dr["Operator"].ToString());
 			this.Speed = Convert.ToInt32(dr["Speed"].ToString());
 			this.Temperature = Convert.ToSingle(dr["Temperature"].ToString());
 			this.Cost = Convert.ToSingle(dr["Cost"].ToString());
