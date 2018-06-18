@@ -30,13 +30,14 @@ namespace Host {
 		}
 
 		public ClientStatus Clone() {
-			ClientStatus rtv = new ClientStatus();
-			rtv.speed = this.Speed;
-			rtv.RealSpeed = this.RealSpeed;
-			rtv.TargetTemperature = this.TargetTemperature;
-			rtv.NowTemperature = this.NowTemperature;
-			rtv.Cost = this.Cost;
-			rtv.LastHeartBeat = this.LastHeartBeat;
+			ClientStatus rtv = new ClientStatus {
+				speed = this.Speed,
+				RealSpeed = this.RealSpeed,
+				TargetTemperature = this.TargetTemperature,
+				NowTemperature = this.NowTemperature,
+				Cost = this.Cost,
+				LastHeartBeat = this.LastHeartBeat
+			};
 			return rtv;
 		}
 
