@@ -25,6 +25,11 @@ namespace Host
             InitializeComponent();
         }
 
+        public IHostService getHostService()
+        {
+            return hostService;
+        }
+
         private void settingBtn_Click(object sender, EventArgs e)
         {
             new SettingForm().ShowDialog();
@@ -37,7 +42,7 @@ namespace Host
 
         private void watchBtn_Click(object sender, EventArgs e)
         {
-            new ACListForm().ShowDialog();
+            new ACListForm(this).ShowDialog();
         }
 
         private void switchBtn_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace Host {
 		Mid,
 		Large
 	}
-	class ClientStatus {
+	public class ClientStatus {
 		int speed;
 		int realSpeed;
 		float targetTemperature;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Host {
-	interface IHostService {
+	public interface IHostService {
 		/// <summary>
 		/// 
 		/// </summary>

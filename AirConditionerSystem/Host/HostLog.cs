@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Host {
-	class HostLog {
+	public class HostLog {
 		byte roomNum;
 		DateTime time;
 		/// <summary>
