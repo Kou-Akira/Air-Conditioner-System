@@ -14,15 +14,12 @@ namespace Host
 {
     public partial class Gathering : DMSkin.Main
     {
-        LoadingBox mLoadingBox;
         Host host;
-        private bool hasSearch;
         private String pre;
         public Gathering(Host h)
         {
             pre = "";
             host = h;
-            hasSearch = false;
             InitializeComponent();
         }
 
@@ -38,7 +35,7 @@ namespace Host
             return regex.IsMatch(input);
         }
 
-     
+
         private void ShutDownButton_Click(object sender, EventArgs e)
         {
             Close();
@@ -46,8 +43,13 @@ namespace Host
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            if (!pre.Equals(textBox1.Text))
+            {
+                new MessageBox("请重新查询金额").ShowDialog();
+                return;
+            }
 
-            if (hasSearch && pre.Equals(textBox1.Text) && (IsRoomNum(textBox1.Text)))
+            if (IsRoomNum(textBox1.Text))
             {
                 if (!host.getHostService().CheckOut((byte)Convert.ToInt32(textBox1.Text)))
                 {
@@ -68,7 +70,8 @@ namespace Host
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            //payText.Text = +"元";
+            float count = host.getHostService().GetMoney((byte)Convert.ToInt32(textBox1.Text));
+            payText.Text = count.ToString("0.0") + "元";
             pre = textBox1.Text;
         }
     }
