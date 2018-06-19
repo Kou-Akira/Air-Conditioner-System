@@ -137,7 +137,7 @@ namespace Host {
 		public bool SendWind(byte id) {
 			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return false;
 			lock (this) {
-				if (this.hostState.NowServiceAmount < 3) {
+				if (this.hostState.NowServiceAmount < Common.Constants.TOTAL_SERVICE_AMOUNT) {
 					this.hostState.NowServiceAmount++;
 					clients[id].ResetRealSpeed();
 					LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
@@ -159,7 +159,7 @@ namespace Host {
 						client.Value.ResetRealSpeed();
 						LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
 						this.hostState.NowServiceAmount++;
-						if (this.hostState.NowServiceAmount == 3) return;
+						if (this.hostState.NowServiceAmount == Common.Constants.TOTAL_SERVICE_AMOUNT) return;
 					}
 				}
 				foreach (var client in clients) {
@@ -167,7 +167,7 @@ namespace Host {
 						client.Value.ResetRealSpeed();
 						LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
 						this.hostState.NowServiceAmount++;
-						if (this.hostState.NowServiceAmount == 3) return;
+						if (this.hostState.NowServiceAmount == Common.Constants.TOTAL_SERVICE_AMOUNT) return;
 					}
 				}
 			}
