@@ -4,11 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using log4net;
+using System.Reflection;
 
 namespace Host {
 	static class PackageHandler {
 		public static Common.Package Deal(RemoteClient client, Common.Package request, IHostServiceCallback callback) {
 			switch (request.Cat) {
+				case 0: {
+					LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType).Error("Error receive NAK!");
+					return new Common.Ignored();
+				}
 				case 2: {
 					Common.ClientLoginPackage loginRequest = request as Common.ClientLoginPackage;
 					float cost;

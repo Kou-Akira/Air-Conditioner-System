@@ -20,8 +20,8 @@ namespace Host {
 	/// 0hot 1cold
 	/// </summary>
 	public enum ServiceMode {
-		HOT = 0,
-		COLD
+		COLD = 0,
+		HOT ,
 	}
 
 	/// <summary>
