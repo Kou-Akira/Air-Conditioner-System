@@ -14,8 +14,10 @@ namespace AirConditionerSystem
         private BackgroundWorker refreshTimeWorker;
         private login lg;
         private HeartbeatpacketSender heartbeatpacketSender;
+        private static object clientLock;
 
-        private TcpClient client;
+
+        private static TcpClient client;
         private static NetworkStream networkStream;
         private static Object writeLock = new Object();
         public SynchronizationContext context;
@@ -56,17 +58,21 @@ namespace AirConditionerSystem
             roomTpText.Text = Constants.ROOM_TP + Constants.DEFAULT_TEMPERATURE.ToString() + "℃";
             context = SynchronizationContext.Current;
             speed = Constants.NONE_SPEED;
+            clientLock = new object();
         }
 
         private void tcpConnect()
         {
             try
             {
-                if (client == null || (client != null && !client.Connected))
+                lock (clientLock)
                 {
-                    client = new TcpClient(Constants.IP_ADDRESS, Constants.PORT);
+                    if (client == null || (client != null && !client.Connected))
+                    {
+                        client = new TcpClient(Constants.IP_ADDRESS, Constants.PORT);
+                    }
+                    networkStream = client.GetStream();
                 }
-                networkStream = client.GetStream();
                 while (true)
                 {
                     //get package
@@ -103,6 +109,15 @@ namespace AirConditionerSystem
         {
             lock (writeLock)
             {
+                lock (clientLock)
+                {
+                    if (client == null || (client != null && !client.Connected))
+                    {
+                        client = new TcpClient(Constants.IP_ADDRESS, Constants.PORT);
+                    }
+                    networkStream = client.GetStream();
+                }
+
                 try
                 {
                     networkStream.Write(buffer, 0, buffer.Length);
