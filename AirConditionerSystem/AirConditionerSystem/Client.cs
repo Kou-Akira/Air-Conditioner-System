@@ -88,7 +88,7 @@ namespace AirConditionerSystem
         public void roomTpCallBack(object o)
         {
             int tp = Convert.ToInt32(o);
-            roomTpText.Text = Constants.ROOM_TP + tp.ToString();
+            roomTpText.Text = Constants.ROOM_TP + tp.ToString() + "℃";
             if (nowTp == tp)
             {
                 ApiClient.sendStopSpeedRequest(tp);
@@ -120,7 +120,7 @@ namespace AirConditionerSystem
             {
                 HostAckPackage ack = p as HostAckPackage;
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)ack.Mode, (Host.ESpeed)speed);
-                tpText.Text = ack.Temperature.ToString("0.0") + "℃";
+                tpText.Text = ack.Temperature.ToString("0") + "℃";
             }
             else if (p.Cat == 7)
             {
