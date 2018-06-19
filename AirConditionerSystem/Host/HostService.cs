@@ -15,27 +15,10 @@ namespace Host {
 
 
 	internal class HostService : IHostService, IHostServiceCallback {
-
-		//#region Constants
-		//private static readonly int HotMaxTemperature = 30;
-		//private static readonly int HotMinTemperature = 25;
-		//private static readonly int HotTemperatureDefault = 28;
-
-		//private static readonly int ColdMaxTemperature = 25;
-		//private static readonly int ColdMinTemperature = 18;
-		//private static readonly int ColdTemperatureDefault = 22;
-
-		//private static readonly double MidSpeedPower = 1.0;
-		//private static readonly double LowSpeedPower = 0.8;
-		//private static readonly double HighSpeedPower = 1.3;
-		//private static readonly int CostPrePower = 5;
-		//#endregion
-
 		private HostServiceStatus hostState;
 		private INetWork netWork;
 		private ILog LOGGER;
 		private IDictionary<Byte, RemoteClient> clients;
-		//private IDictionary<Byte, >
 		private System.Timers.Timer clientHeartBeatChecker;
 
 		private SQLConnector sql;
@@ -131,6 +114,7 @@ namespace Host {
 				LOGGER.WarnFormat("Cannot set to the same mode as before:{0}!", mode.ToString());
 				return false;
 			}
+			this.hostState.Mode = (int)mode;
 			void body(RemoteClient client) { client.ChangeMode(this); }
 			Parallel.ForEach<RemoteClient>(clients.Values, body);
 			LOGGER.InfoFormat("Finish send change mode package to each clients total:{0}!", clients.Count);
@@ -165,10 +149,9 @@ namespace Host {
 		}
 
 		public void StopWind(byte id) {
-			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return;
 			lock (this) {
 				this.hostState.NowServiceAmount--;
-				clients[id].ClientStatus.Speed = (int)ESpeed.NoWind;
+				clients[id].ClientStatus.RealSpeed = (int)ESpeed.NoWind;
 				LOGGER.InfoFormat("Scheduler stop wind to client {0}", (int)id);
 				foreach (var client in clients) {
 					if (client.Key > id && client.Value.CanWind()) {

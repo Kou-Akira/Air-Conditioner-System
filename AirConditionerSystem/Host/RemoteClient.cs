@@ -53,7 +53,7 @@ namespace Host {
 		}
 
 		private void run(object cb) {
-			//heartBeatTimer.Enabled = true;
+			heartBeatTimer.Enabled = true;
 			IHostServiceCallback callback = cb as IHostServiceCallback;
 			try {
 				while (true) {
@@ -64,7 +64,7 @@ namespace Host {
 							clientNum == 0 ? tcpclient.Client.RemoteEndPoint.ToString() : clientNum.ToString());
 					}
 					Common.Package response = PackageHandler.Deal(this, request, callback);
-					if (response.Cat == 2) {
+					if (response.Cat == 1) {
 						new System.Threading.Thread(WriteLog).Start(
 							new Tuple<byte, int, int, float, float>(clientNum, 0, 0, 0, 0));
 					}
@@ -99,7 +99,7 @@ namespace Host {
 			using (SqlConnection con = new SqlConnection(new SQLConnector().Builder.ConnectionString)) {
 				con.Open();
 				SqlCommand cmd = con.CreateCommand();
-				cmd.CommandText = "update from dt_RoomIDCard set Cost = @a where RoomNum = @b";
+				cmd.CommandText = "update dt_RoomIDCard set Cost = @a where RoomNum = @b";
 				cmd.Parameters.Clear();
 				cmd.Parameters.AddWithValue("@b", this.ClientNum);
 				cmd.Parameters.AddWithValue("@a", this.clientStatus.Cost);
@@ -176,6 +176,7 @@ namespace Host {
 		}
 
 		public void StopWind() {
+			if (this.ClientStatus.RealSpeed <= (int)ESpeed.NoWind) return;
 			this.ClientStatus.Speed = (int)ESpeed.NoWind;
 			this.ClientStatus.RealSpeed = (int)ESpeed.NoWind;
 			callback.StopWind(this.clientNum);
