@@ -84,6 +84,17 @@ namespace AirConditionerSystem
         private void login_Load(object sender, EventArgs e)
         {
             context = SynchronizationContext.Current;
+            if(client.mode == 1)
+            {
+                this.BackColor = Color.FromArgb(228, 79, 75);
+                mainPanel.BackColor = Color.FromArgb(242, 165, 163);
+                LoginButton.BackColor =Color.FromArgb(242, 165, 163);
+                LoginButton.ForeColor = Color.FromArgb(228, 79, 75);
+                LoginButton.FlatAppearance.BorderColor = Color.FromArgb(228, 79, 75);
+                label1.ForeColor = label2.ForeColor = Color.FromArgb(228, 79, 75);
+                label1.BackColor = label2.BackColor = Color.FromArgb(242, 165, 163);
+
+            }
         }
 
         public void packageReceive(object pac)

@@ -28,8 +28,8 @@ namespace Common {
         public const String WORKING_STATE = "主机状态：";
 
 
-        public const String IP_ADDRESS = "10.105.249.190";
-		public const int PORT = 6000;
+        public static readonly String IP_ADDRESS ;
+		public static readonly int PORT = 8010;
 		public const int MAXBYTES = 20;
 		public const int IDLENTH = 18;
 
@@ -51,22 +51,15 @@ namespace Common {
 
 		private static XmlNode sqlNode;
 		private static XmlNode root;
-		private static string sqlName;
-		private static string loginName;
-		private static string loginPassword;
-		private static string initialCatalog;
-		private static SqlConnectionStringBuilder builder;
 
 		static Constants() {
-			//XmlDocument doc = new XmlDocument();
-			//doc.Load("Constants.config");
-			//root = doc.DocumentElement;
-			//sqlNode = root.SelectSingleNode("sqlconfig");
-			//sqlName = sqlNode.SelectSingleNode("sqlname").InnerText;
-			//loginName = sqlNode.SelectSingleNode("loginname").InnerText;
-			//loginPassword = sqlNode.SelectSingleNode("loginpassword").InnerText;
-			//initialCatalog = sqlNode.SelectSingleNode("initialcatalog").InnerText;
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Constants.config");
+            root = doc.DocumentElement;
+            sqlNode = root.SelectSingleNode("server");
+            IP_ADDRESS = sqlNode.SelectSingleNode("serverip").InnerText;
+            PORT = Convert.ToInt32(sqlNode.SelectSingleNode("serverport").InnerText);
 
-		}
+        }
 	}
 }
