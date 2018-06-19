@@ -29,83 +29,73 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
-            this.mainIcon = new System.Windows.Forms.PictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.tpBtnText = new System.Windows.Forms.Label();
+            this.switchText = new System.Windows.Forms.Label();
             this.SpeedPanel = new System.Windows.Forms.Panel();
             this.highText = new System.Windows.Forms.Label();
             this.midText = new System.Windows.Forms.Label();
             this.lowText = new System.Windows.Forms.Label();
+            this.speedBtnText = new System.Windows.Forms.Label();
+            this.tpText = new System.Windows.Forms.Label();
+            this.roomTpText = new System.Windows.Forms.Label();
+            this.nowPayText = new System.Windows.Forms.Label();
+            this.roomText = new System.Windows.Forms.Label();
+            this.timeText = new System.Windows.Forms.Label();
+            this.ShutDownButton = new System.Windows.Forms.Button();
             this.highSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.midSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.lowSpeedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.tpUpBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.tpDownBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tpIcon = new System.Windows.Forms.PictureBox();
             this.speedBtn = new DMSkin.Controls.DM.DMButtonImage();
             this.switchBtn = new DMSkin.Controls.DM.DMButtonImage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tpText = new System.Windows.Forms.Label();
-            this.ShutDownButton = new System.Windows.Forms.Button();
-            this.roomTpText = new System.Windows.Forms.Label();
-            this.nowPayText = new System.Windows.Forms.Label();
-            this.roomText = new System.Windows.Forms.Label();
-            this.timeText = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
+            this.mainIcon = new System.Windows.Forms.PictureBox();
             this.mainPanel.SuspendLayout();
             this.SpeedPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tpIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.SuspendLayout();
-            // 
-            // mainIcon
-            // 
-            this.mainIcon.BackgroundImage = global::AirConditionerSystem.Properties.Resources.C0;
-            this.mainIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.mainIcon.Location = new System.Drawing.Point(38, 112);
-            this.mainIcon.Name = "mainIcon";
-            this.mainIcon.Size = new System.Drawing.Size(165, 152);
-            this.mainIcon.TabIndex = 1;
-            this.mainIcon.TabStop = false;
             // 
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
-            this.mainPanel.Controls.Add(this.label5);
-            this.mainPanel.Controls.Add(this.label4);
+            this.mainPanel.Controls.Add(this.tpBtnText);
+            this.mainPanel.Controls.Add(this.switchText);
             this.mainPanel.Controls.Add(this.SpeedPanel);
             this.mainPanel.Controls.Add(this.tpUpBtn);
             this.mainPanel.Controls.Add(this.tpDownBtn);
-            this.mainPanel.Controls.Add(this.pictureBox1);
+            this.mainPanel.Controls.Add(this.tpIcon);
             this.mainPanel.Controls.Add(this.speedBtn);
             this.mainPanel.Controls.Add(this.switchBtn);
-            this.mainPanel.Controls.Add(this.label6);
+            this.mainPanel.Controls.Add(this.speedBtnText);
             this.mainPanel.Location = new System.Drawing.Point(0, 350);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(450, 200);
             this.mainPanel.TabIndex = 2;
             // 
-            // label5
+            // tpBtnText
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("黑体", 10F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label5.Location = new System.Drawing.Point(216, 134);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 14);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "温度";
+            this.tpBtnText.AutoSize = true;
+            this.tpBtnText.Font = new System.Drawing.Font("黑体", 10F);
+            this.tpBtnText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.tpBtnText.Location = new System.Drawing.Point(216, 134);
+            this.tpBtnText.Name = "tpBtnText";
+            this.tpBtnText.Size = new System.Drawing.Size(35, 14);
+            this.tpBtnText.TabIndex = 14;
+            this.tpBtnText.Text = "温度";
             // 
-            // label4
+            // switchText
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("黑体", 10F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label4.Location = new System.Drawing.Point(55, 134);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 14);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "开关";
+            this.switchText.AutoSize = true;
+            this.switchText.Font = new System.Drawing.Font("黑体", 10F);
+            this.switchText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.switchText.Location = new System.Drawing.Point(55, 134);
+            this.switchText.Name = "switchText";
+            this.switchText.Size = new System.Drawing.Size(35, 14);
+            this.switchText.TabIndex = 13;
+            this.switchText.Text = "开关";
             // 
             // SpeedPanel
             // 
@@ -131,6 +121,7 @@
             this.highText.Size = new System.Drawing.Size(29, 19);
             this.highText.TabIndex = 13;
             this.highText.Text = "强";
+            this.highText.Click += new System.EventHandler(this.highText_Click);
             // 
             // midText
             // 
@@ -142,6 +133,7 @@
             this.midText.Size = new System.Drawing.Size(29, 19);
             this.midText.TabIndex = 12;
             this.midText.Text = "中";
+            this.midText.Click += new System.EventHandler(this.midText_Click);
             // 
             // lowText
             // 
@@ -153,6 +145,90 @@
             this.lowText.Size = new System.Drawing.Size(29, 19);
             this.lowText.TabIndex = 11;
             this.lowText.Text = "弱";
+            this.lowText.Click += new System.EventHandler(this.lowText_Click);
+            // 
+            // speedBtnText
+            // 
+            this.speedBtnText.AutoSize = true;
+            this.speedBtnText.Font = new System.Drawing.Font("黑体", 10F);
+            this.speedBtnText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.speedBtnText.Location = new System.Drawing.Point(376, 134);
+            this.speedBtnText.Name = "speedBtnText";
+            this.speedBtnText.Size = new System.Drawing.Size(35, 14);
+            this.speedBtnText.TabIndex = 15;
+            this.speedBtnText.Text = "风力";
+            // 
+            // tpText
+            // 
+            this.tpText.AutoSize = true;
+            this.tpText.Font = new System.Drawing.Font("微软雅黑", 46F);
+            this.tpText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tpText.Location = new System.Drawing.Point(240, 101);
+            this.tpText.Name = "tpText";
+            this.tpText.Size = new System.Drawing.Size(151, 81);
+            this.tpText.TabIndex = 3;
+            this.tpText.Text = "--℃";
+            // 
+            // roomTpText
+            // 
+            this.roomTpText.AutoSize = true;
+            this.roomTpText.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.roomTpText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.roomTpText.Location = new System.Drawing.Point(238, 191);
+            this.roomTpText.Name = "roomTpText";
+            this.roomTpText.Size = new System.Drawing.Size(165, 30);
+            this.roomTpText.TabIndex = 8;
+            this.roomTpText.Text = "房间温度：--℃";
+            // 
+            // nowPayText
+            // 
+            this.nowPayText.AutoSize = true;
+            this.nowPayText.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.nowPayText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.nowPayText.Location = new System.Drawing.Point(238, 232);
+            this.nowPayText.Name = "nowPayText";
+            this.nowPayText.Size = new System.Drawing.Size(180, 30);
+            this.nowPayText.TabIndex = 9;
+            this.nowPayText.Text = "当前费用：-.--元";
+            // 
+            // roomText
+            // 
+            this.roomText.AutoSize = true;
+            this.roomText.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.roomText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.roomText.Location = new System.Drawing.Point(3, 4);
+            this.roomText.Name = "roomText";
+            this.roomText.Size = new System.Drawing.Size(96, 25);
+            this.roomText.TabIndex = 10;
+            this.roomText.Text = "Room ---";
+            // 
+            // timeText
+            // 
+            this.timeText.AutoSize = true;
+            this.timeText.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.timeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.timeText.Location = new System.Drawing.Point(191, 4);
+            this.timeText.Name = "timeText";
+            this.timeText.Size = new System.Drawing.Size(61, 25);
+            this.timeText.TabIndex = 11;
+            this.timeText.Text = "23:33";
+            // 
+            // ShutDownButton
+            // 
+            this.ShutDownButton.BackColor = System.Drawing.Color.Transparent;
+            this.ShutDownButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ShutDownButton.BackgroundImage")));
+            this.ShutDownButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ShutDownButton.FlatAppearance.BorderSize = 0;
+            this.ShutDownButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
+            this.ShutDownButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
+            this.ShutDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ShutDownButton.Location = new System.Drawing.Point(420, 0);
+            this.ShutDownButton.Name = "ShutDownButton";
+            this.ShutDownButton.Size = new System.Drawing.Size(30, 30);
+            this.ShutDownButton.TabIndex = 7;
+            this.ShutDownButton.TabStop = false;
+            this.ShutDownButton.UseVisualStyleBackColor = false;
+            this.ShutDownButton.Click += new System.EventHandler(this.ShutDownButton_Click);
             // 
             // highSpeedBtn
             // 
@@ -234,16 +310,16 @@
             this.tpDownBtn.TabIndex = 5;
             this.tpDownBtn.Click += new System.EventHandler(this.tpDownBtn_Click);
             // 
-            // pictureBox1
+            // tpIcon
             // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(203, 65);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.tpIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tpIcon.BackgroundImage")));
+            this.tpIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.tpIcon.Image = ((System.Drawing.Image)(resources.GetObject("tpIcon.Image")));
+            this.tpIcon.Location = new System.Drawing.Point(203, 65);
+            this.tpIcon.Name = "tpIcon";
+            this.tpIcon.Size = new System.Drawing.Size(60, 60);
+            this.tpIcon.TabIndex = 4;
+            this.tpIcon.TabStop = false;
             // 
             // speedBtn
             // 
@@ -277,88 +353,15 @@
             this.switchBtn.TabIndex = 1;
             this.switchBtn.Click += new System.EventHandler(this.switchBtn_Click);
             // 
-            // label6
+            // mainIcon
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("黑体", 10F);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.label6.Location = new System.Drawing.Point(376, 134);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 14);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "风力";
-            // 
-            // tpText
-            // 
-            this.tpText.AutoSize = true;
-            this.tpText.Font = new System.Drawing.Font("微软雅黑", 46F);
-            this.tpText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tpText.Location = new System.Drawing.Point(240, 101);
-            this.tpText.Name = "tpText";
-            this.tpText.Size = new System.Drawing.Size(151, 81);
-            this.tpText.TabIndex = 3;
-            this.tpText.Text = "--℃";
-            // 
-            // ShutDownButton
-            // 
-            this.ShutDownButton.BackColor = System.Drawing.Color.Transparent;
-            this.ShutDownButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ShutDownButton.BackgroundImage")));
-            this.ShutDownButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ShutDownButton.FlatAppearance.BorderSize = 0;
-            this.ShutDownButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
-            this.ShutDownButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
-            this.ShutDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShutDownButton.Location = new System.Drawing.Point(420, 0);
-            this.ShutDownButton.Name = "ShutDownButton";
-            this.ShutDownButton.Size = new System.Drawing.Size(30, 30);
-            this.ShutDownButton.TabIndex = 7;
-            this.ShutDownButton.TabStop = false;
-            this.ShutDownButton.UseVisualStyleBackColor = false;
-            this.ShutDownButton.Click += new System.EventHandler(this.ShutDownButton_Click);
-            // 
-            // roomTpText
-            // 
-            this.roomTpText.AutoSize = true;
-            this.roomTpText.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.roomTpText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.roomTpText.Location = new System.Drawing.Point(238, 191);
-            this.roomTpText.Name = "roomTpText";
-            this.roomTpText.Size = new System.Drawing.Size(165, 30);
-            this.roomTpText.TabIndex = 8;
-            this.roomTpText.Text = "房间温度：--℃";
-            // 
-            // nowPayText
-            // 
-            this.nowPayText.AutoSize = true;
-            this.nowPayText.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.nowPayText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.nowPayText.Location = new System.Drawing.Point(238, 232);
-            this.nowPayText.Name = "nowPayText";
-            this.nowPayText.Size = new System.Drawing.Size(180, 30);
-            this.nowPayText.TabIndex = 9;
-            this.nowPayText.Text = "当前费用：-.--元";
-            // 
-            // roomText
-            // 
-            this.roomText.AutoSize = true;
-            this.roomText.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.roomText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.roomText.Location = new System.Drawing.Point(3, 4);
-            this.roomText.Name = "roomText";
-            this.roomText.Size = new System.Drawing.Size(96, 25);
-            this.roomText.TabIndex = 10;
-            this.roomText.Text = "Room ---";
-            // 
-            // timeText
-            // 
-            this.timeText.AutoSize = true;
-            this.timeText.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.timeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.timeText.Location = new System.Drawing.Point(191, 4);
-            this.timeText.Name = "timeText";
-            this.timeText.Size = new System.Drawing.Size(61, 25);
-            this.timeText.TabIndex = 11;
-            this.timeText.Text = "23:33";
+            this.mainIcon.BackgroundImage = global::AirConditionerSystem.Properties.Resources.C0;
+            this.mainIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.mainIcon.Location = new System.Drawing.Point(38, 112);
+            this.mainIcon.Name = "mainIcon";
+            this.mainIcon.Size = new System.Drawing.Size(165, 152);
+            this.mainIcon.TabIndex = 1;
+            this.mainIcon.TabStop = false;
             // 
             // Client
             // 
@@ -382,14 +385,14 @@
             this.MinimizeBox = false;
             this.Name = "Client";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "AirConditioner";
             this.Load += new System.EventHandler(this.Client_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).EndInit();
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.SpeedPanel.ResumeLayout(false);
             this.SpeedPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tpIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,7 +410,7 @@
         private System.Windows.Forms.Label timeText;
         private DMSkin.Controls.DM.DMButtonImage speedBtn;
         private DMSkin.Controls.DM.DMButtonImage switchBtn;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox tpIcon;
         private DMSkin.Controls.DM.DMButtonImage tpUpBtn;
         private DMSkin.Controls.DM.DMButtonImage tpDownBtn;
         private System.Windows.Forms.Panel SpeedPanel;
@@ -417,9 +420,9 @@
         private System.Windows.Forms.Label highText;
         private System.Windows.Forms.Label midText;
         private System.Windows.Forms.Label lowText;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label speedBtnText;
+        private System.Windows.Forms.Label tpBtnText;
+        private System.Windows.Forms.Label switchText;
     }
 }
 

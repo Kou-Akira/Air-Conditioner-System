@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Net.Sockets;
 using System.Threading;
 using Common;
@@ -125,6 +126,14 @@ namespace AirConditionerSystem
                 tpText.Text = ack.Temperature.ToString("0") + "℃";
                 nowTp = (int)ack.Temperature;
                 mode = ack.Mode;
+                if (mode == 0)
+                {
+                    setColdColor();
+                }
+                else
+                {
+                    setHotColor();
+                }
             }
             else if (p.Cat == 7)
             {
@@ -145,6 +154,14 @@ namespace AirConditionerSystem
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
                 nowTp = Constants.HotTemperatureDefault;
                 tpText.Text = nowTp.ToString() + "℃";
+                if (mode == 0)
+                {
+                    setColdColor();
+                }
+                else
+                {
+                    setHotColor();
+                }
             }
 
             if (sendType == 2 && (p.Cat == 0 || p.Cat == 1))
@@ -240,6 +257,14 @@ namespace AirConditionerSystem
         private void switchCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
             roomText.Text = "Room " + roomNum;
+            if (isOff)
+            {
+                switchBtn.DM_NolImage = mode == 0 ? switchBtn_DM_NolImage : HswitchBtn;
+            }
+            else
+            {
+                switchBtn.DM_NolImage = mode == 0 ? CswitchOn : HSwitchOn;
+            }
             if (isClose)
             {
                 Environment.Exit(0);
@@ -346,6 +371,65 @@ namespace AirConditionerSystem
                 return false;
             }
             return true;
+        }
+
+        private void lowText_Click(object sender, EventArgs e)
+        {
+            lowSpeedBtn_Click(sender, e);
+        }
+
+        private void midText_Click(object sender, EventArgs e)
+        {
+            midSpeedBtn_Click(sender, e);
+        }
+
+        private void highText_Click(object sender, EventArgs e)
+        {
+            highSpeedBtn_Click(sender, e);
+        }
+
+        private void setHotColor()
+        {
+            this.BackColor = Color.FromArgb(228, 79, 75);
+            mainPanel.BackColor = Color.FromArgb(242, 165, 163);
+            SpeedPanel.BackColor = Color.FromArgb(242, 165, 163);
+            switchBtn.DM_NolImage = HswitchBtn;
+            tpDownBtn.DM_NolImage = HtpDownBtn;
+            tpIcon.BackgroundImage = HpictureBox1;
+            tpIcon.Image = HpictureBox1;
+            tpUpBtn.DM_NolImage = HtpUpBtn;
+            speedBtn.DM_NolImage = HspeedBtn;
+            lowSpeedBtn.DM_NolImage = HlowSpeedBtn;
+            midSpeedBtn.DM_NolImage = HmidSpeedBtn;
+            highSpeedBtn.DM_NolImage = HhighSpeedBtn;
+            lowText.ForeColor = Color.FromArgb(228, 79, 75);
+            midText.ForeColor = Color.FromArgb(228, 79, 75);
+            highText.ForeColor = Color.FromArgb(228, 79, 75);
+            switchText.ForeColor = Color.FromArgb(228, 79, 75);
+            tpBtnText.ForeColor = Color.FromArgb(228, 79, 75);
+            speedBtnText.ForeColor = Color.FromArgb(228, 79, 75);
+        }
+
+        private void setColdColor()
+        {
+            this.BackColor = Color.FromArgb(68, 141, 166);
+            mainPanel.BackColor = Color.FromArgb(198, 221, 232);
+            SpeedPanel.BackColor = Color.FromArgb(198, 221, 232);
+            switchBtn.DM_NolImage = switchBtn_BackgroundImage;
+            tpDownBtn.DM_NolImage = tpDownBtn_DM_NolImage;
+            tpIcon.BackgroundImage = tpIcon_BackgroundImage;
+            tpIcon.Image = tpIcon_BackgroundImage;
+            tpUpBtn.DM_NolImage = tpUpBtn_DM_NolImage;
+            speedBtn.DM_NolImage = speedBtn_BackgroundImage;
+            lowSpeedBtn.DM_NolImage = lowSpeedBtn_BackgroundImage;
+            midSpeedBtn.DM_NolImage = midSpeedBtn_BackgroundImage;
+            highSpeedBtn.DM_NolImage = highSpeedBtn_BackgroundImage;
+            lowText.ForeColor = Color.FromArgb(68, 141, 166);
+            midText.ForeColor = Color.FromArgb(68, 141, 166);
+            highText.ForeColor = Color.FromArgb(68, 141, 166);
+            switchText.ForeColor = Color.FromArgb(68, 141, 166);
+            tpBtnText.ForeColor = Color.FromArgb(68, 141, 166);
+            speedBtnText.ForeColor = Color.FromArgb(68, 141, 166);
         }
     }
 }

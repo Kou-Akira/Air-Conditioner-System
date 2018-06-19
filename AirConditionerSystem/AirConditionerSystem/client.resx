@@ -410,7 +410,7 @@
         UQO4jgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="pictureBox1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tpIcon.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABGdBTUEAALGPC/xhBQAABAFJREFUaEPt
         m0+IVVUcx5+muDFB0qhNLTSDEiFG5973jBAycREuImshhILF5HjPGQk1qMWsnDnnvTQNDQUts02uwoWh
@@ -433,7 +433,7 @@
         QDP/yuLJAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tpIcon.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABGdBTUEAALGPC/xhBQAABAFJREFUaEPt
         m0+IVVUcx5+muDFB0qhNLTSDEiFG5973jBAycREuImshhILF5HjPGQk1qMWsnDnnvTQNDQUts02uwoWh
@@ -608,5 +608,36 @@
         /W1YvsGnfh6M4xp+d6sh+4r9VzjvvthLh/QED5xNsu8457z7Yt5cLMLmI4ZD1q8huM/9nlMfugw/xhX6
         /SPJue8SnrNiYO0jH/wLzqmqD/ycu01PVOeeAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CswitchOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\CswitchOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HhighSpeedBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\hhighspeedbtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HlowSpeedBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\hlowspeedbtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HmidSpeedBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\hmidspeedbtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HpictureBox1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\hpicturebox1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HspeedBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\hspeedbtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HswitchBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\hswitchbtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HSwitchOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\hswitchon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HtpDownBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\htpdownbtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HtpUpBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>resources\htpupbtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

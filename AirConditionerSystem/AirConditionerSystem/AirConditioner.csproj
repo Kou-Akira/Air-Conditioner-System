@@ -63,6 +63,11 @@
     <Compile Include="Client.Designer.cs">
       <DependentUpon>Client.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Client.resx</DependentUpon>
+    </Compile>
     <Compile Include="HeartbeatpacketSender.cs" />
     <Compile Include="LoadingBox.cs">
       <SubType>Form</SubType>
@@ -87,6 +92,8 @@
     <Compile Include="TemperatureSimulator.cs" />
     <EmbeddedResource Include="Client.resx">
       <DependentUpon>Client.cs</DependentUpon>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Client1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadingBox.resx">
       <DependentUpon>LoadingBox.cs</DependentUpon>
@@ -154,6 +161,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\H3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HhighSpeedBtn.png" />
+    <None Include="Resources\HlowSpeedBtn.png" />
+    <None Include="Resources\HmidSpeedBtn.png" />
+    <None Include="Resources\HpictureBox1.png" />
+    <None Include="Resources\HspeedBtn.png" />
+    <None Include="Resources\HswitchBtn.png" />
+    <None Include="Resources\HSwitchOn.png" />
+    <None Include="Resources\HtpDownBtn.png" />
+    <None Include="Resources\HtpUpBtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CswitchOn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
