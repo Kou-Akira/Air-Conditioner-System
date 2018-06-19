@@ -68,7 +68,7 @@ namespace Host {
 			if (hostState.State != (int)ServiceState.OFF)
 				throw new Exception("AirConditioner is already on!");
 			Init();
-			hostState.State = (int)ServiceState.Sleep;
+			hostState.State = (int)ServiceState.On;//.Sleep;
 			netWork.StartListen();
 			LOGGER.Info("AirConditioner Turn On!");
 		}
