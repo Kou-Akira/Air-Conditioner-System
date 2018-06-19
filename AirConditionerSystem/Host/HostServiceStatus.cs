@@ -13,7 +13,7 @@ namespace Host {
 	public enum ServiceState {
 		OFF = 0,
 		On,
-		Sleep
+		//Sleep
 	};
 
 	/// <summary>

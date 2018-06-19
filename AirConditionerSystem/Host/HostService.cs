@@ -68,7 +68,7 @@ namespace Host {
 			if (hostState.State != (int)ServiceState.OFF)
 				throw new Exception("AirConditioner is already on!");
 			Init();
-			hostState.State = (int)ServiceState.Sleep;
+			hostState.State = (int)ServiceState.On;//.Sleep;
 			netWork.StartListen();
 			LOGGER.Info("AirConditioner Turn On!");
 		}
@@ -115,6 +115,7 @@ namespace Host {
 				return false;
 			}
 			this.hostState.Mode = (int)mode;
+			this.hostState.NowServiceAmount = 0;
 			void body(RemoteClient client) { client.ChangeMode(this); }
 			Parallel.ForEach<RemoteClient>(clients.Values, body);
 			LOGGER.InfoFormat("Finish send change mode package to each clients total:{0}!", clients.Count);
@@ -136,7 +137,7 @@ namespace Host {
 		public bool SendWind(byte id) {
 			if (clients[id].ClientStatus.Speed <= (int)ESpeed.NoWind) return false;
 			lock (this) {
-				if (this.hostState.NowServiceAmount < 3) {
+				if (this.hostState.NowServiceAmount < Common.Constants.TOTAL_SERVICE_AMOUNT) {
 					this.hostState.NowServiceAmount++;
 					clients[id].ResetRealSpeed();
 					LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
@@ -158,7 +159,7 @@ namespace Host {
 						client.Value.ResetRealSpeed();
 						LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
 						this.hostState.NowServiceAmount++;
-						if (this.hostState.NowServiceAmount == 3) return;
+						if (this.hostState.NowServiceAmount == Common.Constants.TOTAL_SERVICE_AMOUNT) return;
 					}
 				}
 				foreach (var client in clients) {
@@ -166,7 +167,7 @@ namespace Host {
 						client.Value.ResetRealSpeed();
 						LOGGER.InfoFormat("Scheduler send wind to client {0}", (int)id);
 						this.hostState.NowServiceAmount++;
-						if (this.hostState.NowServiceAmount == 3) return;
+						if (this.hostState.NowServiceAmount == Common.Constants.TOTAL_SERVICE_AMOUNT) return;
 					}
 				}
 			}

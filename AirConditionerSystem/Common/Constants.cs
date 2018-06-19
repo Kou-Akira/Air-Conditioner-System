@@ -32,6 +32,7 @@ namespace Common {
 		public const int IDLENTH = 18;
 
 		public const int REFRESH_INTERVAL = 5;
+		public const int TOTAL_SERVICE_AMOUNT = 3;
 
 		public const int HotMaxTemperature = 30;
 		public const int HotMinTemperature = 25;
