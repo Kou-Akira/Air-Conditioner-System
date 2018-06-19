@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using Common;
 
 namespace AirConditionerSystem
 {
-     class TemperatureSimulator
-     {
+    class TemperatureSimulator
+    {
         private SynchronizationContext context;
         private Client cl;
         private bool isStop;
@@ -54,7 +55,32 @@ namespace AirConditionerSystem
         {
             while (!isStop)
             {
-                //Thread.Sleep(1000);
+                if (cl.speed == Constants.LOW_SPEED)
+                {
+                    Thread.Sleep(3000);
+                }
+                else if (cl.speed == Constants.MID_SPEED)
+                {
+                    Thread.Sleep(2000);
+                }
+                else if (cl.speed == Constants.HIGH_SPEED)
+                {
+                    Thread.Sleep(1000);
+                }
+                else if (cl.speed == Constants.NONE_SPEED)
+                {
+                    Thread.Sleep(1000);
+                    continue;
+                }
+
+                if (cl.mode == 0 && cl.nowTp > roomTemperature)
+                {
+                    roomTemperature--;
+                }
+                else if (cl.mode == 1 && cl.nowTp < roomTemperature)
+                {
+                    roomTemperature++;
+                }
                 context.Post(cl.roomTpCallBack, roomTemperature);
             }
         }
@@ -64,5 +90,5 @@ namespace AirConditionerSystem
             return roomTemperature;
         }
 
-     }
+    }
 }

@@ -39,5 +39,11 @@ namespace AirConditionerSystem
             byte[] buffer = PackageHelper.GetByte(new ClientSpeedPackage(speed, tp));
             Client.sendPackage(buffer);
         }
+
+        public static void sendStopSpeedRequest(float tp)
+        {
+            byte[] buffer = PackageHelper.GetByte(new ClientStopPackage(tp));
+            Client.sendPackage(buffer);
+        }
     }
 }

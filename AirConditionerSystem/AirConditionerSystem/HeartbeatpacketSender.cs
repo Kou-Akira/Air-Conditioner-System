@@ -11,7 +11,7 @@ namespace AirConditionerSystem
     {
         private Client cl;
         private Timer mTimer;
-        private const int SEND_INTERVAL = 1000 * 5; // 5 sescond per send 
+        private int SEND_INTERVAL = 1000 * 5; // 5 sescond per send 
         public HeartbeatpacketSender(Client c)
         {
             cl = c;
@@ -34,6 +34,16 @@ namespace AirConditionerSystem
         public void stopSend()
         {
             mTimer.Enabled = false;
+        }
+
+        public void resetTimer(int interVal)
+        {
+            stopSend();
+            mTimer.Dispose();
+            mTimer = new Timer(interVal * 1000);
+            mTimer.AutoReset = true;
+            mTimer.Elapsed += onTimeSend;
+            startSend();
         }
     }
 }

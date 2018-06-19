@@ -12,7 +12,7 @@ namespace AirConditionerSystem
         private BackgroundWorker timeWordker;
         private BackgroundWorker refreshTimeWorker;
         private login lg;
-
+        private HeartbeatpacketSender heartbeatpacketSender;
 
         private TcpClient client;
         private static NetworkStream networkStream;
@@ -23,7 +23,7 @@ namespace AirConditionerSystem
         private bool isOff;
         private bool isLogin;
         private bool isClose;
-        private int nowTp;
+        public int nowTp;
         public int mode;
         public int speed;
 
@@ -36,7 +36,7 @@ namespace AirConditionerSystem
 
         private void Client_Load(object sender, EventArgs e)
         {
-            TemperatureSimulator.getInstance(this).startSimulating();
+            heartbeatpacketSender = new HeartbeatpacketSender(this);
             mLoadingBox = new LoadingBox();
             timeWordker = new BackgroundWorker();
             refreshTimeWorker = new BackgroundWorker();
@@ -53,7 +53,7 @@ namespace AirConditionerSystem
             nowTp = Constants.DEFAULT_TEMPERATURE;
             tpText.Text = nowTp.ToString() + "℃";
             context = SynchronizationContext.Current;
-
+            speed = Constants.LOW_SPEED;
         }
 
         private void tcpConnect()
@@ -89,6 +89,12 @@ namespace AirConditionerSystem
         {
             int tp = (int)o;
             roomTpText.Text = Constants.ROOM_TP + tp.ToString();
+            if (nowTp == tp)
+            {
+                ApiClient.sendStopSpeedRequest(tp);
+                speed = Constants.NONE_SPEED;
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
+            }
         }
 
         public static void sendPackage(byte[] buffer)
@@ -102,18 +108,38 @@ namespace AirConditionerSystem
         private void tcpCallBack(object pac)
         {
             Package p = pac as Package;
+            if (p.Cat == 1)
+            {
+                HostAckPackage ack = p as HostAckPackage;
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)ack.Mode, (Host.ESpeed)speed);
+                tpText.Text = ack.Temperature.ToString() + "℃";
+            }
+            else if (p.Cat == 7)
+            {
+                HostRequestPackage res = p as HostRequestPackage;
+                refreshUI(res.Speed, res.Cost);
+            }
+            else if (p.Cat == 10)
+            {
+                RefreshFrequencyPackage fr = p as RefreshFrequencyPackage;
+                heartbeatpacketSender.resetTimer(fr.Frequency);
+            }
+            else if (p.Cat == 3)
+            {
+                HostModePackage md = p as HostModePackage;
+
+            }
+
             if (sendType == 2 && (p.Cat == 0 || p.Cat == 1))
             {
                 lg.context.Post(lg.packageReceive, pac);
                 sendType = -1;
                 return;
             }
-            
-            if(p.Cat == 7)
-            {
-                HostRequestPackage res = p as HostRequestPackage;
-                refreshUI(res.Speed, res.Cost);
-            }
+
+
+
+
         }
 
         private void refreshUI(int speed, float cost)
@@ -210,9 +236,13 @@ namespace AirConditionerSystem
                 lg = new login(this);
                 lg.ShowDialog();
                 isOff = false;
+                TemperatureSimulator.getInstance(this).startSimulating();
+                heartbeatpacketSender.startSend();
             }
             else
             {
+                TemperatureSimulator.getInstance(this).stopSimulate();
+                heartbeatpacketSender.stopSend();
                 ApiClient.sendClientCloseRequest(TemperatureSimulator.getInstance(this).getRoomTemperature());
                 isOff = true;
                 listen.Abort();

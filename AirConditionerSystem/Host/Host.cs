@@ -52,6 +52,7 @@ namespace Host
             {
                 hostService.TurnOn();
                 isOff = false;
+                mode = ServiceMode.COLD;
             }
             else
             {
@@ -68,6 +69,25 @@ namespace Host
         private void logBtn_Click(object sender, EventArgs e)
         {
             new LogForm(this).ShowDialog();
+        }
+
+        private void coldBtn_Click(object sender, EventArgs e)
+        {
+            if (!isOff && mode != ServiceMode.COLD)
+            {
+                hostService.SettModle(ServiceMode.COLD);
+                mode = ServiceMode.COLD;
+            }
+            
+        }
+
+        private void heatBtn_Click(object sender, EventArgs e)
+        {
+            if (!isOff && mode != ServiceMode.HOT)
+            {
+                hostService.SettModle(ServiceMode.HOT);
+                mode = ServiceMode.HOT;
+            }
         }
     }
 }

@@ -331,6 +331,7 @@
             this.coldBtn.Size = new System.Drawing.Size(50, 50);
             this.coldBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.coldBtn.TabIndex = 3;
+            this.coldBtn.Click += new System.EventHandler(this.coldBtn_Click);
             // 
             // heatBtn
             // 
@@ -346,6 +347,7 @@
             this.heatBtn.Size = new System.Drawing.Size(50, 50);
             this.heatBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.heatBtn.TabIndex = 2;
+            this.heatBtn.Click += new System.EventHandler(this.heatBtn_Click);
             // 
             // switchBtn
             // 
