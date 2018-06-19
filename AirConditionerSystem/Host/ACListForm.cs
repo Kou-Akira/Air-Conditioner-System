@@ -46,14 +46,14 @@ namespace Host
             int i = 0;
             foreach (KeyValuePair<byte, ClientStatus> client in list)
             {
-                i++;
-                if (i >= 3) break;
                 panelList[i].Visible = true;
                 roomNumList[i].Text = Constants.ROOM_NUM + client.Key.ToString();
                 iconList[i].BackgroundImage = Utils.getRuningImage(host.mode, (ESpeed)(client.Value.Speed));
                 tpTextList[i].Text = ((int)(client.Value.TargetTemperature)).ToString() + "℃";
-                roomTpTextList[i].Text = Constants.ROOM_TP + client.Value.NowTemperature.ToString();
-                nowPayTextList[i].Text = Constants.NOW_PAYMENT + client.Value.Cost.ToString();
+                roomTpTextList[i].Text = Constants.ROOM_TP + client.Value.NowTemperature.ToString("0") + "℃";
+                nowPayTextList[i].Text = Constants.NOW_PAYMENT + client.Value.Cost.ToString() + "元";
+                i++;
+                if (i >= 3) break;
             }
             for (; i < 3; i++)
             {
