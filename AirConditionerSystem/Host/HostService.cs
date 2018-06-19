@@ -115,6 +115,7 @@ namespace Host {
 				return false;
 			}
 			this.hostState.Mode = (int)mode;
+			this.hostState.NowServiceAmount = 0;
 			void body(RemoteClient client) { client.ChangeMode(this); }
 			Parallel.ForEach<RemoteClient>(clients.Values, body);
 			LOGGER.InfoFormat("Finish send change mode package to each clients total:{0}!", clients.Count);

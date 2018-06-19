@@ -156,6 +156,7 @@ namespace Host {
 			var tmp = cb.GetDefaultWorkingState();
 			Common.HostModePackage hostModePackage = new Common.HostModePackage(tmp.Item1, tmp.Item2);
 			SendPackage(hostModePackage);
+			this.ClientStatus.Speed = this.ClientStatus.RealSpeed = (int)ESpeed.NoWind;
 			LOGGER.InfoFormat("Host change mode package send mode:{0}, temperature:{1}!", tmp.Item1, tmp.Item2);
 		}
 
