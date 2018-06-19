@@ -139,10 +139,11 @@ namespace Common {
 				}
 				case 7: {
 					HostRequestPackage hostCostPackage = response as HostRequestPackage;
-					byte[] res = new byte[5];
+					byte[] res = new byte[6];
 					res[0] = 7;
+					res[1] = hostCostPackage.Speed;
 					byte[] tbt = BitConverter.GetBytes(hostCostPackage.Cost);
-					for (int i = 0; i < 4; i++) res[i + 1] = tbt[i];
+					for (int i = 0; i < 4; i++) res[i + 2] = tbt[i];
 					return res;
 				}
 				//case 8: {
