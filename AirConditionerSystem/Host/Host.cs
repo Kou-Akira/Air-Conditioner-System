@@ -61,6 +61,21 @@ namespace Host
             }
         }
 
+        private void registBtn_Click(object sender, EventArgs e)
+        {
+            new Register().ShowDialog();
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            new Cancel().ShowDialog();
+        }
+
+        private void payBtn_Click(object sender, EventArgs e)
+        {
+            new Gathering().ShowDialog();
+        }
+
         private void Host_Load(object sender, EventArgs e)
         {
             context = SynchronizationContext.Current;

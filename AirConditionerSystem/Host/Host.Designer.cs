@@ -254,6 +254,7 @@
             this.registBtn.Size = new System.Drawing.Size(50, 50);
             this.registBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.registBtn.TabIndex = 8;
+            this.registBtn.Click += new System.EventHandler(this.registBtn_Click);
             // 
             // logoutBtn
             // 
@@ -269,6 +270,7 @@
             this.logoutBtn.Size = new System.Drawing.Size(50, 50);
             this.logoutBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.logoutBtn.TabIndex = 7;
+            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
             // logBtn
             // 
@@ -300,6 +302,7 @@
             this.payBtn.Size = new System.Drawing.Size(50, 50);
             this.payBtn.State = DMSkin.Controls.DM.DMButtonImage.BtnState.Nol;
             this.payBtn.TabIndex = 5;
+            this.payBtn.Click += new System.EventHandler(this.payBtn_Click);
             // 
             // watchBtn
             // 
