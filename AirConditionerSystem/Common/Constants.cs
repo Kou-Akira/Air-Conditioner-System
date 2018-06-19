@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Common {
-	public class Constants {
+	public static class Constants {
         public const int NONE_SPEED = 0;
 		public const int LOW_SPEED = 1;
 		public const int MID_SPEED = 2;
@@ -46,5 +48,25 @@ namespace Common {
 		public const float LowSpeedPower = 0.8F;
 		public const float HighSpeedPower = 1.3F;
 		public const int CostPrePower = 5;
+
+		private static XmlNode sqlNode;
+		private static XmlNode root;
+		private static string sqlName;
+		private static string loginName;
+		private static string loginPassword;
+		private static string initialCatalog;
+		private static SqlConnectionStringBuilder builder;
+
+		static Constants() {
+			//XmlDocument doc = new XmlDocument();
+			//doc.Load("Constants.config");
+			//root = doc.DocumentElement;
+			//sqlNode = root.SelectSingleNode("sqlconfig");
+			//sqlName = sqlNode.SelectSingleNode("sqlname").InnerText;
+			//loginName = sqlNode.SelectSingleNode("loginname").InnerText;
+			//loginPassword = sqlNode.SelectSingleNode("loginpassword").InnerText;
+			//initialCatalog = sqlNode.SelectSingleNode("initialcatalog").InnerText;
+
+		}
 	}
 }

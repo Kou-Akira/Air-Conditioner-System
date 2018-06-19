@@ -106,10 +106,11 @@ namespace Common {
 				}
 				case 3: {
 					HostModePackage hostModePackage = response as HostModePackage;
-					byte[] buffer = new byte[20];
+					byte[] buffer = new byte[6];
 					buffer[0] = 3;
 					buffer[1] = (byte)hostModePackage.Mode;
-
+					byte[] tbt = BitConverter.GetBytes(hostModePackage.Temperature);
+					for (int i = 0; i < 4; i++) buffer[i + 2] = tbt[i];
 					return buffer;
 				}
 				case 4: {

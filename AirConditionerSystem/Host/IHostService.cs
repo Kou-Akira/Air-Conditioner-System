@@ -30,6 +30,8 @@ namespace Host {
 
 		bool CheckOut(byte roomId);
 
+		float GetMoney(byte roomId);
+
 		IDictionary<byte, ClientStatus> GetClientStatus(out int waiting);
 
 		IDictionary<Byte, List<HostLog>> GetLog(DateTime start, DateTime end);
