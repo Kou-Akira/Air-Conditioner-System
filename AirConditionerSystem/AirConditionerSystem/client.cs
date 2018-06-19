@@ -141,6 +141,10 @@ namespace AirConditionerSystem
             {
                 HostModePackage md = p as HostModePackage;
                 mode = md.Mode;
+                speed = Constants.NONE_SPEED;
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
+                nowTp = Constants.HotTemperatureDefault;
+                tpText.Text = nowTp.ToString() + "℃";
             }
 
             if (sendType == 2 && (p.Cat == 0 || p.Cat == 1))
