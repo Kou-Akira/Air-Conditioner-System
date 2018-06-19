@@ -36,6 +36,7 @@ namespace AirConditionerSystem
             context = c.context;
             cl = c;
             isStop = true;
+            roomTemperature = Constants.DEFAULT_TEMPERATURE;
         }
 
         public void startSimulating()
