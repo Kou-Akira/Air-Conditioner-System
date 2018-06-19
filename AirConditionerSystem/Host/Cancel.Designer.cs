@@ -138,6 +138,7 @@
             this.Controls.Add(this.ShutDownButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.mainPanel);
+            this.DM_howBorder = false;
             this.Name = "Cancel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cancel";

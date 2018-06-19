@@ -23,6 +23,7 @@ namespace Common {
 		public const String ROOM_TP = "房间温度：";
 		public const String ROOM_NUM = "Room ";
         public const String WAITING_CONN_COUNT = "当前等待队列：";
+        public const String WORKING_STATE = "主机状态：";
 
 
         public const String IP_ADDRESS = "10.105.249.190";

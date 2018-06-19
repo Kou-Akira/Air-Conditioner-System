@@ -53,27 +53,37 @@ namespace Host
                 hostService.TurnOn();
                 isOff = false;
                 mode = ServiceMode.COLD;
+                workStateText.Text = Common.Constants.WORKING_STATE + "运行中";
+                workModeText.Text = Common.Constants.WORKING_MODE_STR + "制冷";
             }
             else
             {
-				hostService.ShutDown();
-                isOff = true;
+                if (hostService.ShutDown())
+                {
+                    workStateText.Text = Common.Constants.WORKING_STATE + "已停机";
+                    workModeText.Text = Common.Constants.WORKING_MODE_STR + "--";
+                    isOff = true;
+                }
+                else
+                {
+                    new MessageBox("从机正在服务，无法关闭").ShowDialog();
+                }
             }
         }
 
         private void registBtn_Click(object sender, EventArgs e)
         {
-            new Register().ShowDialog();
+            new Register(this).ShowDialog();
         }
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            new Cancel().ShowDialog();
+            new Cancel(this).ShowDialog();
         }
 
         private void payBtn_Click(object sender, EventArgs e)
         {
-            new Gathering().ShowDialog();
+            new Gathering(this).ShowDialog();
         }
 
         private void Host_Load(object sender, EventArgs e)
@@ -92,8 +102,9 @@ namespace Host
             {
                 hostService.SettModle(ServiceMode.COLD);
                 mode = ServiceMode.COLD;
+                workModeText.Text = Common.Constants.WORKING_MODE_STR + "制冷";
             }
-            
+
         }
 
         private void heatBtn_Click(object sender, EventArgs e)
@@ -102,6 +113,7 @@ namespace Host
             {
                 hostService.SettModle(ServiceMode.HOT);
                 mode = ServiceMode.HOT;
+                workModeText.Text = Common.Constants.WORKING_MODE_STR + "制热";
             }
         }
     }

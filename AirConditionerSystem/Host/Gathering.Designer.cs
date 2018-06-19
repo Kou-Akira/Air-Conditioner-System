@@ -54,9 +54,9 @@
             this.mainPanel.Controls.Add(this.UserBg);
             this.mainPanel.Controls.Add(this.label2);
             this.mainPanel.Controls.Add(this.label1);
-            this.mainPanel.Location = new System.Drawing.Point(0, 35);
+            this.mainPanel.Location = new System.Drawing.Point(0, 30);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(422, 236);
+            this.mainPanel.Size = new System.Drawing.Size(422, 241);
             this.mainPanel.TabIndex = 18;
             // 
             // IDTextBox
@@ -144,7 +144,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(2, 4);
+            this.label3.Location = new System.Drawing.Point(2, 2);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 25);
             this.label3.TabIndex = 19;
@@ -159,7 +159,7 @@
             this.ShutDownButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(42)))), ((int)(((byte)(21)))));
             this.ShutDownButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(65)))), ((int)(((byte)(39)))));
             this.ShutDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShutDownButton.Location = new System.Drawing.Point(389, 2);
+            this.ShutDownButton.Location = new System.Drawing.Point(392, 0);
             this.ShutDownButton.Name = "ShutDownButton";
             this.ShutDownButton.Size = new System.Drawing.Size(30, 30);
             this.ShutDownButton.TabIndex = 20;
@@ -176,7 +176,8 @@
             this.Controls.Add(this.ShutDownButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.mainPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.DM_howBorder = false;
+            this.DM_RoundStyle = DMSkin.SkinClass.RoundStyle.None;
             this.Name = "Gathering";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Gathering";

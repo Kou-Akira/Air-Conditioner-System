@@ -93,6 +93,7 @@
             this.ClientSize = new System.Drawing.Size(300, 150);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.mainPanel);
+            this.DM_howBorder = false;
             this.Name = "MessageBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MessageBox";
