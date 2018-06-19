@@ -16,9 +16,13 @@ namespace Host
     {
         LoadingBox mLoadingBox;
         Host host;
+        private bool hasSearch;
+        private String pre;
         public Gathering(Host h)
         {
+            pre = "";
             host = h;
+            hasSearch = false;
             InitializeComponent();
         }
 
@@ -37,13 +41,13 @@ namespace Host
      
         private void ShutDownButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
 
-            if (IsMoney(IDTextBox.Text) && (IsRoomNum(textBox1.Text)))
+            if (hasSearch && pre.Equals(textBox1.Text) && (IsRoomNum(textBox1.Text)))
             {
                 if (!host.getHostService().CheckOut((byte)Convert.ToInt32(textBox1.Text)))
                 {
@@ -60,6 +64,12 @@ namespace Host
                 infoBox.ShowDialog();
                 infoBox.Dispose();
             }
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            //payText.Text = +"元";
+            pre = textBox1.Text;
         }
     }
 }

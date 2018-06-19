@@ -18,6 +18,7 @@ namespace Host
         private bool isOff;
         public SynchronizationContext context;
         public ServiceMode mode;
+        private BackgroundWorker refreshTimeWorker;
 
         public Host()
         {
@@ -89,6 +90,11 @@ namespace Host
         private void Host_Load(object sender, EventArgs e)
         {
             context = SynchronizationContext.Current;
+            refreshTimeWorker = new BackgroundWorker();
+            refreshTimeWorker.DoWork += getSysTime;
+            refreshTimeWorker.ProgressChanged += refreshTimeText;
+            refreshTimeWorker.WorkerReportsProgress = true;
+            refreshTimeWorker.RunWorkerAsync();
         }
 
         private void logBtn_Click(object sender, EventArgs e)
@@ -115,6 +121,21 @@ namespace Host
                 mode = ServiceMode.HOT;
                 workModeText.Text = Common.Constants.WORKING_MODE_STR + "制热";
             }
+        }
+
+        private void getSysTime(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker myworker = (BackgroundWorker)sender;
+            while (true)
+            {
+                myworker.ReportProgress(1, DateTime.Now.ToLongTimeString());
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+
+        private void refreshTimeText(object sender, ProgressChangedEventArgs e)
+        {
+            timeText.Text = e.UserState.ToString();
         }
     }
 }

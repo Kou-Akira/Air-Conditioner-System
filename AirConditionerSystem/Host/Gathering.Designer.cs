@@ -30,27 +30,26 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Gathering));
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.IDTextBox = new System.Windows.Forms.TextBox();
             this.LoginButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.IDBg = new System.Windows.Forms.PictureBox();
             this.UserBg = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.ShutDownButton = new System.Windows.Forms.Button();
+            this.payText = new System.Windows.Forms.Label();
+            this.searchBtn = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IDBg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserBg)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
-            this.mainPanel.Controls.Add(this.IDTextBox);
+            this.mainPanel.Controls.Add(this.searchBtn);
+            this.mainPanel.Controls.Add(this.payText);
             this.mainPanel.Controls.Add(this.LoginButton);
             this.mainPanel.Controls.Add(this.textBox1);
-            this.mainPanel.Controls.Add(this.IDBg);
             this.mainPanel.Controls.Add(this.UserBg);
             this.mainPanel.Controls.Add(this.label2);
             this.mainPanel.Controls.Add(this.label1);
@@ -58,17 +57,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(422, 241);
             this.mainPanel.TabIndex = 18;
-            // 
-            // IDTextBox
-            // 
-            this.IDTextBox.BackColor = System.Drawing.Color.White;
-            this.IDTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.IDTextBox.Font = new System.Drawing.Font("黑体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IDTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.IDTextBox.Location = new System.Drawing.Point(174, 105);
-            this.IDTextBox.Name = "IDTextBox";
-            this.IDTextBox.Size = new System.Drawing.Size(209, 22);
-            this.IDTextBox.TabIndex = 40;
             // 
             // LoginButton
             // 
@@ -91,29 +79,19 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("黑体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.textBox1.Location = new System.Drawing.Point(174, 35);
+            this.textBox1.Location = new System.Drawing.Point(174, 37);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(209, 22);
+            this.textBox1.Size = new System.Drawing.Size(126, 22);
             this.textBox1.TabIndex = 0;
-            // 
-            // IDBg
-            // 
-            this.IDBg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
-            this.IDBg.Image = ((System.Drawing.Image)(resources.GetObject("IDBg.Image")));
-            this.IDBg.Location = new System.Drawing.Point(137, 98);
-            this.IDBg.Name = "IDBg";
-            this.IDBg.Size = new System.Drawing.Size(258, 42);
-            this.IDBg.TabIndex = 39;
-            this.IDBg.TabStop = false;
             // 
             // UserBg
             // 
             this.UserBg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(221)))), ((int)(((byte)(232)))));
             this.UserBg.Enabled = false;
             this.UserBg.Image = ((System.Drawing.Image)(resources.GetObject("UserBg.Image")));
-            this.UserBg.Location = new System.Drawing.Point(138, 27);
+            this.UserBg.Location = new System.Drawing.Point(138, 29);
             this.UserBg.Name = "UserBg";
-            this.UserBg.Size = new System.Drawing.Size(258, 42);
+            this.UserBg.Size = new System.Drawing.Size(179, 42);
             this.UserBg.TabIndex = 38;
             this.UserBg.TabStop = false;
             // 
@@ -122,7 +100,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
-            this.label2.Location = new System.Drawing.Point(29, 102);
+            this.label2.Location = new System.Drawing.Point(33, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 27);
             this.label2.TabIndex = 2;
@@ -167,6 +145,32 @@
             this.ShutDownButton.UseVisualStyleBackColor = false;
             this.ShutDownButton.Click += new System.EventHandler(this.ShutDownButton_Click);
             // 
+            // payText
+            // 
+            this.payText.AutoSize = true;
+            this.payText.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.payText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
+            this.payText.Location = new System.Drawing.Point(143, 102);
+            this.payText.Name = "payText";
+            this.payText.Size = new System.Drawing.Size(50, 27);
+            this.payText.TabIndex = 42;
+            this.payText.Text = "--元";
+            // 
+            // searchBtn
+            // 
+            this.searchBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
+            this.searchBtn.FlatAppearance.BorderSize = 2;
+            this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchBtn.Font = new System.Drawing.Font("等线", 12F, System.Drawing.FontStyle.Bold);
+            this.searchBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(141)))), ((int)(((byte)(166)))));
+            this.searchBtn.Location = new System.Drawing.Point(330, 32);
+            this.searchBtn.Name = "searchBtn";
+            this.searchBtn.Size = new System.Drawing.Size(57, 36);
+            this.searchBtn.TabIndex = 43;
+            this.searchBtn.Text = "查询";
+            this.searchBtn.UseVisualStyleBackColor = true;
+            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
+            // 
             // Gathering
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -183,7 +187,6 @@
             this.Text = "Gathering";
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IDBg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserBg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -195,12 +198,12 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox IDTextBox;
-        private System.Windows.Forms.PictureBox IDBg;
         private System.Windows.Forms.PictureBox UserBg;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button ShutDownButton;
+        private System.Windows.Forms.Button searchBtn;
+        private System.Windows.Forms.Label payText;
     }
 }

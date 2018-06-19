@@ -62,7 +62,7 @@
             this.timeText.AutoSize = true;
             this.timeText.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.timeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.timeText.Location = new System.Drawing.Point(218, 2);
+            this.timeText.Location = new System.Drawing.Point(210, 2);
             this.timeText.Name = "timeText";
             this.timeText.Size = new System.Drawing.Size(61, 25);
             this.timeText.TabIndex = 14;

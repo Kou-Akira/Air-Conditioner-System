@@ -118,25 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="IDBg.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAQIAAAAmCAYAAAAvBZXEAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
-        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAMISURBVHhe7dzZUupAFEZh3v/p
-        uFOcJxxQy1lx7OOK2RxOKiTBU6WtWV9Vl5AQvNo/nR4y2NzcTG9vb+np6clms/WsUftkwGB3dzdJ6i8y
-        YLCzs1O+ldRHZIBBIPWcQSDJIJBkEEh6919B8PLyki4uLtJ4PC6+iJHHo6OjdH19XUxJSPoZPhUEDw8P
-        aW9vL62srMza+vp6Wltb++fY4eFhen5+Lq+SlKulg2AymRRFvrq6ms7OztLj42N55i+C4vj4eBYIl5eX
-        5RlJOVoqCA4ODorCPj09LY804/aA2wauITQk5alzEHDvT0Hf3NwU7+/u7tLt7W3xug7jB4Hg4FrGEyTl
-        p1MQUPDVQo4xgvmCD4wLcG7+liB6Bo4ZSPnpFASMB2xsbJTvPtDtp7DZrFDFsbqi55j7GqT8tAbB/f19
-        UcAMAFbFOQYQA2MBiz4f5+p6EZK+T2sQxC3AIufn57Pijl7CosHE19fX4rwDh1JeWoOAwiUMqpg25Fef
-        /cyxhiD+TqfTorfAuarRaFT7fZK+T6cgmO/6B4qec02N6cYq/tfW1lb5TlIOOgVBXVee3gCzCUwj8uvP
-        Lz3fw+uYWqxbbMRgYd0Ao6TvYxBI6hYELCZqw9hAl88xDbm9vV2+k5SD1iCgcBkPqNrf3y+ORyMwWG8w
-        f6xubKFrsEj6Oq1BENOD1W3FFDPXReMz9Aro+scxrp3HLQOf4/ZBUj6o18YgiLUB7CZswhgBy4ibcEtA
-        r0FSXlqDADxXgDBoWhHI+ablw7Ff4erqqjwiKRedggD8ktP1X4SxhEU9gtiE1OX/SPp6nYOAqUCKmYKv
-        6xlwC1EdRwDTjFzH4KGkPHUOArB0mKKmsbaAvQOL0AuIZxiwkrAuJCTlYakgAAUdTyqicS3ThDx7gOcV
-        nJyczLYh0+qmECXlZekgCGwoYiaBcYMo+mjcPrT1GCTl49NBIOn3MAgkGQSSDAJJ7wwCSR9B4JOFpX4j
-        AwbM+7M+gClBm83Wr0btkwGD4XBY7CWorgew2Wy/v1H7w+Ew/QFcc6RGV/3E2wAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="UserBg.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAATcAAAAmCAYAAACh39y4AAAABGdBTUEAALGPC/xhBQAAAhhJREFUeF7t
