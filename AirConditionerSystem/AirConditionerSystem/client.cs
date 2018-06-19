@@ -87,7 +87,7 @@ namespace AirConditionerSystem
 
         public void roomTpCallBack(object o)
         {
-            int tp = (int)o;
+            int tp = Convert.ToInt32(o);
             roomTpText.Text = Constants.ROOM_TP + tp.ToString();
             if (nowTp == tp)
             {
@@ -101,7 +101,15 @@ namespace AirConditionerSystem
         {
             lock (writeLock)
             {
-                networkStream.Write(buffer, 0, buffer.Length);
+                try
+                {
+                    networkStream.Write(buffer, 0, buffer.Length);
+                }
+                catch(Exception e)
+                {
+
+                }
+                
             }
         }
 
@@ -112,7 +120,7 @@ namespace AirConditionerSystem
             {
                 HostAckPackage ack = p as HostAckPackage;
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)ack.Mode, (Host.ESpeed)speed);
-                tpText.Text = ack.Temperature.ToString() + "℃";
+                tpText.Text = ack.Temperature.ToString("0.0") + "℃";
             }
             else if (p.Cat == 7)
             {
@@ -145,7 +153,7 @@ namespace AirConditionerSystem
         private void refreshUI(int speed, float cost)
         {
             mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
-            nowPayText.Text = Constants.NOW_PAYMENT + cost.ToString();
+            nowPayText.Text = Constants.NOW_PAYMENT + cost.ToString("0.0");
         }
 
         private void getSysTime(object sender, DoWorkEventArgs e)
