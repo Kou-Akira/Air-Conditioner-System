@@ -23,6 +23,7 @@ namespace AirConditionerSystem
         private bool isOff;
         private bool isLogin;
         private bool isClose;
+        public String roomNum;
         public int nowTp;
         public int mode;
         public int speed;
@@ -51,9 +52,9 @@ namespace AirConditionerSystem
             isLogin = false;
             isClose = false;
             nowTp = Constants.DEFAULT_TEMPERATURE;
-            tpText.Text = nowTp.ToString() + "℃";
+            roomTpText.Text = Constants.ROOM_TP + Constants.DEFAULT_TEMPERATURE.ToString() + "℃";
             context = SynchronizationContext.Current;
-            speed = Constants.LOW_SPEED;
+            speed = Constants.NONE_SPEED;
         }
 
         private void tcpConnect()
@@ -105,11 +106,12 @@ namespace AirConditionerSystem
                 {
                     networkStream.Write(buffer, 0, buffer.Length);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-
+                    new MessageBox("主机连接已关闭").ShowDialog();
+                    Environment.Exit(0);
                 }
-                
+
             }
         }
 
@@ -121,10 +123,13 @@ namespace AirConditionerSystem
                 HostAckPackage ack = p as HostAckPackage;
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)ack.Mode, (Host.ESpeed)speed);
                 tpText.Text = ack.Temperature.ToString("0") + "℃";
+                nowTp = (int)ack.Temperature;
+                mode = ack.Mode;
             }
             else if (p.Cat == 7)
             {
                 HostRequestPackage res = p as HostRequestPackage;
+                speed = res.Speed;
                 refreshUI(res.Speed, res.Cost);
             }
             else if (p.Cat == 10)
@@ -135,7 +140,7 @@ namespace AirConditionerSystem
             else if (p.Cat == 3)
             {
                 HostModePackage md = p as HostModePackage;
-
+                mode = md.Mode;
             }
 
             if (sendType == 2 && (p.Cat == 0 || p.Cat == 1))
@@ -153,7 +158,7 @@ namespace AirConditionerSystem
         private void refreshUI(int speed, float cost)
         {
             mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
-            nowPayText.Text = Constants.NOW_PAYMENT + cost.ToString("0.0");
+            nowPayText.Text = Constants.NOW_PAYMENT + cost.ToString("0.0") + "元";
         }
 
         private void getSysTime(object sender, DoWorkEventArgs e)
@@ -230,6 +235,7 @@ namespace AirConditionerSystem
 
         private void switchCallBack(object sender, RunWorkerCompletedEventArgs e)
         {
+            roomText.Text = "Room " + roomNum;
             if (isClose)
             {
                 Environment.Exit(0);
@@ -277,7 +283,7 @@ namespace AirConditionerSystem
             {
                 ApiClient.sendSpeedRequest(Constants.LOW_SPEED, TemperatureSimulator.getInstance(this).getRoomTemperature());
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, Host.ESpeed.Small);
-                speed = Constants.LOW_SPEED;
+                //speed = Constants.LOW_SPEED;
             }
         }
 
@@ -289,7 +295,7 @@ namespace AirConditionerSystem
             {
                 ApiClient.sendSpeedRequest(Constants.MID_SPEED, TemperatureSimulator.getInstance(this).getRoomTemperature());
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, Host.ESpeed.Mid);
-                speed = Constants.MID_SPEED;
+                //speed = Constants.MID_SPEED;
             }
         }
 
@@ -301,7 +307,7 @@ namespace AirConditionerSystem
             {
                 ApiClient.sendSpeedRequest(Constants.HIGH_SPEED, TemperatureSimulator.getInstance(this).getRoomTemperature());
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, Host.ESpeed.Large);
-                speed = Constants.HIGH_SPEED;
+                //speed = Constants.HIGH_SPEED;
             }
         }
 

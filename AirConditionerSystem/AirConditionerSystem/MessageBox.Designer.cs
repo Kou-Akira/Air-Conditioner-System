@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.ConfirmButton = new System.Windows.Forms.Button();
             this.TextBox = new System.Windows.Forms.Label();
+            this.ConfirmButton = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -44,6 +44,16 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(300, 120);
             this.mainPanel.TabIndex = 1;
+            // 
+            // TextBox
+            // 
+            this.TextBox.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.TextBox.Location = new System.Drawing.Point(0, 27);
+            this.TextBox.Name = "TextBox";
+            this.TextBox.Size = new System.Drawing.Size(300, 23);
+            this.TextBox.TabIndex = 8;
+            this.TextBox.Text = "label1";
+            this.TextBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ConfirmButton
             // 
@@ -62,16 +72,6 @@
             this.ConfirmButton.Text = "确定";
             this.ConfirmButton.UseVisualStyleBackColor = false;
             this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
-            // 
-            // TextBox
-            // 
-            this.TextBox.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.TextBox.Location = new System.Drawing.Point(0, 27);
-            this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(300, 23);
-            this.TextBox.TabIndex = 8;
-            this.TextBox.Text = "label1";
-            this.TextBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TitleLabel
             // 
@@ -93,7 +93,10 @@
             this.ClientSize = new System.Drawing.Size(300, 150);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.mainPanel);
+            this.DM_howBorder = false;
+            this.DM_ShadowWidth = 5;
             this.Name = "MessageBox";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MessageBox";
             this.Load += new System.EventHandler(this.MessageBox_Load);
             this.mainPanel.ResumeLayout(false);

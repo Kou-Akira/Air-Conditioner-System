@@ -91,6 +91,7 @@ namespace AirConditionerSystem
             Package pack = (Package)pac;
             if (pack.Cat == 1)//success
             {
+                client.roomNum = textBox1.Text.Trim();
                 mLoadingBox.Close();
                 Close();
             }

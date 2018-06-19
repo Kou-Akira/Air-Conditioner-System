@@ -23,7 +23,7 @@ namespace AirConditionerSystem
                 {
                     if (instance == null)
                     {
-                        return new TemperatureSimulator(c);
+                        instance = new TemperatureSimulator(c);
                     }
                 }
             }
@@ -74,11 +74,11 @@ namespace AirConditionerSystem
                     continue;
                 }
 
-                if (cl.mode == 0 && cl.nowTp > roomTemperature)
+                if (cl.mode == 0 && cl.nowTp < roomTemperature)
                 {
                     roomTemperature--;
                 }
-                else if (cl.mode == 1 && cl.nowTp < roomTemperature)
+                else if (cl.mode == 1 && cl.nowTp > roomTemperature)
                 {
                     roomTemperature++;
                 }

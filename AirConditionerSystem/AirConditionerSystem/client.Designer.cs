@@ -50,7 +50,7 @@
             this.ShutDownButton = new System.Windows.Forms.Button();
             this.roomTpText = new System.Windows.Forms.Label();
             this.nowPayText = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.roomText = new System.Windows.Forms.Label();
             this.timeText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainIcon)).BeginInit();
             this.mainPanel.SuspendLayout();
@@ -60,7 +60,7 @@
             // 
             // mainIcon
             // 
-            this.mainIcon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mainIcon.BackgroundImage")));
+            this.mainIcon.BackgroundImage = global::AirConditionerSystem.Properties.Resources.C0;
             this.mainIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mainIcon.Location = new System.Drawing.Point(38, 112);
             this.mainIcon.Name = "mainIcon";
@@ -295,9 +295,9 @@
             this.tpText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tpText.Location = new System.Drawing.Point(240, 101);
             this.tpText.Name = "tpText";
-            this.tpText.Size = new System.Drawing.Size(169, 81);
+            this.tpText.Size = new System.Drawing.Size(151, 81);
             this.tpText.TabIndex = 3;
-            this.tpText.Text = "28℃";
+            this.tpText.Text = "--℃";
             // 
             // ShutDownButton
             // 
@@ -323,9 +323,9 @@
             this.roomTpText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.roomTpText.Location = new System.Drawing.Point(238, 191);
             this.roomTpText.Name = "roomTpText";
-            this.roomTpText.Size = new System.Drawing.Size(171, 30);
+            this.roomTpText.Size = new System.Drawing.Size(165, 30);
             this.roomTpText.TabIndex = 8;
-            this.roomTpText.Text = "房间温度：28℃";
+            this.roomTpText.Text = "房间温度：--℃";
             // 
             // nowPayText
             // 
@@ -334,27 +334,27 @@
             this.nowPayText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.nowPayText.Location = new System.Drawing.Point(238, 232);
             this.nowPayText.Name = "nowPayText";
-            this.nowPayText.Size = new System.Drawing.Size(189, 30);
+            this.nowPayText.Size = new System.Drawing.Size(180, 30);
             this.nowPayText.TabIndex = 9;
-            this.nowPayText.Text = "当前费用：2.33元";
+            this.nowPayText.Text = "当前费用：-.--元";
             // 
-            // label3
+            // roomText
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(3, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 25);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Room 632";
+            this.roomText.AutoSize = true;
+            this.roomText.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.roomText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.roomText.Location = new System.Drawing.Point(3, 4);
+            this.roomText.Name = "roomText";
+            this.roomText.Size = new System.Drawing.Size(96, 25);
+            this.roomText.TabIndex = 10;
+            this.roomText.Text = "Room ---";
             // 
             // timeText
             // 
             this.timeText.AutoSize = true;
             this.timeText.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.timeText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.timeText.Location = new System.Drawing.Point(192, 4);
+            this.timeText.Location = new System.Drawing.Point(191, 4);
             this.timeText.Name = "timeText";
             this.timeText.Size = new System.Drawing.Size(61, 25);
             this.timeText.TabIndex = 11;
@@ -368,7 +368,7 @@
             this.ClientSize = new System.Drawing.Size(450, 550);
             this.ControlBox = false;
             this.Controls.Add(this.timeText);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.roomText);
             this.Controls.Add(this.nowPayText);
             this.Controls.Add(this.roomTpText);
             this.Controls.Add(this.ShutDownButton);
@@ -403,7 +403,7 @@
         private System.Windows.Forms.Button ShutDownButton;
         private System.Windows.Forms.Label roomTpText;
         private System.Windows.Forms.Label nowPayText;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label roomText;
         private System.Windows.Forms.Label timeText;
         private DMSkin.Controls.DM.DMButtonImage speedBtn;
         private DMSkin.Controls.DM.DMButtonImage switchBtn;

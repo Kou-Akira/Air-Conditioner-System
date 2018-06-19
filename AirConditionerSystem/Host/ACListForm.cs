@@ -77,7 +77,7 @@ namespace Host
             panelList.Add(panel2);
             roomNumList.Add(roomText0);
             roomNumList.Add(roomText1);
-            roomNumList.Add(roomText1);
+            roomNumList.Add(roomText2);
             iconList.Add(stateIcon0);
             iconList.Add(stateIcon1);
             iconList.Add(stateIcon2);
