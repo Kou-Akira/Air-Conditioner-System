@@ -258,5 +258,23 @@ namespace Host {
 				return dic;
 			}
 		}
+
+		public float GetMoney(byte roomId) {
+			using (SqlConnection con = new SqlConnection(sql.Builder.ConnectionString)) {
+				con.Open();
+				SqlCommand cmd = con.CreateCommand();
+				cmd.CommandText = "select Cost from dt_RoomIDCard where RoonNum = @a";
+				cmd.Parameters.Clear();
+				cmd.Parameters.AddWithValue("@a", (int)roomId);
+
+				SqlDataReader rd = cmd.ExecuteReader();
+				float res = 0;
+				if (rd.HasRows) {
+					rd.Read();
+					res = Convert.ToSingle(rd["Cost"].ToString());
+				}
+				return res;
+			}
+		}
 	}
 }
