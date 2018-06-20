@@ -82,6 +82,8 @@ namespace AirConditionerSystem
             }
             catch (Exception)
             {
+                new MessageBox("主机连接已关闭").ShowDialog();
+                Environment.Exit(0);
             }
             finally
             {
@@ -101,6 +103,16 @@ namespace AirConditionerSystem
             {
                 ApiClient.sendStopSpeedRequest(tp);
                 speed = Constants.NONE_SPEED;
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
+            }
+            else if (mode == 0 && tp > nowTp + 2)
+            {
+                ApiClient.sendSpeedRequest(speed == Constants.NONE_SPEED ? Constants.MID_SPEED : speed, TemperatureSimulator.getInstance(this).getRoomTemperature());
+                mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
+            }
+            else if (mode == 1 && tp < nowTp - 2)
+            {
+                ApiClient.sendSpeedRequest(speed == Constants.NONE_SPEED ? Constants.MID_SPEED : speed, TemperatureSimulator.getInstance(this).getRoomTemperature());
                 mainIcon.BackgroundImage = Host.Utils.getRuningImage((Host.ServiceMode)mode, (Host.ESpeed)speed);
             }
         }
