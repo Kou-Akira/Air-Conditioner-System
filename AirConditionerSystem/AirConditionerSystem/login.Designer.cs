@@ -84,6 +84,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(209, 22);
             this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "005";
             // 
             // IDTextBox
             // 
@@ -95,7 +96,7 @@
             this.IDTextBox.Name = "IDTextBox";
             this.IDTextBox.Size = new System.Drawing.Size(209, 22);
             this.IDTextBox.TabIndex = 40;
-            this.IDTextBox.Text = "650204199612181235";
+            this.IDTextBox.Text = "555555555555555555";
             // 
             // IDBg
             // 

@@ -70,7 +70,22 @@ namespace AirConditionerSystem
                 }
                 else if (cl.speed == Constants.NONE_SPEED)
                 {
-                    Thread.Sleep(1000);
+                    if (cl.mode == 0)
+                    {
+                        if (Constants.TEMPERATURE_MAX > roomTemperature)
+                        {
+                            roomTemperature++;
+                        }
+                    }
+                    else
+                    {
+                        if (Constants.TEMPERATURE_MIN < roomTemperature)
+                        {
+                            roomTemperature--;
+                        }
+                    }
+                    context.Post(cl.roomTpCallBack, roomTemperature);
+                    Thread.Sleep(3000);
                     continue;
                 }
 
