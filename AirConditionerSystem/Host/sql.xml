@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ROOT>
+  <sqlconfig>
+    <sqlname>10.105.249.190,1433</sqlname>	<!--数据库地址-->
+    <loginname>AirHost</loginname>				<!--数据库用户名-->
+    <loginpassword>airhost</loginpassword>	<!--数据库密码-->
+    <initialcatalog>db_AirCondition</initialcatalog>
+  </sqlconfig>
+</ROOT>

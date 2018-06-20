@@ -39,10 +39,7 @@ namespace AirConditionerSystem
 
         private void closeBtn_Click(object sender, EventArgs e)
         {
-            loadIcon.Enabled = true;
-            remindText.Text = preText;
-            closeBtn.Visible = false;
-            Hide();
+            Close();
         }
     }
 }

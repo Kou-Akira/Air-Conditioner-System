@@ -4,29 +4,46 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Common;
 
 namespace AirConditionerSystem
 {
     static class ApiClient
     {
-        public static bool sendTurnOnRequest()
+        public static void sendLoginRequest(int roomNumber, String id)
         {
-            //Network send request
-            Thread.Sleep(2000);
-            return false;
+            byte[] buffer = PackageHelper.GetByte(new ClientLoginPackage((byte)roomNumber, id));
+            Client.sendPackage(buffer);
         }
 
-        public static bool sendTurnOffRequest()
+        public static void sendClientCloseRequest(float tp)
         {
-            return true;
+            byte[] buffer = PackageHelper.GetByte(new ClientClosePackage(tp));
+            Client.sendPackage(buffer);
         }
 
-        public static void sendRoomTemperature() { }
-
-        public static bool sendSpeedMode(int mode)
+        public static void sendRoomTemperature(float tp)
         {
-            return true;
+            byte[] buffer = PackageHelper.GetByte(new ClientTemperaturePackage(tp));
+            Client.sendPackage(buffer);
         }
 
+        public static void sendTpChange(float tp)
+        {
+            byte[] buffer = PackageHelper.GetByte(new ClientTargetTemperaturePackage(tp));
+            Client.sendPackage(buffer);
+        }
+
+        public static void sendSpeedRequest(int speed, float tp)
+        {
+            byte[] buffer = PackageHelper.GetByte(new ClientSpeedPackage(speed, tp));
+            Client.sendPackage(buffer);
+        }
+
+        public static void sendStopSpeedRequest(float tp)
+        {
+            byte[] buffer = PackageHelper.GetByte(new ClientStopPackage(tp));
+            Client.sendPackage(buffer);
+        }
     }
 }
